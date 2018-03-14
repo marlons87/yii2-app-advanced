@@ -1,0 +1,70 @@
+<?php
+
+namespace backend\models;
+
+use Yii;
+
+/**
+ * This is the model class for table "controles".
+ *
+ * @property int $Id_Control
+ * @property string $Nombre
+ * @property int $Id_Dominio
+ * @property string $Codigo
+ *
+ * @property Dominios $dominio
+ * @property Niveles[] $niveles
+ */
+class Controles extends \yii\db\ActiveRecord
+{
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return 'controles';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['Id_Dominio'], 'required'],
+            [['Id_Dominio'], 'integer'],
+            [['Nombre'], 'string', 'max' => 100],
+            [['Codigo'], 'string', 'max' => 10],
+            [['Id_Dominio'], 'exist', 'skipOnError' => true, 'targetClass' => Dominios::className(), 'targetAttribute' => ['Id_Dominio' => 'Id_Dominio']],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'Id_Control' => 'Id  Control',
+            'Nombre' => 'Nombre',
+            'Id_Dominio' => 'Id  Dominio',
+            'Codigo' => 'Codigo',
+        ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDominio()
+    {
+        return $this->hasOne(Dominios::className(), ['Id_Dominio' => 'Id_Dominio']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getNiveles()
+    {
+        return $this->hasMany(Niveles::className(), ['Id_Control' => 'Id_Control']);
+    }
+}

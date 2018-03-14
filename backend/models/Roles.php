@@ -59,13 +59,4 @@ class Roles extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Usuarios::className(), ['Id_Rol' => 'Id_Rol']);
     }
-
-    /**
-     * @inheritdoc
-     * @return RolesQuery the active query used by this AR class.
-     */
-    public static function find()
-    {
-        return new RolesQuery(get_called_class());
-    }
 }

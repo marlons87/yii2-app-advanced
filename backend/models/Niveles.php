@@ -13,6 +13,8 @@ use Yii;
  * @property int $Id_Control
  *
  * @property Controles $control
+ * 
+ * $controles =>$Id_Control=>Nombre
  * @property Respuestas[] $respuestas
  */
 class Niveles extends \yii\db\ActiveRecord
@@ -46,8 +48,8 @@ class Niveles extends \yii\db\ActiveRecord
         return [
             'Id_Nivel' => 'Id  Nivel',
             'Valor' => 'Valor',
-            'Descripcion' => 'Descripcion',
-            'Id_Control' => 'Id  Control',
+            'Descripcion' => 'Descripción',
+            'Id_Control' => 'Control',
         ];
     }
 

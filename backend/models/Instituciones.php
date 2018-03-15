@@ -39,7 +39,7 @@ class Instituciones extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'Id_Institucion' => 'Id  Institucion',
+            'Id_Institucion' => 'ID',
             'Nombre' => 'Nombre',
         ];
     }

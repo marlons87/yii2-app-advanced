@@ -31,7 +31,7 @@ class Controles extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Id_Dominio'], 'required'],
+            [['Nombre', 'Id_Dominio', 'Codigo'], 'required'],
             [['Id_Dominio'], 'integer'],
             [['Nombre'], 'string', 'max' => 100],
             [['Codigo'], 'string', 'max' => 10],
@@ -45,10 +45,10 @@ class Controles extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'Id_Control' => 'Id  Control',
+            'Id_Control' => 'ID',
             'Nombre' => 'Nombre',
-            'Id_Dominio' => 'Id  Dominio',
-            'Codigo' => 'Codigo',
+            'Id_Dominio' => 'Dominio',
+            'Codigo' => 'Código',
         ];
     }
 

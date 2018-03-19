@@ -3,16 +3,16 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\Roles;
-use backend\models\RolesSearch;
+use backend\models\Usuarios;
+use backend\models\UsuariosSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * RolesController implements the CRUD actions for Roles model.
+ * UsuariosController implements the CRUD actions for Usuarios model.
  */
-class RolesController extends Controller
+class UsuariosController extends Controller
 {
     /**
      * @inheritdoc
@@ -30,12 +30,12 @@ class RolesController extends Controller
     }
 
     /**
-     * Lists all Roles models.
+     * Lists all Usuarios models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new RolesSearch();
+        $searchModel = new UsuariosSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class RolesController extends Controller
     }
 
     /**
-     * Displays a single Roles model.
+     * Displays a single Usuarios model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -58,16 +58,16 @@ class RolesController extends Controller
     }
 
     /**
-     * Creates a new Roles model.
+     * Creates a new Usuarios model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Roles();
+        $model = new Usuarios();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->Id_Rol]);
+            return $this->redirect(['view', 'id' => $model->Id_Usuario]);
         }
 
         return $this->render('create', [
@@ -76,7 +76,7 @@ class RolesController extends Controller
     }
 
     /**
-     * Updates an existing Roles model.
+     * Updates an existing Usuarios model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -87,7 +87,7 @@ class RolesController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->Id_Rol]);
+            return $this->redirect(['view', 'id' => $model->Id_Usuario]);
         }
 
         return $this->render('update', [
@@ -96,7 +96,7 @@ class RolesController extends Controller
     }
 
     /**
-     * Deletes an existing Roles model.
+     * Deletes an existing Usuarios model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -104,42 +104,24 @@ class RolesController extends Controller
      */
     public function actionDelete($id)
     {
-       
-        try {
-          
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
-        
-    } catch( \Exception $e) {
-       
-
-        ///return $this->redirect(['error']);
-         throw new NotFoundHttpException('No se puede eliminar el registro. El rol actualmente está siendo utilizado');
-    }
-        
-        
-        
-        
     }
 
     /**
-     * Finds the Roles model based on its primary key value.
+     * Finds the Usuarios model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Roles the loaded model
+     * @return Usuarios the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    
-    
-    
-
     protected function findModel($id)
     {
-        if (($model = Roles::findOne($id)) !== null) {
+        if (($model = Usuarios::findOne($id)) !== null) {
             return $model;
         }
 
-        throw new NotFoundHttpException('La página solicitada no existe.');
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }

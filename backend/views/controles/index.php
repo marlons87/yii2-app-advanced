@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Controles', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Agregar Controles', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -26,9 +26,11 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'Id_Control',
-            'Nombre',
             'Id_Dominio',
             'Codigo',
+            'Nombre',
+          
+           
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

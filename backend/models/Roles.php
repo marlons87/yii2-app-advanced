@@ -29,6 +29,7 @@ class Roles extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['Descripcion'], 'required'],
             [['Descripcion'], 'string', 'max' => 50],
         ];
     }

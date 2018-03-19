@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Dominios */
 
-$this->title = 'Create Dominios';
+$this->title = 'Agregar Dominio';
 $this->params['breadcrumbs'][] = ['label' => 'Dominios', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

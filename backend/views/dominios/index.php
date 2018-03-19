@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Dominios', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Agregar Dominio', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -26,8 +26,9 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'Id_Dominio',
-            'Nombre',
             'Codigo',
+            'Nombre',
+           
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

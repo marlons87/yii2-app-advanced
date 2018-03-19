@@ -29,6 +29,7 @@ class Dominios extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['Nombre', 'Codigo'], 'required'],
             [['Nombre'], 'string', 'max' => 50],
             [['Codigo'], 'string', 'max' => 5],
         ];
@@ -40,9 +41,10 @@ class Dominios extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'Id_Dominio' => 'Id  Dominio',
+            'Id_Dominio' => 'ID',
+            'Codigo' => 'Código',
             'Nombre' => 'Nombre',
-            'Codigo' => 'Codigo',
+          
         ];
     }
 

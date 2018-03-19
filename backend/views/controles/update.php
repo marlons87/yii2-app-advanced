@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Controles */
 
-$this->title = 'Update Controles: {nameAttribute}';
+$this->title = 'Actualizar Controles:';
 $this->params['breadcrumbs'][] = ['label' => 'Controles', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->Id_Control, 'url' => ['view', 'id' => $model->Id_Control]];
 $this->params['breadcrumbs'][] = 'Update';

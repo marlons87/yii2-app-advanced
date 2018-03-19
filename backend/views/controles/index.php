@@ -26,7 +26,11 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'Id_Control',
-            'Id_Dominio',
+             [
+              'attribute' => 'Id_Dominio',
+            'value' => 'dominio.Nombre',
+                 
+             ],
             'Codigo',
             'Nombre',
           

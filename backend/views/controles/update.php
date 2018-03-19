@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Controles */
 
-$this->title = 'Actualizar Controles:';
+$this->title = 'Actualizar Control:';
 $this->params['breadcrumbs'][] = ['label' => 'Controles', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->Id_Control, 'url' => ['view', 'id' => $model->Id_Control]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = ['label' => $model->Nombre, 'url' => ['view', 'id' => $model->Id_Control]];
+$this->params['breadcrumbs'][] = 'Actualizar';
 ?>
 <div class="controles-update">
 

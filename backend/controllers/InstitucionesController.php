@@ -104,9 +104,17 @@ class InstitucionesController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        
+          try {
+              
+               $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+              
+          } catch (\Exception $e) {
+         throw new NotFoundHttpException('No se puede eliminar la institución. La institución, está actualmente siendo utilizada');
+          }
+       
     }
 
     /**
@@ -122,6 +130,6 @@ class InstitucionesController extends Controller
             return $model;
         }
 
-        throw new NotFoundHttpException('The requested page does not exist.');
+        throw new NotFoundHttpException('La página solicitada no existe.');
     }
 }

@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'Id_Control',
-            'Id_Dominio',
+            'dominio.Nombre',
             'Codigo',
             'Nombre',
           

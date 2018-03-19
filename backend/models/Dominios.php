@@ -30,7 +30,7 @@ class Dominios extends \yii\db\ActiveRecord
     {
         return [
             [['Nombre', 'Codigo'], 'required'],
-            [['Nombre'], 'string', 'max' => 50],
+            [['Nombre'], 'string', 'max' => 100],
             [['Codigo'], 'string', 'max' => 5],
         ];
     }

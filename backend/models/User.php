@@ -46,7 +46,7 @@ class User extends \common\models\User
             ['password', 'string', 'min' => 6],
  
             ['Id_Rol', 'required'],
-            [['Id_Rol'], 'exist', 'skipOnError' => true, 'targetClass' => Roles::className(), 'targetAttribute' => ['Id_Rol' => 'Id_Rol']],
+            [['Id_Rol'], 'exist', 'skipOnError' => true, 'targetClass' => \common\models\Roles::className(), 'targetAttribute' => ['Id_Rol' => 'Id_Rol']],
         ];
  
         return array_merge(parent::rules(), $child);
@@ -57,7 +57,7 @@ class User extends \common\models\User
      */
     public function getRoles()
     {
-        return $this->hasOne(Roles::className(), ['Id_Rol' => 'Id_Rol']);
+        return $this->hasOne(\common\models\Roles::className(), ['Id_Rol' => 'Id_Rol']);
     }
  
     /**
@@ -65,7 +65,7 @@ class User extends \common\models\User
      */
     public function getRolList()
 	{
-    	$Roles = Roles::find()->all();
+    	$Roles = \common\models\Roles::find()->all();
     	$RolesList = ArrayHelper::map($Roles, 'Id_Rol', 'Descripcion');
     	return $RolesList;
 	}

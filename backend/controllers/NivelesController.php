@@ -104,9 +104,20 @@ class NivelesController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        try{
+             $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+      
+        
+           } catch (\Exception $ex) {
+              throw new NotFoundHttpException('No se puede eliminar el registro. El nivel actualmente está siendo utilizado');
+
+          }
+        
+        
+        
+       
     }
 
     /**
@@ -122,6 +133,6 @@ class NivelesController extends Controller
             return $model;
         }
 
-        throw new NotFoundHttpException('The requested page does not exist.');
+        throw new NotFoundHttpException('La página solicitada no existe.');
     }
 }

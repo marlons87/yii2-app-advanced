@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "niveles".
@@ -13,8 +14,6 @@ use Yii;
  * @property int $Id_Control
  *
  * @property Controles $control
- * 
- * $controles =>$Id_Control=>Nombre
  * @property Respuestas[] $respuestas
  */
 class Niveles extends \yii\db\ActiveRecord
@@ -33,8 +32,8 @@ class Niveles extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['Valor', 'Descripcion', 'Id_Control'], 'required'],
             [['Valor', 'Id_Control'], 'integer'],
-            [['Id_Control'], 'required'],
             [['Descripcion'], 'string', 'max' => 250],
             [['Id_Control'], 'exist', 'skipOnError' => true, 'targetClass' => Controles::className(), 'targetAttribute' => ['Id_Control' => 'Id_Control']],
         ];
@@ -46,7 +45,7 @@ class Niveles extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'Id_Nivel' => 'Id  Nivel',
+            'Id_Nivel' => 'ID',
             'Valor' => 'Valor',
             'Descripcion' => 'Descripción',
             'Id_Control' => 'Control',
@@ -56,10 +55,7 @@ class Niveles extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getControl()
-    {
-        return $this->hasOne(Controles::className(), ['Id_Control' => 'Id_Control']);
-    }
+  
 
     /**
      * @return \yii\db\ActiveQuery
@@ -68,4 +64,32 @@ class Niveles extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Respuestas::className(), ['Id_Nivel' => 'Id_Nivel']);
     }
+
+    /**
+     * @inheritdoc
+     * @return NivelesQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new NivelesQuery(get_called_class());
+    }
+    
+    
+      public function getControl()
+    {
+        return $this->hasOne(Controles::className(), ['Id_Control' => 'Id_Control']);
+    }
+    
+         public function getControlList()
+	{
+    	$Control = Controles::find()->all();
+    	$ControlList = ArrayHelper::map($Control, 'Id_Control', 'Nombre');
+    	return $ControlList;
+	}
+
+	public function getControlName()
+	{
+    	return $this->control ? $this->$control->control : '- no definido -';
+	}
+    
 }

@@ -15,16 +15,16 @@ use backend\models\Controles;
     <?php $form = ActiveForm::begin(); ?>
     
     
-     <?= $form->field($model, 'Id_Control')->dropDownList(ArrayHelper::map(Controles::find()->all(), 'Id_Control', 'Nombre'),['class' => 'form-control inline-block']); ?>
+    <?= $form->field($model, 'Id_Control')->dropDownList(ArrayHelper::map(Controles::find()->all(), 'Id_Control', 'Nombre'),['class' => 'form-control inline-block']); ?>
 
     <?= $form->field($model, 'Valor')->textInput() ?>
 
     <?= $form->field($model, 'Descripcion')->textInput(['maxlength' => true]) ?>
 
-    
 
+   
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

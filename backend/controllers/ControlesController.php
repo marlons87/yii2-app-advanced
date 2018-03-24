@@ -104,9 +104,17 @@ class ControlesController extends Controller
      */
     public function actionDelete($id)
     {
+        
+         try {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+        
+        
+         } catch (\Exception $ex) {
+              throw new NotFoundHttpException('No se puede eliminar el registro. El control actualmente está siendo utilizado');
+
+          }
     }
 
     /**

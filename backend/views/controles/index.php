@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\ArrayHelper;
+use backend\models\Dominios;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\ControlesSearch */
@@ -27,8 +29,9 @@ $this->params['breadcrumbs'][] = $this->title;
              [
               'attribute' => 'Id_Dominio',
             'value' => 'dominio.Nombre',
-                 
+             'filter' => Html::activeDropDownList($searchModel, 'Id_Dominio', ArrayHelper::map(Dominios::find()->asArray()->all(), 'Id_Dominio', 'Nombre'),['class'=>'form-control','prompt' => 'Seleccione el dominio']), 
              ],
+            
             'Codigo',
             'Nombre',
           

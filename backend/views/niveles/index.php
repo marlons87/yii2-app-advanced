@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\ArrayHelper;
+use backend\models\Controles;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\NivelesSearch */
@@ -27,6 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
              [
               'attribute' => 'Id_Control',
             'value' => 'control.Nombre',
+             'filter' => Html::activeDropDownList($searchModel, 'Id_Control', ArrayHelper::map(Controles::find()->asArray()->all(), 'Id_Control', 'Nombre'),['class'=>'form-control','prompt' => 'Seleccione el control']), 
                  
              ],
             'Valor',

@@ -3,8 +3,8 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\Instituciones;
-use backend\models\InstitucionesSearch;
+use common\models\Instituciones;
+use common\models\InstitucionesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

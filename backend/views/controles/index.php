@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
-use backend\models\Dominios;
+use common\models\Dominios;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\ControlesSearch */

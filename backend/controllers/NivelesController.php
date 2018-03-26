@@ -3,8 +3,8 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\Niveles;
-use backend\models\NivelesSearch;
+use common\models\Niveles;
+use common\models\NivelesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

@@ -1,16 +1,16 @@
 <?php
 
-namespace backend\models;
+namespace common\models;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\Dominios;
+use common\models\Niveles;
 
 /**
- * DominiosSearch represents the model behind the search form of `backend\models\Dominios`.
+ * NivelesSearch represents the model behind the search form of `backend\models\Niveles`.
  */
-class DominiosSearch extends Dominios
+class NivelesSearch extends Niveles
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class DominiosSearch extends Dominios
     public function rules()
     {
         return [
-            [['Id_Dominio'], 'integer'],
-            [['Nombre', 'Codigo'], 'safe'],
+            [['Id_Nivel', 'Valor', 'Id_Control'], 'integer'],
+            [['Descripcion'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class DominiosSearch extends Dominios
      */
     public function search($params)
     {
-        $query = Dominios::find();
+        $query = Niveles::find();
 
         // add conditions that should always apply here
 
@@ -59,11 +59,12 @@ class DominiosSearch extends Dominios
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'Id_Dominio' => $this->Id_Dominio,
+            'Id_Nivel' => $this->Id_Nivel,
+            'Valor' => $this->Valor,
+            'Id_Control' => $this->Id_Control,
         ]);
 
-        $query->andFilterWhere(['like', 'Nombre', $this->Nombre])
-            ->andFilterWhere(['like', 'Codigo', $this->Codigo]);
+        $query->andFilterWhere(['like', 'Descripcion', $this->Descripcion]);
 
         return $dataProvider;
     }

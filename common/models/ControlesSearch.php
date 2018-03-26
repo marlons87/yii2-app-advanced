@@ -1,16 +1,16 @@
 <?php
 
-namespace backend\models;
+namespace common\models;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\Niveles;
+use common\models\Controles;
 
 /**
- * NivelesSearch represents the model behind the search form of `backend\models\Niveles`.
+ * ControlesSearch represents the model behind the search form of `backend\models\Controles`.
  */
-class NivelesSearch extends Niveles
+class ControlesSearch extends Controles
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class NivelesSearch extends Niveles
     public function rules()
     {
         return [
-            [['Id_Nivel', 'Valor', 'Id_Control'], 'integer'],
-            [['Descripcion'], 'safe'],
+            [['Id_Control', 'Id_Dominio'], 'integer'],
+            [['Nombre', 'Codigo'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class NivelesSearch extends Niveles
      */
     public function search($params)
     {
-        $query = Niveles::find();
+        $query = Controles::find();
 
         // add conditions that should always apply here
 
@@ -59,12 +59,12 @@ class NivelesSearch extends Niveles
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'Id_Nivel' => $this->Id_Nivel,
-            'Valor' => $this->Valor,
             'Id_Control' => $this->Id_Control,
+            'Id_Dominio' => $this->Id_Dominio,
         ]);
 
-        $query->andFilterWhere(['like', 'Descripcion', $this->Descripcion]);
+        $query->andFilterWhere(['like', 'Nombre', $this->Nombre])
+            ->andFilterWhere(['like', 'Codigo', $this->Codigo]);
 
         return $dataProvider;
     }

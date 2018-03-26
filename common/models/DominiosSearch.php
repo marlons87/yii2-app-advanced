@@ -1,16 +1,16 @@
 <?php
 
-namespace backend\models;
+namespace common\models;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\Instituciones;
+use common\models\Dominios;
 
 /**
- * InstitucionesSearch represents the model behind the search form of `backend\models\Instituciones`.
+ * DominiosSearch represents the model behind the search form of `backend\models\Dominios`.
  */
-class InstitucionesSearch extends Instituciones
+class DominiosSearch extends Dominios
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class InstitucionesSearch extends Instituciones
     public function rules()
     {
         return [
-            [['Id_Institucion'], 'integer'],
-            [['Nombre'], 'safe'],
+            [['Id_Dominio'], 'integer'],
+            [['Nombre', 'Codigo'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class InstitucionesSearch extends Instituciones
      */
     public function search($params)
     {
-        $query = Instituciones::find();
+        $query = Dominios::find();
 
         // add conditions that should always apply here
 
@@ -59,10 +59,11 @@ class InstitucionesSearch extends Instituciones
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'Id_Institucion' => $this->Id_Institucion,
+            'Id_Dominio' => $this->Id_Dominio,
         ]);
 
-        $query->andFilterWhere(['like', 'Nombre', $this->Nombre]);
+        $query->andFilterWhere(['like', 'Nombre', $this->Nombre])
+            ->andFilterWhere(['like', 'Codigo', $this->Codigo]);
 
         return $dataProvider;
     }

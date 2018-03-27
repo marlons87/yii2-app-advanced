@@ -10,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\ForbiddenHttpException;
 
+
 /**
  * UserController implements the CRUD actions for User model.
  */
@@ -82,7 +83,10 @@ class UserController extends Controller
         ]);
         }else
         {
-            throw new ForbiddenHttpException;
+            echo 'Su usuario posee permisos '.Yii::$app->user->identity->Nombre. ' '.Yii::$app->user->identity->Apellido1.' '.Yii::$app->user->identity->Apellido2;
+                    /*
+                     * throw new \Exception('No tienes los suficientes permisos para acceder a esta página');
+            throw new ForbiddenHttpException; */
         }
     }
 

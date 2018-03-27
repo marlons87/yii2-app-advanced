@@ -13,6 +13,7 @@ use yii\widgets\ActiveForm;
 
         <?= $form->field($model, 'status') ?>
         <?= $form->field($model, 'username') ?>
+        <?= $form->field($model, 'Nombre') ?>
         <?= $form->field($model, 'email') ?>
         <?= $form->field($model, 'password') ?>
         <?= $form->field($model, 'Id_Rol') ?>

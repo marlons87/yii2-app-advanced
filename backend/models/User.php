@@ -41,6 +41,10 @@ class User extends \common\models\User
             
             [['Nombre'], 'string', 'max' => 50],
             
+                        [['Apellido1'], 'string', 'max' => 30],
+
+                        [['Apellido2'], 'string', 'max' => 30],
+            
             ['email', 'trim'],
             ['email', 'required'],
             ['email', 'email'],

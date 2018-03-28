@@ -89,6 +89,12 @@ class UserController extends Controller
             throw new ForbiddenHttpException; */
         }
     }
+    
+
+    
+    
+    
+    
 
     /**
      * Updates an existing User model.

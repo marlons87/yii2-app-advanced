@@ -15,6 +15,7 @@ use yii\helpers\Html;
 </head>
 <body>
     <?php $this->beginBody() ?>
+    <h1>EMC2</h1>
     <?= $content ?>
     <?php $this->endBody() ?>
 </body>

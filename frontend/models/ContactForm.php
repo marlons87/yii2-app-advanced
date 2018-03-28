@@ -55,6 +55,7 @@ class ContactForm extends Model
             ->setFrom([$this->email => $this->name])
             ->setSubject($this->subject)
             ->setTextBody($this->body)
+                
             ->send();
     }
 }

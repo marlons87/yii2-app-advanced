@@ -3,13 +3,9 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 
-foreach ($consulta as $data):
-    
-    echo "1";
-endforeach;
-
-
-?>
+foreach ($items as $i):?>
+<br><?php echo $i['Nombre'] ; ?>
+   <?php endforeach;?>
 
 
     

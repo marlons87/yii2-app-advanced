@@ -15,11 +15,7 @@ class EvaluacionesController extends Controller
     
        $sql=( new \yii\db\Query())->select('*')->from('dominios')->All();
     
-       return $this->render('index', [
-            'consulta' => $sql
-           
-        ]);
-       
+       return $this->render('index', array('items'=>$sql));
 }
 
     }

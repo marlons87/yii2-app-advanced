@@ -23,6 +23,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'password')->passwordInput() ?>
+    
+    <?= $form->field($model, 'passCompare')->passwordInput() ?>
 
     <?= $form->field($model, 'Id_Rol')->dropDownList($model->RolList, ['prompt' => 'Seleccione...']) ?>
 

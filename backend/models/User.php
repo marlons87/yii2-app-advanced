@@ -27,7 +27,8 @@ use yii\helpers\ArrayHelper;
 class User extends \common\models\User
 {
     public $password;
- 
+    public $passCompare;
+
     /**
      * @inheritdoc
      */
@@ -53,7 +54,9 @@ class User extends \common\models\User
             
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
- 
+                       ['password', 'compare', 'compareAttribute'=>'passCompare','on'=>'create'],
+
+   
             ['Id_Rol', 'required'],
             [['Id_Rol'], 'exist', 'skipOnError' => true, 'targetClass' => \common\models\Roles::className(), 'targetAttribute' => ['Id_Rol' => 'Id_Rol']],
             

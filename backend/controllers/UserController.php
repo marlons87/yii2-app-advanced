@@ -66,6 +66,7 @@ class UserController extends Controller
      */
     public function actionCreate()
     {
+        $model = new User(['scenario' => 'create']);
         if(Yii::$app->user->can('CrearUsuario'))
         {
         $model = new User();
@@ -83,6 +84,7 @@ class UserController extends Controller
         ]);
         }else
         {
+            return $this->redirect(['index']);
             echo 'Su usuario posee permisos '.Yii::$app->user->identity->Nombre. ' '.Yii::$app->user->identity->Apellido1.' '.Yii::$app->user->identity->Apellido2;
                     /*
                      * throw new \Exception('No tienes los suficientes permisos para acceder a esta página');

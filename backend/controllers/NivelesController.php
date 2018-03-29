@@ -67,7 +67,7 @@ class NivelesController extends Controller
         $model = new Niveles();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->Id_Nivel]);
+            return $this->redirect(['index']);
         }
 
         return $this->render('create', [

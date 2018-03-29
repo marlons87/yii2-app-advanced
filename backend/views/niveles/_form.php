@@ -15,7 +15,7 @@ use common\models\Controles;
     <?php $form = ActiveForm::begin(); ?>
     
     
-    <?= $form->field($model, 'Id_Control')->dropDownList(ArrayHelper::map(Controles::find()->all(), 'Id_Control', 'Nombre'),['class' => 'form-control inline-block']); ?>
+     <?= $form->field($model, 'Id_Control')->dropDownList($model->ControlList , ['prompt' => 'Seleccione...']) ?>
 
     <?= $form->field($model, 'Valor')->textInput() ?>
 

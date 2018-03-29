@@ -67,7 +67,7 @@ class DominiosController extends Controller
         $model = new Dominios();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->Id_Dominio]);
+            return $this->redirect(['index']);
         }
 
         return $this->render('create', [
@@ -87,7 +87,7 @@ class DominiosController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->Id_Dominio]);
+            return $this->redirect(['index']);
         }
 
         return $this->render('update', [

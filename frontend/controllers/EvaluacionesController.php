@@ -34,18 +34,29 @@ class EvaluacionesController extends Controller
     }
 
 
-public function actionEvaluar($id)
-        
+ public function actionDominios()
     {
-        $model = $this->findModel($id);
+    
+       $sql=( new \yii\db\Query())->select('*')->from('dominios')->All();
+    
+       return $this->render('dominios', array('items'=>$sql));
+}
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['evaluar', 'id' => $model->Id_Dominio]);
-        }
+public function actionControles($idEvaluacion, $idDominio) {
 
-        return $this->render('evaluar', [
-            'model' => $model,
-        ]);
+        //$sql = ( new \yii\db\Query())->select('*')->from('controles')->where(['Id_Dominio' => [$idDominio]]);
+
+        $sql = (new \yii\db\Query())
+                ->select('*')
+                ->from('controles')
+                ->where(['Id_Dominio' => $idDominio])
+                ->all();
+
+        return $this->render('controles', array('items' => $sql));
+        //$model = new \common\models\Controles();
+        //return $this->render('controles', ['id' =>$idEvaluacion, 'idDominio' => $idDominio,]);
+        // return $this->render('controles', ['model' => $this->findModel($idDominio), ]);
+        //return $this->redirect(array('evaluar', 'id' => $id, 'idDominio' => $idDominio));
     }
 
     }

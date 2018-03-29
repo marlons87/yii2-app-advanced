@@ -15,6 +15,3 @@ foreach ($items as $i):?>
   
      <?php endforeach;?>
 </div>
-
-
-    

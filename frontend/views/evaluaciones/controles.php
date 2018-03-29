@@ -11,7 +11,7 @@ use yii\grid\GridView;
 $idEvaluacion = 1;
 foreach ($items as $i):?> 
 
-  <a href="#" class="list-group-item"><?php echo $i['Nombre'] ; ?></a>
+  <a href="#" class="list-group-item"><?php echo $i['Nombre'].' - '.$i['Active'] ; ?></a>
   
      <?php endforeach;?>
 </div>

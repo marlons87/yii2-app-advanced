@@ -24,10 +24,6 @@ class EvaluacionesController extends Controller
              ->queryAll(); 
      
      return $this->render('index', ['items'=>$count]);
-     
-     
-    
-
 }
 
 

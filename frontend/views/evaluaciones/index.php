@@ -67,5 +67,5 @@ $this->title = 'EMC2 | Evaluaciones';
 
 
  <p>
-        <?= Html::a('Crear evaluacion', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Crear evaluacion', ['dominios'], ['class' => 'btn btn-success']) ?>
     </p>

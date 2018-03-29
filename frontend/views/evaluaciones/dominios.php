@@ -1,12 +1,23 @@
-<div class="list-group">
-  <a href="#" class="list-group-item active">
-    Dominios a evaluar:
-  </a>
-    
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+
+$this->title = 'Dominios a evaluar';
+
+$this->params['breadcrumbs'][] = ['label' => 'Evaluaciones', 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
+
+   
+
+?>
+ <h1><?= Html::encode($this->title) ?></h1>
+
+<div class="list-group">
+
+    
+<?php
+
+
 
 $idEvaluacion = 1;
 foreach ($items as $i):?> 

@@ -1,11 +1,13 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
 
-$this->title = 'EMC2 | Evaluaciones';
+
+$this->title = 'Evaluación';
+
+$this->params['breadcrumbs'][] = $this->title;
 ?>
-<h1>Modelo de Madurez en Ciberseguridad</h1>
+<h1>Evaluaci&oacute;n</h1>
 
 <div class="panel panel-default">
   <div class="panel-heading">
@@ -32,11 +34,13 @@ $this->title = 'EMC2 | Evaluaciones';
           
           <div class="panel panel-default">
       <div class="panel-heading">
-          <h3 class="panel-title">Evaluaci&oacute;n <?php echo $i['Consecutivo']; ?></h3>
+          <h3 class="panel-title">Evaluaci&oacute;n <?php echo $i['Consecutivo']." - ".$i['institucion']; ?></h3>
       </div>
       <div class="panel-body">
+         
           <p>Fecha creaci&oacute;n: <?php echo $i['Fecha']; ?></p>
-    <?php if ($i['Status']) {
+          <p>Persona que la aplic&oacute;: <?php echo $i['usuario']." ".$i['Apellido1']." ".$i['Apellido2']; ?></p>
+    <?php if ($i['estado']) {
         ?> 
                      <p>Estado: Completa</p>
         <?php

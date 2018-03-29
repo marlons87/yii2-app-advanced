@@ -16,9 +16,6 @@ class EvaluacionesController extends Controller
                 
     {
         
-        
-        
-      
      $count = Yii::$app->db->createCommand('SELECT * FROM {{evaluaciones}} WHERE [[Id_Usuario]]=:id')
              ->bindValue(':id', yii::$app->user->identity->id)
              ->queryAll(); 

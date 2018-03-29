@@ -15,8 +15,8 @@ use yii\helpers\ArrayHelper;
     <?php $form = ActiveForm::begin(); ?>
 
 
-    
-        <?= $form->field($model, 'Id_Dominio')->dropDownList(ArrayHelper::map(Dominios::find()->all(), 'Id_Dominio', 'Nombre'),['class' => 'form-control inline-block']); ?>
+    <?= $form->field($model, 'Id_Dominio')->dropDownList($model->DominioList , ['prompt' => 'Seleccione...']) ?>
+
     
     <?= $form->field($model, 'Codigo')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'Nombre')->textInput(['maxlength' => true]) ?>

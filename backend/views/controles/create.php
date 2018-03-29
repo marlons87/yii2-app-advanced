@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Controles */
 
-$this->title = 'Agregar Controles';
+$this->title = 'Agregar Control';
 $this->params['breadcrumbs'][] = ['label' => 'Controles', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

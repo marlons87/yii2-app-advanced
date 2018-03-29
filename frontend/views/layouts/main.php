@@ -44,6 +44,7 @@ AppAsset::register($this);
         
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
+         $menuItems[] = ['label' => 'Evaluación', 'url' => ['/evaluaciones/index']];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
@@ -52,6 +53,7 @@ AppAsset::register($this);
             )
             . Html::endForm()
             . '</li>';
+        
     }
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],

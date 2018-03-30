@@ -12,21 +12,45 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
  <h1><?= Html::encode($this->title) ?></h1>
 
-<div class="list-group">
+
 
     
 <?php
+
+/*
+if ($evaluacion["evaluacion"]==null){
+    $idEvaluacion = $i['Id_Evaluacion'];
+}else
+{
+ $idEvaluacion = $evaluacion["evaluacion"];   
+    
+}*/
 
 
 
 $idEvaluacion = 1;
 foreach ($items as $i):?> 
+ 
+ 
+ <div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title"><?php echo $i['Nombre'];?></h3>
+  </div>
+  <div class="panel-body">
+      
+      
+   
+      
+      
+        <?= Html::a ($i['Nombre'] , ['controles', 'idEvaluacion' => $idEvaluacion, 'idDominio'=>$i['Id_Dominio']], ['class' => 'list-group-item']) ?>
+  </div>
+</div>
 
-  <a href="#" class="list-group-item"><?php echo $i['Nombre'] ; ?></a>
-  <?= Html::a ('Actualizar', ['controles', 'idEvaluacion' => $idEvaluacion, 'idDominio'=>$i['Id_Dominio']], ['class' => 'btn btn-primary']) ?>
+  
+
 
      <?php endforeach;?>
-</div>
+
 
 
     

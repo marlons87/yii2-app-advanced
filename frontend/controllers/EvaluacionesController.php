@@ -5,7 +5,7 @@ namespace frontend\controllers;
 use Yii;
 use yii\web\Controller;
 use common\models\Dominios;
-use common\models\DominiosSearch;
+
 
 class EvaluacionesController extends Controller {
 
@@ -33,16 +33,25 @@ class EvaluacionesController extends Controller {
 
     public function actionDominios() {
 
-        $consecutivo = Yii::$app->db->createCommand('select (MAX(Consecutivo)+1) as Consecutivo from evaluaciones where Id_Institucion=:idInstitucion')
+        $consecutivo = Yii::$app->db->createCommand('select (MAX(Consecutivo)+1) as Consecutivo from {{evaluaciones}} where [[Id_Institucion]]=:idInstitucion')
                 ->bindValue(':idInstitucion', yii::$app->user->identity->Id_Institucion)
                 ->queryOne();
 
+        Yii::$app->db->createCommand()->insert('evaluaciones', [
+            'Consecutivo' => $consecutivo['Consecutivo'],
+            'Fecha' => date('Y-m-d H:i:s'),
+            'Status' => 0,
+            'Id_Usuario' => yii::$app->user->identity->Id,
+            'Id_Institucion' => yii::$app->user->identity->Id_Institucion,
+            'Fecha_Ultima_Modificacion' => date('Y-m-d H:i:s'),])->execute();
 
-
+        $evaluacion = Yii::$app->db->createCommand('SELECT LAST_INSERT_ID() as evaluacion')
+                ->queryOne();
+        
 
         $sql = ( new \yii\db\Query())->select('*')->from('dominios')->All();
 
-        return $this->render('dominios', array('items' => $sql));
+      return $this->render('dominios', array('items' => $sql,'evaluacion'=>$evaluacion));
     }
 
     public function actionControles($idEvaluacion, $idDominio) {

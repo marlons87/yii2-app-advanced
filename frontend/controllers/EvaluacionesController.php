@@ -32,11 +32,25 @@ class EvaluacionesController extends Controller {
     }
     
     
-     public function actionDominios() {
+     public function actionDominios($id) {
          
             $sql = ( new \yii\db\Query())->select('*')->from('dominios')->All();
+            
+            $calificacion = Yii::$app->db->createCommand('select dominios.Id_Dominio, dominios.Codigo as DominioCodigo, dominios.Nombre as DominioNombre, controles.Id_Control, controles.Codigo, controles.Nombre, niveles.Valor
+from dominios
+LEFT join controles on dominios.Id_Dominio = controles.Id_Dominio
+left join niveles on controles.Id_Control = niveles.Id_Control
+left join respuestas on controles.Id_Control = respuestas.Id_Control and niveles.Id_Nivel = respuestas.Id_Nivel
+where (respuestas.Id_Evaluacion is null OR respuestas.Id_Evaluacion = :id) and respuestas.Id_Nivel IS NOT null
+order by dominios.Id_Dominio, controles.Id_Control, niveles.Id_Nivel ASC')
+                ->bindValue(':id', $id)
+                ->queryAll();
+            
+            
+            
+            
 
-      return $this->render('dominios', array('items' => $sql));
+      return $this->render('dominios', array('items' => $sql,'calificacion'=>$calificacion,'id'=>$id));
          
      }
     

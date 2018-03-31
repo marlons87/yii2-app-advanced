@@ -26,9 +26,7 @@ if ($evaluacion["evaluacion"]==null){
     
 }*/
 
-
-
-$idEvaluacion = 1;
+$idEvaluacion = $id[0];
 foreach ($items as $i):?> 
  
  
@@ -38,9 +36,54 @@ foreach ($items as $i):?>
   </div>
   <div class="panel-body">
       
+  <?php
+  
+$nivelDominio=6;
+
+     foreach ($calificacion as $cali):
+         
+        if ($i['Id_Dominio']==$cali["Id_Dominio"]){
+               ?>
       
+      <p> Control :<?php echo $cali["Codigo"]." ".$cali["Nombre"]." Nivel: ".$cali["Valor"] ?></p>
+      
+        <?php
+        
+        if ($nivelDominio>$cali["Valor"]){
+            
+             $nivelDominio=$cali["Valor"];
+        }
+    
+            
+        }
+         
+     endforeach;
+       
+       
    
+      ?>
       
+      <div class="alert alert-info">
+          <?php
+          
+          if ($nivelDominio ==6){
+              ?>
+             <p>Calificaci&oacute;n: <b> Pendiente </b></p>
+                     
+                         <?php
+          }else
+          {
+               ?>
+            <p>Calificaci&oacute;n: <b><?php echo $nivelDominio ?>  </b></p> 
+             <?php
+          }
+           ?>
+                  
+                  
+                  
+              
+</div>
+     
       
      
   </div>

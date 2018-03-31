@@ -42,7 +42,7 @@ foreach ($items as $i):?>
    
       
       
-        <?= Html::a ($i['Nombre'] , ['controles', 'idEvaluacion' => $idEvaluacion, 'idDominio'=>$i['Id_Dominio']], ['class' => 'list-group-item']) ?>
+     
   </div>
 </div>
 

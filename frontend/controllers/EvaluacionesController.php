@@ -30,8 +30,19 @@ class EvaluacionesController extends Controller {
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+    
+    
+     public function actionDominios() {
+         
+            $sql = ( new \yii\db\Query())->select('*')->from('dominios')->All();
 
-    public function actionDominios() {
+      return $this->render('dominios', array('items' => $sql));
+         
+     }
+    
+    
+
+    public function actionInsertar() {
 
         $consecutivo = Yii::$app->db->createCommand('select (MAX(Consecutivo)+1) as Consecutivo from {{evaluaciones}} where [[Id_Institucion]]=:idInstitucion')
                 ->bindValue(':idInstitucion', yii::$app->user->identity->Id_Institucion)
@@ -44,6 +55,12 @@ class EvaluacionesController extends Controller {
             'Id_Usuario' => yii::$app->user->identity->Id,
             'Id_Institucion' => yii::$app->user->identity->Id_Institucion,
             'Fecha_Ultima_Modificacion' => date('Y-m-d H:i:s'),])->execute();
+        
+        
+        
+        
+        
+     
 
         $evaluacion = Yii::$app->db->createCommand('SELECT LAST_INSERT_ID() as evaluacion')
                 ->queryOne();
@@ -64,6 +81,11 @@ class EvaluacionesController extends Controller {
 //Se deben incluier los Niveles de cada control y determinar cual esta saleccionado por el usuario si ya existe una evaluacion
         return $this->render('controles', array('items' => $sql));
     }
+    
+
+    
+    
+
 
 }
 

@@ -72,5 +72,5 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
  <p>
-        <?= Html::a('Crear evaluacion', ['dominios'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Crear evaluacion', ['insertar'], ['class' => 'btn btn-success']) ?>
     </p>

@@ -84,6 +84,8 @@ order by dominios.Id_Dominio, controles.Id_Control, niveles.Id_Nivel ASC')
 
       return $this->render('dominios', array('items' => $sql,'evaluacion'=>$evaluacion));
     }
+    
+    
 
     public function actionControles($idEvaluacion, $idDominio) {
         $sql = (new \yii\db\Query())

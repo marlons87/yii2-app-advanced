@@ -27,6 +27,8 @@ if ($evaluacion["evaluacion"]==null){
 }*/
 
 $idEvaluacion = $id[0];
+
+$notaGlobal=6;
 foreach ($items as $i):?> 
  
  
@@ -73,26 +75,31 @@ $nivelDominio=6;
                          <?php
           }else
           {
+              
+               if ($notaGlobal>$nivelDominio){
+            
+             $notaGlobal= $nivelDominio ;  
+        }
+              
+              
+         
+              
+              
                ?>
             <p>Calificaci&oacute;n: <b><?php echo $nivelDominio ?>  </b></p> 
              <?php
           }
            ?>
-                  
-                  
-                  
-              
-</div>
-     
-      
-     
+            
+</div>    
   </div>
 </div>
-
-  
-
-
+ 
      <?php endforeach;?>
+
+  <div class="alert alert-info">
+     <p>La calificaci&oacute;n general es: <?php echo $notaGlobal; ?></p>
+ </div>
 
 
 

@@ -1,20 +1,18 @@
 <?php
 
-namespace backend\controllers;
+namespace frontend\controllers;
 
 use Yii;
-use backend\models\User;
-use backend\models\UserSearch;
+use common\models\Respuestas;
+use common\models\RespuestasSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\web\ForbiddenHttpException;
-
 
 /**
- * UserController implements the CRUD actions for User model.
+ * RespuestasController implements the CRUD actions for Respuestas model.
  */
-class UserController extends Controller
+class RespuestasController extends Controller
 {
     /**
      * @inheritdoc
@@ -32,12 +30,12 @@ class UserController extends Controller
     }
 
     /**
-     * Lists all User models.
+     * Lists all Respuestas models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new UserSearch();
+        $searchModel = new RespuestasSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -47,7 +45,7 @@ class UserController extends Controller
     }
 
     /**
-     * Displays a single User model.
+     * Displays a single Respuestas model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -60,46 +58,25 @@ class UserController extends Controller
     }
 
     /**
-     * Creates a new User model.
+     * Creates a new Respuestas model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new User(['scenario' => 'create']);
-        if(Yii::$app->user->can('CrearUsuario'))
-        {
-        $model = new User();
- 
-        if ($model->load(Yii::$app->request->post())) {
-            $model->setPassword($model->password);
-            $model->generateAuthKey();
-            if ($model->save()) {
-                return $this->redirect(['index']);
-            }
+        $model = new Respuestas();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->Id_Respuesta]);
         }
- 
+
         return $this->render('create', [
             'model' => $model,
         ]);
-        }else
-        {
-            return $this->redirect(['index']);
-            echo 'Su usuario posee permisos '.Yii::$app->user->identity->Nombre. ' '.Yii::$app->user->identity->Apellido1.' '.Yii::$app->user->identity->Apellido2;
-                    /*
-                     * throw new \Exception('No tienes los suficientes permisos para acceder a esta página');
-            throw new ForbiddenHttpException; */
-        }
     }
-    
-
-    
-    
-    
-    
 
     /**
-     * Updates an existing User model.
+     * Updates an existing Respuestas model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -110,7 +87,7 @@ class UserController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->Id_Respuesta]);
         }
 
         return $this->render('update', [
@@ -119,7 +96,7 @@ class UserController extends Controller
     }
 
     /**
-     * Deletes an existing User model.
+     * Deletes an existing Respuestas model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -133,17 +110,18 @@ class UserController extends Controller
     }
 
     /**
-     * Finds the User model based on its primary key value.
+     * Finds the Respuestas model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return User the loaded model
+     * @return Respuestas the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = User::findOne($id)) !== null) {
+        if (($model = Respuestas::findOne($id)) !== null) {
             return $model;
         }
+
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 }

@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use Yii;
 use common\models\Dominios;
 use common\models\DominiosSearch;
+use common\models\Controles;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -37,7 +38,6 @@ class ControlesController extends Controller
     {
         $searchModel = new DominiosSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

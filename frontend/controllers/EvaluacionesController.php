@@ -5,7 +5,11 @@ namespace frontend\controllers;
 use Yii;
 use yii\web\Controller;
 use common\models\Dominios;
-
+use common\models\Controles;
+use common\models\Niveles;
+use common\models\ControlesSearch;
+use common\models\Respuestas;
+use common\models\Evaluaciones;
 
 class EvaluacionesController extends Controller {
 
@@ -47,22 +51,33 @@ class EvaluacionesController extends Controller {
 
         $evaluacion = Yii::$app->db->createCommand('SELECT LAST_INSERT_ID() as evaluacion')
                 ->queryOne();
-        
+
 
         $sql = ( new \yii\db\Query())->select('*')->from('dominios')->All();
 
-      return $this->render('dominios', array('items' => $sql,'evaluacion'=>$evaluacion));
+        return $this->render('dominios', array('items' => $sql, 'evaluacion' => $evaluacion));
     }
 
     public function actionControles($idEvaluacion, $idDominio) {
         $sql = (new \yii\db\Query())
-                ->select(['{{controles}}.*', '(CASE when respuestas.Id_Control IS NULL then 0 else 1 END) as Active',])
+                ->select(['{{controles}}.id_Control, {{controles}}.Nombre, {{controles}}.Codigo, {{niveles}}.Id_Nivel, {{niveles}}.Valor, {{niveles}}.Descripcion', '(CASE when respuestas.Id_Control IS NULL then 0 else 1 END) as Active',])
                 ->from('controles')
+                ->leftJoin('niveles', 'controles.Id_Control = niveles.Id_Control')
                 ->leftJoin('respuestas', 'controles.Id_Control = respuestas.Id_Control')
                 ->Where(['and', ['controles.Id_Dominio' => $idDominio], ['or', ['respuestas.Id_Evaluacion' => null], ['respuestas.Id_Evaluacion' => $idEvaluacion]]])
                 ->all();
 //Se deben incluier los Niveles de cada control y determinar cual esta saleccionado por el usuario si ya existe una evaluacion
         return $this->render('controles', array('items' => $sql));
+    }
+
+    public function actionPruebas($idEvaluacion, $idDominio) {
+        $dominios = Dominios::findOne($idDominio);
+        $controles = $dominios->controles;
+        $evaluaciones = Evaluaciones::findOne($idEvaluacion);
+        $respuestas = $evaluaciones->respuestas;
+        //var_dump($respuestas);
+//Se deben incluier los Niveles de cada control y determinar cual esta saleccionado por el usuario si ya existe una evaluacion
+        return $this->render('pruebas', array('controles' => $controles, 'respuestas' => $respuestas));
     }
 
 }

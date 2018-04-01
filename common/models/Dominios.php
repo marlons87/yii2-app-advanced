@@ -13,21 +13,19 @@ use Yii;
  *
  * @property Controles[] $controles
  */
-class Dominios extends \yii\db\ActiveRecord
-{
+class Dominios extends \yii\db\ActiveRecord {
+
     /**
      * @inheritdoc
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'dominios';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['Nombre', 'Codigo'], 'required'],
             [['Nombre'], 'string', 'max' => 100],
@@ -38,21 +36,32 @@ class Dominios extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'Id_Dominio' => 'ID',
             'Codigo' => 'Código',
             'Nombre' => 'Nombre',
-          
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getControles()
-    {
+    public function getControles() {
         return $this->hasMany(Controles::className(), ['Id_Dominio' => 'Id_Dominio']);
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getControlesList() {
+        $Controles = \common\models\Controles::find()->all();
+        $ControlesList = ArrayHelper::map($Controles, 'Id_Control', 'Nombre', 'Id_Dominio', 'Codigo');
+        return $ControlesList;
+    }
+
+    public function getControlName() {
+        return $this->Controles ? $this->$Controles->Controles : '- no definido -';
+    }
+
 }

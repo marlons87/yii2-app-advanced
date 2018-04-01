@@ -38,6 +38,8 @@ class Controles extends \yii\db\ActiveRecord
             
              ['Id_Dominio', 'integer'],
             [['Id_Dominio'], 'exist', 'skipOnError' => true, 'targetClass' => Dominios::className(), 'targetAttribute' => ['Id_Dominio' => 'Id_Dominio']],
+           [['Id_Nivel'], 'exist', 'skipOnError' => true, 'targetClass' => \common\models\Niveles::className(), 'targetAttribute' => ['Id_Nivel' => 'Id_Nivel']],
+            
         ]; 
         
     }
@@ -48,10 +50,10 @@ class Controles extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'Id_Control' => 'ID',
+            'Id_Control' => 'Id_Control',
             'Nombre' => 'Nombre',
-            'Id_Dominio' => 'Dominio',
-            'Codigo' => 'Código',
+            'Id_Dominio' => 'Id_Dominio',
+            'Codigo' => 'Codigo',
         ];
     }
 

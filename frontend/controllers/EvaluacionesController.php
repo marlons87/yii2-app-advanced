@@ -103,11 +103,6 @@ order by dominios.Id_Dominio, controles.Id_Control, niveles.Id_Nivel ASC')
         return $this->render('controles', array('items' => $sql));
     }
     
-
-    
-    
-
-
     public function actionPruebas($idEvaluacion, $idDominio) {
         $dominios = Dominios::findOne($idDominio);
         $controles = $dominios->controles;
@@ -116,8 +111,7 @@ order by dominios.Id_Dominio, controles.Id_Control, niveles.Id_Nivel ASC')
         //var_dump($respuestas);
 //Se deben incluier los Niveles de cada control y determinar cual esta saleccionado por el usuario si ya existe una evaluacion
         return $this->render('pruebas', array('controles' => $controles, 'respuestas' => $respuestas));
-    }
+    
 
 }
-
-?>
+}

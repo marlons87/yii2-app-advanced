@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
 
 $idEvaluacion = 1;
 $this->title = 'Controles a evaluar';
@@ -17,23 +18,44 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title"><?php echo $valc['Nombre']; ?></h3>
+            <h3 class="panel-title"><?php echo $valc['Nombre']; 
+            
+ 
+            ?>
+                
+            
+                
+             
+
+            
+            
+            </h3>
         </div>
         <div class="panel-body">
             <?php $form = ActiveForm::begin(); ?>
             <?php
             $valn = $valc['niveles'];
+           
             
-                $form->field ($valn, 'Descripcion')
-                        ->radioList ($valn ,array('class' => 'i-checks'));
-                //$form->field($model, 'bird_mutation')
-                //->checkboxList(ArrayHelper::map(BirdSpecieMutation::find()
-                //->where(['bird_specie_id' => $model->bird_specie_id])->all(),
-                //'id','birdMutation.name','birdMutation.birdMutationType.label'),['prompt' => 'Select Mutations','itemOptions' => ['class' => 'i-checks']]) ?>
+            foreach ($valc['niveles'] as $varNiveles):
+                
+                
+              echo   Html::radioList($valc['Nombre']."radio", '', [$varNiveles['Valor']=>$varNiveles['Descripcion']]); 
+                
 
-               
+            
+            endforeach;
+                
+            
 
-    <?php ActiveForm::end(); ?>
+        
+         
+
+
+
+            
+            
+ActiveForm::end(); ?>
 
 
         </div>

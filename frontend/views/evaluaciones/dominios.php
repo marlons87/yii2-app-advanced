@@ -2,7 +2,9 @@
 
 use yii\helpers\Html;
 
-$this->title = 'Dominios a evaluar';
+
+
+$this->title = 'Dominios evaluados';
 
 $this->params['breadcrumbs'][] = ['label' => 'Evaluaciones', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
@@ -58,6 +60,12 @@ $nivelDominio=6;
     
             
         }
+        
+        
+
+        
+        
+        
          
      endforeach;
        

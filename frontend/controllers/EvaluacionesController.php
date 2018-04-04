@@ -74,11 +74,6 @@ order by dominios.Id_Dominio, controles.Id_Control, niveles.Id_Nivel ASC')
             'Id_Institucion' => yii::$app->user->identity->Id_Institucion,
             'Fecha_Ultima_Modificacion' => date('Y-m-d H:i:s'),])->execute();
         
-        
-        
-        
-        
-     
 
         $evaluacion = Yii::$app->db->createCommand('SELECT LAST_INSERT_ID() as evaluacion')
                 ->queryOne();
@@ -86,7 +81,7 @@ order by dominios.Id_Dominio, controles.Id_Control, niveles.Id_Nivel ASC')
 
         $sql = ( new \yii\db\Query())->select('*')->from('dominios')->All();
 
-        return $this->render('dominios', array('items' => $sql, 'evaluacion' => $evaluacion));
+        return $this->render('evaluar', array('items' => $sql, 'evaluacion' => $evaluacion));
     }
     
     

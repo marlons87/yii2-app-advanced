@@ -26,8 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <button type="button" class="btn btn-primary">Evaluar</button>
   </div>
 </div>
- <?= Html::radioList('interests', '', [99=>'Coso 1', 'MySQL',
-'JavaScript', 'CSS', 'Yii Framework']); ?>
+
      
      
  <?php     

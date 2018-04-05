@@ -4,6 +4,7 @@ use yii\helpers\Html;
 
 
 
+
 $this->title = 'Dominios evaluados';
 
 $this->params['breadcrumbs'][] = ['label' => 'Evaluaciones', 'url' => ['index']];
@@ -108,6 +109,9 @@ $nivelDominio=6;
   <div class="alert alert-info">
      <p>La calificaci&oacute;n general es: <?php echo $notaGlobal; ?></p>
  </div>
+
+
+
 
 
 

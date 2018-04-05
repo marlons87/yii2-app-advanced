@@ -16,39 +16,33 @@ use yii\helpers\ArrayHelper;
  * @property Dominios $dominio
  * @property Niveles[] $niveles
  */
-class Controles extends \yii\db\ActiveRecord
-{
+class Controles extends \yii\db\ActiveRecord {
+
     /**
      * @inheritdoc
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'controles';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
-       return [
+    public function rules() {
+        return [
             [['Nombre', 'Id_Dominio', 'Codigo'], 'required'],
             [['Nombre'], 'string', 'max' => 100],
             [['Codigo'], 'string', 'max' => 10],
-            
-             ['Id_Dominio', 'integer'],
+            ['Id_Dominio', 'integer'],
             [['Id_Dominio'], 'exist', 'skipOnError' => true, 'targetClass' => Dominios::className(), 'targetAttribute' => ['Id_Dominio' => 'Id_Dominio']],
-           [['Id_Nivel'], 'exist', 'skipOnError' => true, 'targetClass' => \common\models\Niveles::className(), 'targetAttribute' => ['Id_Nivel' => 'Id_Nivel']],
-            
-        ]; 
-        
+            [['Id_Nivel'], 'exist', 'skipOnError' => true, 'targetClass' => \common\models\Niveles::className(), 'targetAttribute' => ['Id_Nivel' => 'Id_Nivel']],
+        ];
     }
 
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'Id_Control' => 'Id_Control',
             'Nombre' => 'Nombre',
@@ -60,33 +54,38 @@ class Controles extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-   
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getNiveles()
-    {
+    public function getNiveles() {
         return $this->hasMany(Niveles::className(), ['Id_Control' => 'Id_Control']);
     }
     
-     public function getDominio()
-    {
-        return $this->hasOne(Dominios::className(), ['Id_Dominio' => 'Id_Dominio']);
+    public function getNivelList() {
+        $Niveles = \common\models\Niveles::find()->all();
+        $NivelesList = ArrayHelper::map($Niveles, 'Id_Nivel', 'Id_Control', 'Valor', 'Descripcion');        
+        return $NivelesList;
     }
     
-     public function getDominioList()
+    public function getNivelName()
 	{
-    	$Dominio = Dominios::find()->all();
-    	$DominioList = ArrayHelper::map($Dominio, 'Id_Dominio', 'Nombre');
-    	return $DominioList;
+    	return $this->Niveles ? $this->$Niveles->Niveles : '- no definido -';
 	}
 
-	public function getDominioName()
-	{
-    	return $this->dominio ? $this->$dominio->dominio : '- no definido -';
-	}
-    
-    
-    
+
+    public function getDominio() {
+        return $this->hasOne(Dominios::className(), ['Id_Dominio' => 'Id_Dominio']);
+    }
+
+    public function getDominioList() {
+        $Dominio = Dominios::find()->all();
+        $DominioList = ArrayHelper::map($Dominio, 'Id_Dominio', 'Nombre');
+        return $DominioList;
+    }
+
+    public function getDominioName() {
+        return $this->dominio ? $this->$dominio->dominio : '- no definido -';
+    }
+
 }

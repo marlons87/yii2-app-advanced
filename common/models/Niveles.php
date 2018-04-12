@@ -32,7 +32,9 @@ class Niveles extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Valor', 'Descripcion', 'Id_Control'], 'required'],
+            [['Valor'], 'required','message' => 'Complete el valor para del nivel.'],
+            [['Descripcion'], 'required','message' => 'Complete la descripción.'],
+            [['Id_Control'], 'required','message' => 'Seleccione el control al cual pertenece el nivel.'],
             [['Valor', 'Id_Control'], 'integer'],
             [['Descripcion'], 'string', 'max' => 250],
             [['Id_Control'], 'exist', 'skipOnError' => true, 'targetClass' => Controles::className(), 'targetAttribute' => ['Id_Control' => 'Id_Control']],

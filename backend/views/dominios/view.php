@@ -7,6 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model backend\models\Dominios */
 
 $this->title = $model->Nombre;
+$this->params['breadcrumbs'][] = ['label' => 'Mantenimientos', 'url' => ['/mantenimientos/index']];
 $this->params['breadcrumbs'][] = ['label' => 'Dominios', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

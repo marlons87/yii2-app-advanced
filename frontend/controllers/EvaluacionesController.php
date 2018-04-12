@@ -164,4 +164,16 @@ class EvaluacionesController extends Controller {
             return \yii\helpers\Json::encode($test);
         }
 
-}        
+}
+
+public function actionResponder($id,$Id_Dominio,$idNivel) {
+    
+  echo "El id de la evaluacion es ".$id." el id del dominio es ".$Id_Dominio." el nivel es ".$idNivel;  
+
+}
+
+
+
+
+
+}

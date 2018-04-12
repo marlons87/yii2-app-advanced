@@ -39,12 +39,13 @@ AppAsset::register($this);
         ['label' => 'Inicio', 'url' => ['/site/index']],
     ];
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+        $menuItems[] = ['label' => 'Iniciar sesión', 'url' => ['/site/login']];
     } else {
+        $menuItems[] = ['label' => 'Mantenimientos', 'url' => ['/mantenimientos/index']];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
+                'Cerrar sesión (' . Yii::$app->user->identity->username . ')',
                 ['class' => 'btn btn-link logout']
             )
             . Html::endForm()

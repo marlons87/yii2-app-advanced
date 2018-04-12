@@ -7,6 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model backend\models\Niveles */
 
 $this->title = $model->Descripcion;
+$this->params['breadcrumbs'][] = ['label' => 'Mantenimientos', 'url' => ['/mantenimientos/index']];
 $this->params['breadcrumbs'][] = ['label' => 'Niveles', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

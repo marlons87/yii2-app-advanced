@@ -10,6 +10,7 @@ use common\models\Dominios;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Controles';
+$this->params['breadcrumbs'][] = ['label' => 'Mantenimientos', 'url' => ['/mantenimientos/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="controles-index">
@@ -25,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'Id_Control',
+            //'Id_Control',
              [
               'attribute' => 'Id_Dominio',
             'value' => 'dominio.Nombre',
@@ -37,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
           
            
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn','header'=>'Acciones'],
         ],
     ]); ?>
     

@@ -83,7 +83,7 @@ class Evaluaciones extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Respuestas::className(), ['Id_Evaluacion' => 'Id_Evaluacion']);
     }
-
+    
     /**
      * @inheritdoc
      * @return EvaluacionesQuery the active query used by this AR class.

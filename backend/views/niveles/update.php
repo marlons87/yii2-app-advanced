@@ -6,6 +6,7 @@ use yii\helpers\Html;
 /* @var $model backend\models\Niveles */
 
 $this->title = 'Actualizar Nivel';
+$this->params['breadcrumbs'][] = ['label' => 'Mantenimientos', 'url' => ['/mantenimientos/index']];
 $this->params['breadcrumbs'][] = ['label' => 'Niveles', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->Descripcion, 'url' => ['view', 'id' => $model->Id_Nivel]];
 $this->params['breadcrumbs'][] = 'Actualizar';

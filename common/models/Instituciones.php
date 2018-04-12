@@ -28,9 +28,8 @@ class Instituciones extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Nombre'], 'required'],
-            [['Nombre'], 'string', 'max' => 100],
-        ];
+            [['Nombre'], 'required', 'message' => 'Complete el nombre de la Institución.'],
+            [['Nombre'], 'string', 'max' => 100]];
     }
 
     /**
@@ -41,6 +40,7 @@ class Instituciones extends \yii\db\ActiveRecord
         return [
             'Id_Institucion' => 'ID',
             'Nombre' => 'Nombre',
+          
         ];
     }
 

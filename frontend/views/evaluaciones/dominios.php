@@ -1,6 +1,9 @@
 <?php
 
 use yii\helpers\Html;
+ use scotthuangzl\googlechart\GoogleChart;
+ use yii\helpers\ArrayHelper;
+
 
 
 
@@ -45,12 +48,30 @@ foreach ($items as $i):?>
   
 $nivelDominio=6;
 
+
+ $graph_data = [];
+ $graph_data[] = array('Nombre', 'Valor'); 
+
      foreach ($calificacion as $cali):
          
         if ($i['Id_Dominio']==$cali["Id_Dominio"]){
                ?>
       
-      <p> Control :<?php echo $cali["Codigo"]." ".$cali["Nombre"]." Nivel: ".$cali["Valor"] ?></p>
+      <?php
+      
+      //echo $cali["Codigo"]." ".$cali["Nombre"]." Nivel: ".$cali["Valor"];
+              
+              
+               $graph_data[] = array($cali["Nombre"],intval($cali["Valor"]));
+               
+              // $grafico["nombre"] = $cali["Nombre"] ;
+                  //     $grafico["valor"]= $cali["Valor"];
+              
+              ?>
+      
+      
+      
+    
       
         <?php
         
@@ -61,17 +82,28 @@ $nivelDominio=6;
     
             
         }
-        
-        
 
-        
-        
-        
          
      endforeach;
-       
-       
-   
+     
+    
+     
+     if (sizeof($graph_data)>6){
+         $tipoGrafico='BarChart';
+         
+     }else{
+         $tipoGrafico='ColumnChart';
+     }
+     
+    if ($nivelDominio !=6){
+        
+        echo GoogleChart::widget(array('visualization' => $tipoGrafico,
+                'data' => $graph_data,
+                'options' => array('title' => 'Resultado de la evaluación de los controles del dominio: '.$i['Nombre'],'height'=>450)));
+    }
+  
+      
+    
       ?>
       
       <div class="alert alert-info">
@@ -109,6 +141,8 @@ $nivelDominio=6;
   <div class="alert alert-info">
      <p>La calificaci&oacute;n general es: <?php echo $notaGlobal; ?></p>
  </div>
+ 
+ 
 
 
 

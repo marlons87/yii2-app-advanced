@@ -7,6 +7,7 @@ use yii\helpers\Html;
 /* @var $model backend\models\Niveles */
 
 $this->title = 'Agregar Niveles';
+$this->params['breadcrumbs'][] = ['label' => 'Mantenimientos', 'url' => ['/mantenimientos/index']];
 $this->params['breadcrumbs'][] = ['label' => 'Niveles', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

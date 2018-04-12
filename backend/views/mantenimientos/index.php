@@ -1,24 +1,30 @@
 <?php
 
+/* @var $this yii\web\View */
 
 use yii\helpers\Html;
 
-use yii\helpers\ArrayHelper;
-
-
-
 $this->title = 'Mantenimientos';
 $this->params['breadcrumbs'][] = $this->title;
-
 ?>
+<div class="site-about">
+    <h1><?= Html::encode($this->title) ?></h1>
 
-<div class="niveles-index">
-      <h1><?= Html::encode($this->title) ?></h1>
-      
-      <ol>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-      </ol>
+   
+
+
+
+<div class="list-group">
+  <a href="/user/index" class="list-group-item">Usuarios</a>
+  <a href="/dominios/index" class="list-group-item">Dominios</a>
+  <a href="/controles/index" class="list-group-item">Controles</a>
+  <a href="/niveles/index" class="list-group-item">Niveles</a>
+  <a href="/instituciones/index" class="list-group-item">Instituciones</a>
+</div>
+
+
+
+
+
+   
 </div>

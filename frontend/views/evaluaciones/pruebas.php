@@ -1,9 +1,10 @@
 <?php
 
+
 use yii\helpers\Html;
-use yii\grid\GridView;
 use yii\widgets\ActiveForm;
-use yii\helpers\ArrayHelper;
+use yii\widgets\Pjax;
+
 
 $idEvaluacion = 1;
 $this->title = 'Controles a evaluar';
@@ -22,7 +23,12 @@ $this->params['breadcrumbs'][] = $this->title;
             </h3>
         </div>
         <div class="panel-body">
-            <?php $form = ActiveForm::begin(); ?>
+            
+            
+            
+         
+            <?php $form = ActiveForm::begin();?>
+
             <?php
             $valn = $valc['niveles'];
 
@@ -33,18 +39,55 @@ $this->params['breadcrumbs'][] = $this->title;
                     
                     if ($varNiveles['Id_Control'] == $respuesta['Id_Control'] && $varNiveles['Id_Nivel'] == $respuesta['Id_Nivel']) {
                         $val = $varNiveles['Id_Nivel'];
+                        
+                       
                     }
+                    
+                    
+                    
+
+                    
                 endforeach;
-                echo Html::radioList($valc['Nombre'] . "radio", $val, [$varNiveles['Id_Nivel'] => $varNiveles['Descripcion']]);
+                 echo $form->field ($varNiveles, 'Id_Nivel')->radioList([$varNiveles['Id_Nivel'] => $varNiveles['Descripcion']]);
+                 
+                $idNivel=  1;
+                
+                //echo Html::radioList("radio", $val, [$varNiveles['Id_Nivel'] => $varNiveles['Descripcion'],]);
+                
+                
+                
+ 
+                
+               
+                
+             
+                
+               
 
             endforeach;
+               
+          echo Html::a('Evaluar', ['responder', 'id' => $idEvaluacion,'Id_Dominio'=>$valc['Id_Dominio'],'idNivel'=>$idNivel], ['class' => 'btn btn-primary']); 
 
-            ActiveForm::end();
-            ?>
+            ActiveForm::end();?>
+            
+          
 
 
         </div>
         
     </div>
 <?php endforeach; ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
 

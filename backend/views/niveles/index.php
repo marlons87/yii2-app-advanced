@@ -10,6 +10,7 @@ use common\models\Controles;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Niveles';
+$this->params['breadcrumbs'][] = ['label' => 'Mantenimientos', 'url' => ['/mantenimientos/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="niveles-index">
@@ -38,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
                
            
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn','header'=>'Acciones'],
         ],
     ]); ?>
     

@@ -23,6 +23,17 @@ return [
              ],
          ],
     ],
+    
+'assetManager' => [
+        'bundles' => [
+            'dmstr\web\AdminLteAsset' => [
+                'skin' => 'skin-black',
+            ],
+        ],
+    ],
+
+
+
         'request' => [
             'csrfParam' => '_csrf-backend',
         ],

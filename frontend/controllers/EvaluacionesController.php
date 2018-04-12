@@ -109,4 +109,15 @@ order by dominios.Id_Dominio, controles.Id_Control, niveles.Id_Nivel ASC')
     
 
 }
+
+public function actionResponder($id,$Id_Dominio,$idNivel) {
+    
+  echo "El id de la evaluacion es ".$id." el id del dominio es ".$Id_Dominio." el nivel es ".$idNivel;  
+
+}
+
+
+
+
+
 }

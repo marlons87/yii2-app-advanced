@@ -60,7 +60,21 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        
+        $notaXInstitucion = Yii::$app->db->createCommand('select i.Id_Institucion, i.Nombre, e.Id_Evaluacion, e.Fecha, MIN(n.Valor) as Valor
+FROM instituciones i 
+LEFT JOIN (SELECT e1.Id_Institucion, e1.Fecha, max(e1.Id_Evaluacion) as Id_Evaluacion FROM evaluaciones e1 GROUP BY e1.Id_Institucion) e on  
+i.Id_Institucion = e.Id_Institucion
+LEFT JOIN respuestas r on e.Id_Evaluacion = r.Id_Evaluacion
+LEFT JOIN niveles n on r.Id_Nivel = n.Id_Nivel
+GROUP by i.Id_Institucion, e.Id_Evaluacion')
+                ->queryAll();
+
+        
+        
+        
+        
+        return $this->render('index',array('notaXInstitucion' => $notaXInstitucion));
     }
     
     

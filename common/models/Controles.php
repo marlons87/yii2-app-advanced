@@ -30,12 +30,14 @@ class Controles extends \yii\db\ActiveRecord {
      */
     public function rules() {
         return [
-            [['Nombre', 'Id_Dominio', 'Codigo'], 'required'],
+            [['Nombre'], 'required','message' => 'Complete el nombre del Control.'],
+            [['Id_Dominio'], 'required','message' => 'Seleccione el dominio al que pertenece el Control.'],
+            [['Codigo'], 'required','message' => 'Complete el código del Control.'],
             [['Nombre'], 'string', 'max' => 100],
             [['Codigo'], 'string', 'max' => 10],
             ['Id_Dominio', 'integer'],
             [['Id_Dominio'], 'exist', 'skipOnError' => true, 'targetClass' => Dominios::className(), 'targetAttribute' => ['Id_Dominio' => 'Id_Dominio']],
-            [['Id_Nivel'], 'exist', 'skipOnError' => true, 'targetClass' => \common\models\Niveles::className(), 'targetAttribute' => ['Id_Nivel' => 'Id_Nivel']],
+           // [['Id_Nivel'], 'exist', 'skipOnError' => true, 'targetClass' => \common\models\Niveles::className(), 'targetAttribute' => ['Id_Nivel' => 'Id_Nivel']],
         ];
     }
 
@@ -44,10 +46,10 @@ class Controles extends \yii\db\ActiveRecord {
      */
     public function attributeLabels() {
         return [
-            'Id_Control' => 'Id_Control',
+            'Id_Control' => 'ID',
             'Nombre' => 'Nombre',
-            'Id_Dominio' => 'Id_Dominio',
-            'Codigo' => 'Codigo',
+            'Id_Dominio' => 'Dominio',
+            'Codigo' => 'Código',
         ];
     }
 

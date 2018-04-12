@@ -27,7 +27,8 @@ class Dominios extends \yii\db\ActiveRecord {
      */
     public function rules() {
         return [
-            [['Nombre', 'Codigo'], 'required'],
+            [['Nombre'], 'required','message' => 'Complete el nombre del Dominio.'],
+            [['Codigo'], 'required','message' => 'Complete el Código del Dominio.'],
             [['Nombre'], 'string', 'max' => 100],
             [['Codigo'], 'string', 'max' => 5],
         ];

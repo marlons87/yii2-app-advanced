@@ -38,6 +38,8 @@ class InstitucionesController extends Controller
         $searchModel = new InstitucionesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -109,10 +111,12 @@ class InstitucionesController extends Controller
               
                $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+       return $this->redirect(['index']);
               
           } catch (\Exception $e) {
-         throw new NotFoundHttpException('No se puede eliminar la institución. La institución, está actualmente siendo utilizada');
+              
+              
+        throw new NotFoundHttpException('No se puede eliminar la institución. La institución, está actualmente siendo utilizada');
           }
        
     }

@@ -89,17 +89,16 @@ class EvaluacionesController extends Controller {
 //Se deben incluier los Niveles de cada control y determinar cual esta saleccionado por el usuario si ya existe una evaluacion
         return $this->render('controles', array('items' => $sql));
     }
-    
-       public function actionPruebas($idEvaluacion, $idDominio) {
+
+    public function actionPruebas($idEvaluacion, $idDominio) {
         $dominios = Dominios::findOne($idDominio);
         $controles = $dominios->controles;
         $evaluaciones = Evaluaciones::findOne($idEvaluacion);
         $respuestas = $evaluaciones->respuestas;
-        return $this->render('pruebas', array('controles' => $controles, 'respuestas' => $respuestas, 'idevaluacion'=>$idEvaluacion, 'iddominio'=>$idDominio));
-   }
-       
-       
-       public function actionPruebas2($idEvaluacion, $idDominio) {
+        return $this->render('pruebas', array('controles' => $controles, 'respuestas' => $respuestas, 'idevaluacion' => $idEvaluacion, 'iddominio' => $idDominio));
+    }
+
+    public function actionPruebas2($idEvaluacion, $idDominio) {
         $evaluacion = Evaluaciones::findOne($idEvaluacion);
         $respuestas = $evaluacion->respuestas;
         $control = $respuestas->control;
@@ -107,67 +106,65 @@ class EvaluacionesController extends Controller {
         //var_dump($respuestas);
         //Se deben incluier los Niveles de cada control y determinar cual esta saleccionado por el usuario si ya existe una evaluacion
         return $this->render('pruebas2', array('respuestas' => $respuestas));
-        
-       }
-       
-        //Controller file code
-    public function actionAjax()
-        {
-            $data = Yii::$app->request->post('niveles');
-            $observaciones = Yii::$app->request->post('observaciones');
-            $idEvaluacion = Yii::$app->request->post('idEvaluacion');
-            if (isset($data)) {
-                foreach ($data as $respuesta)
-                {
-                    $nivel = Niveles::findOne($respuesta);
-                    $control = $nivel['Id_Control'];
-                    //Asignar el comentario de cada control
-                    $comentario='mmm';
-                    foreach ($observaciones as $observacion)
-                    {
-                        $myArray = explode('~', $observacion);
-                        if ($myArray[0] === $control) {
-                            $comentario = $myArray[1];
-                        }
+    }
+
+    //Controller file code
+    public function actionAjax() {
+        $data = Yii::$app->request->post('niveles');
+        $observaciones = Yii::$app->request->post('observaciones');
+        $idEvaluacion = Yii::$app->request->post('idEvaluacion');
+        if (isset($data)) {
+            foreach ($data as $respuesta) {
+                $nivel = Niveles::findOne($respuesta);
+                $control = $nivel['Id_Control'];
+                //Asignar el comentario de cada control
+                $comentario = 'mmm';
+                foreach ($observaciones as $observacion) {
+                    $myArray = explode('~', $observacion);
+                    $aux = (int) $myArray[0];
+                    if ((int) $myArray[0] === $control) {
+                        $comentario = trim($myArray[1]);
+                        break;
                     }
-                    
+                }
+
+                $respuestaactual = Respuestas::find()
+                        ->where(['Id_Evaluacion' => $idEvaluacion])
+                        ->andWhere(['Id_Control' => $control])
+                        ->andWhere(['Id_Nivel' => $respuesta])
+                        ->one();
+                if (!$respuestaactual['Id_Respuesta']) {
                     $respuestaactual = Respuestas::find()
-                            ->where(['Id_Evaluacion'=>$idEvaluacion])
-                            ->andWhere(['Id_Control'=>$control])
-                            ->andWhere(['Id_Nivel'=>$respuesta])
+                            ->where(['Id_Evaluacion' => $idEvaluacion])
+                            ->andWhere(['Id_Control' => $control])
                             ->one();
-                    if(!$respuestaactual['Id_Respuesta'])
-                    {
-                        $respuestaactual = Respuestas::find()
-                            ->where(['Id_Evaluacion'=>$idEvaluacion])
-                            ->andWhere(['Id_Control'=>$control])
-                            ->one(); 
-                        if(!$respuestaactual['Id_Respuesta'])
-                    {  //Inserta uno nuevo
-                            $respuestanueva = new Respuestas();
-                           $respuestanueva->Id_Nivel=$respuesta;
-                           $respuestanueva->Id_Evaluacion=$idEvaluacion;
-                           $respuestanueva->Id_Control=$control;
-                           $respuestanueva->Observaciones=$comentario;
-                           $respuestanueva->save();
-                    }     
-                    else{//Actualizar
+                    if (!$respuestaactual['Id_Respuesta']) {  //Inserta uno nuevo
+                        $respuestanueva = new Respuestas();
+                        $respuestanueva->Id_Nivel = $respuesta;
+                        $respuestanueva->Id_Evaluacion = $idEvaluacion;
+                        $respuestanueva->Id_Control = $control;
+                        $respuestanueva->Observaciones = $comentario;
+                        $respuestanueva->save();
+                    } else {//Actualizar
                         $respuestaactual->Id_Nivel= intval($respuesta);
                         $respuestaactual->Observaciones = $comentario;
                         $respuestaactual->save();
-                    }   }                   
+                    }
+                } else {//Actualizar
+                    //$respuestaactual->Id_Nivel= intval($respuesta);
+                    $respuestaactual->Observaciones = $comentario;
+                    $respuestaactual->save();
                 }
-                
-            } else {
-                $test = "Ajax failed";
             }
-            return \yii\helpers\Json::encode($test);
+        } else {
+            $test = "Ajax failed";
         }
-public function actionResponder($id,$Id_Dominio,$idNivel) {
-    
-  echo "El id de la evaluacion es ".$id." el id del dominio es ".$Id_Dominio." el nivel es ".$idNivel;  
+        return \yii\helpers\Json::encode($test);
+    }
+
+    public function actionResponder($id, $Id_Dominio, $idNivel) {
+
+        echo "El id de la evaluacion es " . $id . " el id del dominio es " . $Id_Dominio . " el nivel es " . $idNivel;
+    }
 
 }
-
-}
-

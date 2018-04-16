@@ -118,7 +118,7 @@ class EvaluacionesController extends Controller {
                 $nivel = Niveles::findOne($respuesta);
                 $control = $nivel['Id_Control'];
                 //Asignar el comentario de cada control
-                $comentario = 'mmm';
+                $comentario = '';
                 foreach ($observaciones as $observacion) {
                     $myArray = explode('~', $observacion);
                     $aux = (int) $myArray[0];

@@ -146,7 +146,7 @@ class EvaluacionesController extends Controller {
                         $respuestanueva->Observaciones = $comentario;
                         $respuestanueva->save();
                     } else {//Actualizar
-                        //$respuestaactual->Id_Nivel= intval($respuesta);
+                        $respuestaactual->Id_Nivel= intval($respuesta);
                         $respuestaactual->Observaciones = $comentario;
                         $respuestaactual->save();
                     }

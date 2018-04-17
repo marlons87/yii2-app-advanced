@@ -5,7 +5,7 @@ use yii\grid\GridView;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 
-$idEvaluacion = 1;
+$idEvaluacion = 97;
 $this->title = 'Controles a evaluar';
 
 $this->params['breadcrumbs'][] = ['label' => 'Evaluaciones', 'url' => ['index']];

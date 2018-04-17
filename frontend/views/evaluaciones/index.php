@@ -47,7 +47,13 @@ $this->params['breadcrumbs'][] = $this->title;
     } else {
         ?>  
               <p>Estado: Incompleta</p>
-              <p>&Uacute;ltima modificaci&oacute;n:<?php echo $i['Fecha_Ultima_Modificacion']; ?></p>
+              <p>&Uacute;ltima modificaci&oacute;n:<?php echo $i['Fecha_Ultima_Modificacion'];
+              
+            
+             
+              ?></p>
+              
+             
               
         <?= Html::a('Ver detalles', ['dominios', 'id' => $i['Id_Evaluacion']], ['class' => 'btn btn-primary']) ?>
   

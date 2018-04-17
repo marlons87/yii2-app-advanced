@@ -23,7 +23,8 @@
 		"yii2mod/yii2-c3-chart": "dev-master",
 		"mrlco/yii2-google-charts": "*",
 		"yiisoft/yii2-debug": "^2.0@dev",
-		"dmstr/yii2-adminlte-asset": "^2.1"
+		"dmstr/yii2-adminlte-asset": "^2.1",
+		"mdmsoft/yii2-admin": "~2.0"
 	},
     "require-dev": {
 		"phpunit/phpunit": "~4.4",

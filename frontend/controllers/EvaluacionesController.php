@@ -38,6 +38,9 @@ class EvaluacionesController extends Controller {
     }
 
     public function actionDominios($id) {
+        
+        
+        echo $id;
 
         $sql = ( new \yii\db\Query())->select('*')->from('dominios')->All();
 
@@ -74,8 +77,13 @@ class EvaluacionesController extends Controller {
 
 
         $sql = ( new \yii\db\Query())->select('*')->from('dominios')->All();
-
-        return $this->render('evaluar', array('items' => $sql, 'evaluacion' => $evaluacion));
+        
+       
+        
+       
+        
+       
+        return $this->render('crear', array('items' => $sql, 'evaluacion' => $evaluacion));
     }
 
     public function actionControles($idEvaluacion, $idDominio) {
@@ -90,12 +98,12 @@ class EvaluacionesController extends Controller {
         return $this->render('controles', array('items' => $sql));
     }
 
-    public function actionPruebas($idEvaluacion, $idDominio) {
+    public function actionEvaluar($idEvaluacion, $idDominio) {
         $dominios = Dominios::findOne($idDominio);
         $controles = $dominios->controles;
         $evaluaciones = Evaluaciones::findOne($idEvaluacion);
         $respuestas = $evaluaciones->respuestas;
-        return $this->render('pruebas', array('controles' => $controles, 'respuestas' => $respuestas, 'idevaluacion' => $idEvaluacion, 'iddominio' => $idDominio));
+        return $this->render('evaluar', array('controles' => $controles, 'respuestas' => $respuestas, 'idevaluacion' => $idEvaluacion, 'iddominio' => $idDominio));
     }
 
     public function actionPruebas2($idEvaluacion, $idDominio) {

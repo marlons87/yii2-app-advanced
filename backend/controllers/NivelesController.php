@@ -37,6 +37,8 @@ class NivelesController extends Controller
     {
         $searchModel = new NivelesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        
+          
 
         return $this->render('index', [
             'searchModel' => $searchModel,

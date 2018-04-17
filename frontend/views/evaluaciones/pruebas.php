@@ -24,6 +24,9 @@ $form = ActiveForm::begin([
 <?php foreach ($controles as $valc): ?> 
 
     <div class="panel panel-default">
+         <?php
+            $comentario;
+            ?>
         <div class="panel-heading">
             <h3 class="panel-title"><?php echo $valc['Nombre']; ?>
             </h3>
@@ -31,7 +34,6 @@ $form = ActiveForm::begin([
         <div class="panel-body">
 
             <?php
-            $comentario;
             $valn = $valc['niveles'];
 
             foreach ($valc['niveles'] as $varNiveles):

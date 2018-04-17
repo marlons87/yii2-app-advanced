@@ -98,12 +98,12 @@ class EvaluacionesController extends Controller {
         return $this->render('controles', array('items' => $sql));
     }
 
-    public function actionEvaluar($idEvaluacion, $idDominio) {
+    public function actionEvaluar($idEvaluacion, $idDominio,$nombre) {
         $dominios = Dominios::findOne($idDominio);
         $controles = $dominios->controles;
         $evaluaciones = Evaluaciones::findOne($idEvaluacion);
         $respuestas = $evaluaciones->respuestas;
-        return $this->render('evaluar', array('controles' => $controles, 'respuestas' => $respuestas, 'idevaluacion' => $idEvaluacion, 'iddominio' => $idDominio));
+        return $this->render('evaluar', array('controles' => $controles, 'respuestas' => $respuestas, 'idevaluacion' => $idEvaluacion, 'iddominio' => $idDominio,'nombre'=>$nombre));
     }
 
     public function actionPruebas2($idEvaluacion, $idDominio) {

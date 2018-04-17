@@ -5,13 +5,16 @@ use yii\grid\GridView;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 
-$idEvaluacion = 97;
+$idEvaluacion = $idevaluacion;
+$comentario = "";
+$nombre = $nombre;
+
 $this->title = 'Controles a evaluar';
 
 $this->params['breadcrumbs'][] = ['label' => 'Evaluaciones', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<h1><?= Html::encode($this->title) ?></h1>
+<h1><?= Html::encode($this->title) ?> para el dominio <?= Html::encode($nombre) ?></h1>
 
 <input id="idEvaluacion" type="hidden" value="<?= Html::encode($idevaluacion) ?>">
 <input id="idDominio" type="hidden" value="<?= Html::encode($iddominio) ?>" >
@@ -31,7 +34,6 @@ $form = ActiveForm::begin([
         <div class="panel-body">
 
             <?php
-            $comentario;
             $valn = $valc['niveles'];
 
             foreach ($valc['niveles'] as $varNiveles):

@@ -86,7 +86,7 @@ foreach ($items as $i):
 
             
             
-              <?= Html::a('Ver detalles', ['evaluar','idEvaluacion' => $idEvaluacion,'idDominio'=>$i['Id_Dominio']], ['class' => 'btn btn-primary']) ?>
+              <?= Html::a('Ver detalles', ['evaluar','idEvaluacion' => $idEvaluacion,'idDominio'=>$i['Id_Dominio'],'nombre'=>$i['Nombre']], ['class' => 'btn btn-primary']) ?>
             
             <br> <br>
             <div class="alert alert-info">

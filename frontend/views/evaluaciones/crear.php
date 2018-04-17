@@ -14,20 +14,34 @@ $idEvaluacion = $evaluacion["evaluacion"];
 ?>
 <h1><?= Html::encode($this->title) ?></h1>
 
-
+<ul class="list-group">
 <?php
+
+
 foreach ($items as $i):?> 
 
- <div class="panel panel-default">
- <div class="panel-heading">
-   <h3 class="panel-title"><?php echo $i['Nombre'];?></h3>
- </div>
- <div class="panel-body">
-   <button type="button" class="btn btn-primary">Evaluar</button>
- </div>
-</div>
+    <li class="list-group-item">
+        
+         <?= Html::a($i['Nombre'], ['evaluar','idEvaluacion' => $idEvaluacion,'idDominio'=>$i['Id_Dominio'],'nombre'=>$i['Nombre']]) ?>
+      
+     
+  
+  
+  </li>
+  
+
+
+
+
+
+
+
 
     
     
-<?php     
+<?php
+
+
 endforeach;
+?>
+</ul>

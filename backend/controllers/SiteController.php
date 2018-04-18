@@ -114,4 +114,12 @@ GROUP by i.Id_Institucion, e.Id_Evaluacion')
 
         return $this->goHome();
     }
+    
+      public function actionEvaluaciones()
+    {
+          
+          echo "Hola munfd";
+          
+            return $this->render('evaluaciones');
+    }
 }

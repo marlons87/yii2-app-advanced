@@ -1,5 +1,5 @@
 <?php
-
+use yii\helpers\Html;
 /* @var $this yii\web\View */
 
 $this->title = 'ECM2';
@@ -25,10 +25,13 @@ $this->title = 'ECM2';
                      ?>
                    <li class="list-group-item">
                     <span class="badge"><?php echo $nota['Valor']; ?></span>
-                  <?php echo $nota['Nombre']; ?>
+                
+                    
+                             <?= Html::a($nota['Nombre'], ['evaluaciones','Id_Institucion' => $nota['Id_Institucion']]) ?>
+                    
                   </li>
                    <?php  
-                 endforeach;
+                 endforeach
  ?>
              
                   

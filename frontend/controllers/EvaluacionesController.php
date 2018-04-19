@@ -18,10 +18,10 @@ class EvaluacionesController extends Controller {
     public function actionIndex() {
 
         $count = Yii::$app->db->createCommand('select Id_Evaluacion,Consecutivo,Fecha,evaluaciones.Status as estado,Fecha_Ultima_Modificacion,instituciones.Nombre as institucion,user.Nombre as usuario,user.Apellido1,user.Apellido2,user.Puesto
- from evaluaciones
- inner join instituciones on evaluaciones.Id_Institucion = instituciones.Id_Institucion
- inner join user on evaluaciones.Id_Usuario = user.id
- where (instituciones.Id_Institucion =:IdInstitucion or user.id=:id) ')
+                    from evaluaciones
+                    inner join instituciones on evaluaciones.Id_Institucion = instituciones.Id_Institucion
+                    inner join user on evaluaciones.Id_Usuario = user.id
+                    where (instituciones.Id_Institucion =:IdInstitucion or user.id=:id) ')
                 ->bindValue(':id', yii::$app->user->identity->id)
                 ->bindValue(':IdInstitucion', yii::$app->user->identity->Id_Institucion)
                 ->queryAll();
@@ -33,17 +33,12 @@ class EvaluacionesController extends Controller {
         if (($model = Dominios::findOne($id)) !== null) {
             return $model;
         }
-
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
     public function actionDominios($id) {
-        
-        
         echo $id;
-
         $sql = ( new \yii\db\Query())->select('*')->from('dominios')->All();
-
         $calificacion = Yii::$app->db->createCommand('select dominios.Id_Dominio, dominios.Codigo as DominioCodigo, dominios.Nombre as DominioNombre, controles.Id_Control, controles.Codigo, controles.Nombre, niveles.Valor
         from dominios
         LEFT join controles on dominios.Id_Dominio = controles.Id_Dominio
@@ -58,7 +53,6 @@ class EvaluacionesController extends Controller {
     }
 
     public function actionInsertar() {
-
         $consecutivo = Yii::$app->db->createCommand('select (MAX(Consecutivo)+1) as Consecutivo from {{evaluaciones}} where [[Id_Institucion]]=:idInstitucion')
                 ->bindValue(':idInstitucion', yii::$app->user->identity->Id_Institucion)
                 ->queryOne();
@@ -71,18 +65,10 @@ class EvaluacionesController extends Controller {
             'Id_Institucion' => yii::$app->user->identity->Id_Institucion,
             'Fecha_Ultima_Modificacion' => date('Y-m-d H:i:s'),])->execute();
 
-
         $evaluacion = Yii::$app->db->createCommand('SELECT LAST_INSERT_ID() as evaluacion')
                 ->queryOne();
 
-
         $sql = ( new \yii\db\Query())->select('*')->from('dominios')->All();
-        
-       
-        
-       
-        
-       
         return $this->render('crear', array('items' => $sql, 'evaluacion' => $evaluacion));
     }
 
@@ -99,11 +85,15 @@ class EvaluacionesController extends Controller {
     }
 
     public function actionEvaluar($idEvaluacion, $idDominio) {
-        $dominios = Dominios::findOne($idDominio);
-        $controles = $dominios->controles;
-        $evaluaciones = Evaluaciones::findOne($idEvaluacion);
-        $respuestas = $evaluaciones->respuestas;
-        return $this->render('evaluar', array('controles' => $controles, 'respuestas' => $respuestas, 'idevaluacion' => $idEvaluacion, 'iddominio' => $idDominio));
+        if (Yii::$app->request->post()) {
+            $this->redirect(array('evaluaciones/dominios', 'id' => $idEvaluacion));
+        } else {
+            $dominios = Dominios::findOne($idDominio);
+            $controles = $dominios->controles;
+            $evaluaciones = Evaluaciones::findOne($idEvaluacion);
+            $respuestas = $evaluaciones->respuestas;
+            return $this->render('evaluar', array('controles' => $controles, 'respuestas' => $respuestas, 'idevaluacion' => $idEvaluacion, 'iddominio' => $idDominio));
+        }
     }
 
     public function actionPruebas2($idEvaluacion, $idDominio) {
@@ -128,7 +118,7 @@ class EvaluacionesController extends Controller {
                 //Asignar el comentario de cada control
                 $comentario = '';
                 foreach ($observaciones as $observacion) {
-                    $myArray = explode('~', $observacion);
+                    $myArray = \explode('~', $observacion);
                     $aux = (int) $myArray[0];
                     if ((int) $myArray[0] === $control) {
                         $comentario = trim($myArray[1]);
@@ -154,7 +144,7 @@ class EvaluacionesController extends Controller {
                         $respuestanueva->Observaciones = $comentario;
                         $respuestanueva->save();
                     } else {//Actualizar
-                        $respuestaactual->Id_Nivel= intval($respuesta);
+                        $respuestaactual->Id_Nivel = intval($respuesta);
                         $respuestaactual->Observaciones = $comentario;
                         $respuestaactual->save();
                     }
@@ -164,8 +154,9 @@ class EvaluacionesController extends Controller {
                     $respuestaactual->save();
                 }
             }
+            $test = "Acción ejecutada exitosamente";
         } else {
-            $test = "Ajax failed";
+            $test = "Error al ejecutar la acción";
         }
         return \yii\helpers\Json::encode($test);
     }

@@ -6,6 +6,7 @@ use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 
 $idEvaluacion = 97;
+$comentario="";
 $this->title = 'Controles a evaluar';
 
 $this->params['breadcrumbs'][] = ['label' => 'Evaluaciones', 'url' => ['index']];
@@ -24,9 +25,7 @@ $form = ActiveForm::begin([
 <?php foreach ($controles as $valc): ?> 
 
     <div class="panel panel-default">
-         <?php
-            $comentario;
-            ?>
+
         <div class="panel-heading">
             <h3 class="panel-title"><?php echo $valc['Nombre']; ?>
             </h3>

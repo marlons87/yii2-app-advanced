@@ -37,7 +37,7 @@ class EvaluacionesController extends Controller {
     }
 
     public function actionDominios($id) {
-        echo $id;
+        
         $sql = ( new \yii\db\Query())->select('*')->from('dominios')->All();
         $calificacion = Yii::$app->db->createCommand('select dominios.Id_Dominio, dominios.Codigo as DominioCodigo, dominios.Nombre as DominioNombre, controles.Id_Control, controles.Codigo, controles.Nombre, niveles.Valor
         from dominios
@@ -84,7 +84,7 @@ class EvaluacionesController extends Controller {
         return $this->render('controles', array('items' => $sql));
     }
 
-    public function actionEvaluar($idEvaluacion, $idDominio) {
+    public function actionEvaluar($idEvaluacion, $idDominio,$nombre) {
         if (Yii::$app->request->post()) {
             $this->redirect(array('evaluaciones/dominios', 'id' => $idEvaluacion));
         } else {
@@ -92,7 +92,7 @@ class EvaluacionesController extends Controller {
             $controles = $dominios->controles;
             $evaluaciones = Evaluaciones::findOne($idEvaluacion);
             $respuestas = $evaluaciones->respuestas;
-            return $this->render('evaluar', array('controles' => $controles, 'respuestas' => $respuestas, 'idevaluacion' => $idEvaluacion, 'iddominio' => $idDominio));
+            return $this->render('evaluar', array('controles' => $controles, 'respuestas' => $respuestas, 'idevaluacion' => $idEvaluacion, 'iddominio' => $idDominio,'nombre'=>$nombre));
         }
     }
 

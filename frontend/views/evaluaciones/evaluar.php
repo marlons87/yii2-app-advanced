@@ -36,21 +36,20 @@ $form = ActiveForm::begin([
 
             <?php
             $valn = $valc['niveles'];
-
+            $val = '';
             foreach ($valc['niveles'] as $varNiveles):
-                $val = '';
+
                 foreach ($respuestas as $respuesta):
 
                     if ($varNiveles['Id_Control'] == $respuesta['Id_Control'] && $varNiveles['Id_Nivel'] == $respuesta['Id_Nivel']) {
                         $val = $varNiveles['Id_Nivel'];
                         $comentario = $respuesta['Observaciones'];
                         break;
-                    } else {
-                        if ($varNiveles['Valor'] == -1 && $val = '') {
-                            $val = $varNiveles['Id_Nivel'];
-                        }
                     }
                 endforeach;
+                if ($varNiveles['Valor'] == -1 && $val == '') {
+                            $val = $varNiveles['Id_Nivel'];
+                        }
                 echo Html::radioList($valc['Nombre'] . "radio", $val, [$varNiveles['Id_Nivel'] => $varNiveles['Descripcion']]);
 
             endforeach;

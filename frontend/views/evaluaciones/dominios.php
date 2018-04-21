@@ -1,40 +1,19 @@
 <?php
 
-use yii\helpers\Html;
-use scotthuangzl\googlechart\GoogleChart;
-use yii\helpers\ArrayHelper;
+    use yii\helpers\Html;
+    use scotthuangzl\googlechart\GoogleChart;
+    use yii\helpers\ArrayHelper;
 
-$this->title = 'Dominios evaluados';
-
-$this->params['breadcrumbs'][] = ['label' => 'Evaluaciones', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+    $this->title = 'Dominios evaluados';
+    $this->params['breadcrumbs'][] = ['label' => 'Evaluaciones', 'url' => ['index']];
+    $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h1><?= Html::encode($this->title) ?></h1>
 
-
-
-
 <?php
-/*
-  if ($evaluacion["evaluacion"]==null){
-  $idEvaluacion = $i['Id_Evaluacion'];
-  }else
-  {
-  $idEvaluacion = $evaluacion["evaluacion"];
-
-  } */
-
-
-
-
-
-
-$idEvaluacion = $id;
-
-$notaGlobal = 6;
-$nivelDominio = 6;
-foreach ($items as $i):
-    ?> 
+    $idEvaluacion = $id;
+    $notaGlobal = 6;
+foreach ($items as $i):?> 
 
 
     <div class="panel panel-default">
@@ -44,7 +23,7 @@ foreach ($items as $i):
         <div class="panel-body">
 
     <?php
-   
+    $nivelDominio = 6;
 
 
     $graph_data = [];
@@ -56,11 +35,22 @@ foreach ($items as $i):
             ?>
 
                     <?php
-                    $graph_data[] = array($cali["Nombre"], intval($cali["Valor"]));
+                    
+                    if (intval($cali["Valor"])>=0){
+                          $graph_data[] = array($cali["Nombre"], intval($cali["Valor"]));
+                    }else{
+                        ?>
+            
+            <p>El control <b><?php echo $cali["Nombre"];  ?></b> no aplica </p>
+                        
+                     <?php   
+                    }
+                    
+                  
                     ?>
 
                     <?php
-                    if ($nivelDominio > $cali["Valor"]) {
+                    if ($nivelDominio > $cali["Valor"] AND $cali["Valor"]>=0 ) {
 
                         $nivelDominio = $cali["Valor"];
                     }
@@ -76,35 +66,42 @@ foreach ($items as $i):
                     'data' => $graph_data,
                     'options' => array('title' => 'Resultado de la evaluación de los controles del dominio: ' . $i['Nombre'], 'height' => 450)));
             }
-            ?>
 
-            
-            
-              <?= Html::a('Ver detalles', ['evaluar','idEvaluacion' => $idEvaluacion,'idDominio'=>$i['Id_Dominio'],'nombre'=>$i['Nombre']], ['class' => 'btn btn-primary']) ?>
-            
-            <br> <br>
-            <div class="alert alert-info">
-            <?php
             if ($nivelDominio == 6) {
                 ?>
-                    <p>Calificaci&oacute;n: <b> Pendiente </b></p>
-
+                <?= Html::a('Evaluar', ['evaluar', 'idEvaluacion' => $idEvaluacion, 'idDominio' => $i['Id_Dominio'], 'nombre' => $i['Nombre']], ['class' => 'btn btn-primary']) ?>
                 <?php
             } else {
-
-                if ($notaGlobal > $nivelDominio and $nivelDominio>=0 ) {
-
-                    $notaGlobal = $nivelDominio;
-                }
                 ?>
+
+                <?=
+                Html::a('Ver detalles', ['evaluar', 'idEvaluacion' => $idEvaluacion, 'idDominio' => $i['Id_Dominio'], 'nombre' => $i['Nombre']], ['class' => 'btn btn-primary']);
+            }
+            ?>
+
+            <br> <br>
+            <div class="alert alert-info">
+    <?php
+    if ($nivelDominio == 6) {
+        ?>
+                    <p>Calificaci&oacute;n: <b> Pendiente </b></p>
+
+        <?php
+    } else {
+
+        if ($notaGlobal > $nivelDominio) {
+
+            $notaGlobal = $nivelDominio;
+        }
+        ?>
 
 
                     <p>Calificaci&oacute;n: <b><?php echo $nivelDominio ?>  </b></p> 
 
 
-                <?php
-            }
-            ?>
+        <?php
+    }
+    ?>
 
             </div> 
 
@@ -112,17 +109,8 @@ foreach ($items as $i):
         </div>
     </div>
 
-            <?php endforeach; ?>
+<?php endforeach; ?>
 
 <div class="alert alert-info">
     <p>La calificaci&oacute;n general es: <?php echo $notaGlobal; ?></p>
 </div>
-
-
-
-
-
-
-
-
-

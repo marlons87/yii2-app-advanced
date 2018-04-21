@@ -10,6 +10,7 @@ $comentario = "";
 $nombre = $nombre;
 
 $this->title = 'Controles a evaluar';
+$comentario='';
 
 $this->params['breadcrumbs'][] = ['label' => 'Evaluaciones', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
@@ -45,7 +46,7 @@ $form = ActiveForm::begin([
                         $comentario = $respuesta['Observaciones'];
                         break;
                     } else {
-                        if ($varNiveles['Valor'] == -1 &&  $val = '') {
+                        if ($varNiveles['Valor'] == -1 && $val = '') {
                             $val = $varNiveles['Id_Nivel'];
                         }
                     }
@@ -58,7 +59,7 @@ $form = ActiveForm::begin([
         </div>
         <div class="panel-footer">
             <label>Observaciones:</label>
-            <textarea class="txtObservaciones" id="<?= Html::encode($valc['Id_Control']) ?>"  name="txtObservaciones" style="width:100%"><?=(trim($comentario)); ?></textarea>
+            <textarea class="txtObservaciones" id="<?= Html::encode($valc['Id_Control']) ?>"  name="txtObservaciones" style="width:100%"><?= (trim($comentario)); ?></textarea>
 
         </div>
 
@@ -75,8 +76,8 @@ ActiveForm::end();
 
 <script>
 
-
     function sendData() {
+        var test = "";
         var selected = [];
         $('input:checked').each(function () {
             selected.push($(this).attr('value'));
@@ -93,23 +94,14 @@ ActiveForm::end();
             type: "POST",
             url: "<?php echo Yii::$app->getUrlManager()->createUrl('evaluaciones/ajax'); ?>",
             data: {niveles: selected, observaciones: formElements, idEvaluacion: $('#idEvaluacion').val()},
-            success: function (niveles) {
-                alert(niveles);
+            success: function () {
+                //alert("CORECTO");
             },
+            //callBack,
             error: function (exception) {
-                alert('Hubo error');
+                alert(exception);
             }
         });
-    }
-
-    function sendData2() {
-
-        var formElements = new Array();
-        $(".txtObservaciones").each(function () {
-            formElements.push($(this).val());
-            alert($(this).attr('id') + "~" + $(this).val());
-        });
-
     }
 
 </script>

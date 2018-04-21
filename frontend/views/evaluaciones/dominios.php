@@ -32,6 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
 $idEvaluacion = $id;
 
 $notaGlobal = 6;
+$nivelDominio = 6;
 foreach ($items as $i):
     ?> 
 
@@ -43,7 +44,7 @@ foreach ($items as $i):
         <div class="panel-body">
 
     <?php
-    $nivelDominio = 6;
+   
 
 
     $graph_data = [];
@@ -69,13 +70,6 @@ foreach ($items as $i):
             endforeach;
 
 
-
-            if (sizeof($graph_data) > 6) {
-                $tipoGrafico = 'BarChart';
-            } else {
-                $tipoGrafico = 'ColumnChart';
-            }
-
             if ($nivelDominio != 6) {
 
                 echo GoogleChart::widget(array('visualization' => 'ColumnChart',
@@ -98,7 +92,7 @@ foreach ($items as $i):
                 <?php
             } else {
 
-                if ($notaGlobal > $nivelDominio) {
+                if ($notaGlobal > $nivelDominio and $nivelDominio>=0 ) {
 
                     $notaGlobal = $nivelDominio;
                 }

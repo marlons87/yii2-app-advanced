@@ -8,56 +8,13 @@ $this->title = 'EMC2 | Inicio';
 
 
 
-   <!-- Carousel
-    ================================================== -->
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-      <!-- Indicators -->
-      <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-      </ol>
-      <div class="carousel-inner" role="listbox">
-        <div class="item active">
-          <img class="first-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="First slide">
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>Example headline.</h1>
-              <p>Note: If you're viewing this page via a <code>file://</code> URL, the "next" and "previous" Glyphicon buttons on the left and right might not load/display properly due to web browser security rules.</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
-            </div>
-          </div>
-        </div>
-        <div class="item">
-          <img class="second-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Second slide">
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>Another example headline.</h1>
-              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
-            </div>
-          </div>
-        </div>
-        <div class="item">
-          <img class="third-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Third slide">
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>One more for good measure.</h1>
-              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
-    </div><!-- /.carousel -->
+    <div class="jumbotron">
+        <h1>xxx</h1>
+
+        <p class="lead">You have successfully created your Yii-powered application.</p>
+
+    
+    </div>
 
 
     <!-- Marketing messaging and featurettes
@@ -99,7 +56,7 @@ $this->title = 'EMC2 | Inicio';
           <p class="lead">El modelo debe de contar con un esquema definido. &Aacute;reas de estudio definidas, as&iacute; como tambi&eacute;n con sus escalas definidas y explicadas.</p>
         </div>
         <div class="col-md-5">
-          <img class="featurette-image img-responsive center-block" src="https://pbs.twimg.com/media/DbCsd_rVQAAnSl4.jpg" alt="Completo">
+          <img class="featurette-image img-responsive center-block" src="https://pbs.twimg.com/media/DbHxi6jU0AAQpAV.jpg" alt="Completo">
         </div>
       </div>
 
@@ -111,7 +68,8 @@ $this->title = 'EMC2 | Inicio';
           <p class="lead">El modelo debe de ser sencillo para que una persona con experiencia en TI de la empresa sea capaz de implementar el modelo y hacer la evaluaci&oacute;n de la empresa.</p>
         </div>
         <div class="col-md-5 col-md-pull-7">
-          <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+            
+            <img class="featurette-image img-responsive center-block" src="https://pbs.twimg.com/media/DbHvJJ4VQAAqb1B.jpg" alt="F&aacute;cil de implementar">
         </div>
       </div>
 
@@ -137,7 +95,7 @@ $this->title = 'EMC2 | Inicio';
                  <p class="lead">Otro de los graves problemas es que las implementaciones de modelos propietarios son muy costosas, lo que provoca que algunas empresas medianas no puedan acceder a ellos y estas quedan vulnerables ante los crecientes riesgos en materia de Ciberseguridad.</p>
         </div>
         <div class="col-md-5 col-md-pull-7">
-          <img class="featurette-image img-responsive center-block" src="https://pbs.twimg.com/media/DbCp7HYV4AA8_ER.jpg" alt="Actualizado">
+          <img class="featurette-image img-responsive center-block" src="https://pbs.twimg.com/media/DbH2xL9UMAEtYgH.jpg" alt="Actualizado">
         </div>
       </div>
 

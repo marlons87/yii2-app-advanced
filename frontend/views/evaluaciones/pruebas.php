@@ -24,9 +24,7 @@ $form = ActiveForm::begin([
 <?php foreach ($controles as $valc): ?> 
 
     <div class="panel panel-default">
-         <?php
-            $comentario;
-            ?>
+
         <div class="panel-heading">
             <h3 class="panel-title"><?php echo $valc['Nombre']; ?>
             </h3>

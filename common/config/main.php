@@ -14,7 +14,7 @@ return [
         'user' => [
             'identityClass' => 'common\models\User',
             //'identityClass' => 'mdm\admin\models\User',
-            'loginUrl' => ['admin/user/login'],
+            'loginUrl' => ['site/login'],
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
         ],

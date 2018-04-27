@@ -47,6 +47,8 @@ $this->title = 'EMC2 | Inicio';
 
 
       <!-- START THE FEATURETTES -->
+      
+      <h1>Acerca del modelo</h1>
 
       <hr class="featurette-divider">
 

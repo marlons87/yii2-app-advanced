@@ -27,7 +27,7 @@ $this->title = 'ECM2';
                     <span class="badge"><?php echo $nota['Valor']; ?></span>
                 
                     
-                             <?= Html::a($nota['Nombre'], ['evaluaciones','Id_Institucion' => $nota['Id_Institucion']]) ?>
+                             <?= Html::a($nota['Nombre'], ['evaluaciones/index','Id_Institucion' => $nota['Id_Institucion'],'nombre'=>$nota['Nombre']]) ?>
                     
                   </li>
                    <?php  

@@ -67,6 +67,7 @@ LEFT JOIN (SELECT e1.Id_Institucion, e1.Fecha, max(e1.Id_Evaluacion) as Id_Evalu
 i.Id_Institucion = e.Id_Institucion
 LEFT JOIN respuestas r on e.Id_Evaluacion = r.Id_Evaluacion
 LEFT JOIN niveles n on r.Id_Nivel = n.Id_Nivel
+and n.Valor>-1
 GROUP by i.Id_Institucion, e.Id_Evaluacion')
                 ->queryAll();
 
@@ -120,6 +121,6 @@ GROUP by i.Id_Institucion, e.Id_Evaluacion')
           
           echo "Hola munfd";
           
-            return $this->render('evaluaciones');
+          
     }
 }

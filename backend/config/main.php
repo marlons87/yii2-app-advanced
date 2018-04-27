@@ -66,6 +66,7 @@ return [
         'allowActions' => [
             'site/*',
             'admin/*',
+            'site/evaluaciones',
       
           
             // The actions listed here will be allowed to everyone including guests.

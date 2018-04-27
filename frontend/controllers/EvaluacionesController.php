@@ -16,17 +16,31 @@ use yii\db\Schema;
 class EvaluacionesController extends Controller {
 
     public function actionIndex() {
-
-        $count = Yii::$app->db->createCommand('select Id_Evaluacion,Consecutivo,Fecha,evaluaciones.Status as estado,Fecha_Ultima_Modificacion,instituciones.Nombre as institucion,user.Nombre as usuario,user.Apellido1,user.Apellido2,user.Puesto
+        
+        
+        
+          if (!Yii::$app->user->isGuest){
+              
+               $count = Yii::$app->db->createCommand('select Id_Evaluacion,Consecutivo,Fecha,evaluaciones.Status as estado,Fecha_Ultima_Modificacion,instituciones.Nombre as institucion,user.Nombre as usuario,user.Apellido1,user.Apellido2,user.Puesto
                     from evaluaciones
                     inner join instituciones on evaluaciones.Id_Institucion = instituciones.Id_Institucion
                     inner join user on evaluaciones.Id_Usuario = user.id
-                    where (instituciones.Id_Institucion =:IdInstitucion or user.id=:id) ')
+                    where (instituciones.Id_Institucion =:IdInstitucion or user.id=:id)order by Consecutivo DESC ')
                 ->bindValue(':id', yii::$app->user->identity->id)
                 ->bindValue(':IdInstitucion', yii::$app->user->identity->Id_Institucion)
                 ->queryAll();
 
         return $this->render('index', ['items' => $count]);
+           
+          }else{
+              
+              
+                
+                   return $this->render('../site/index');
+          }
+
+
+       
     }
 
     protected function findModel($id) {

@@ -50,11 +50,13 @@ class User extends \common\models\User
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
-            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
+            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'La dirección de correo ya está siendo utilizada.'],
             
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
-                       ['password', 'compare', 'compareAttribute'=>'passCompare','on'=>'create'],
+             ['passCompare', 'compare', 'compareAttribute'=>'password', 'skipOnEmpty' => false, 'message'=>"Las contraseñas digitadas deben de coincidir."],
+            
+//            ['password', 'compare', 'compareAttribute' => 'passCompare'],
 
    
             ['Id_Rol', 'required'],

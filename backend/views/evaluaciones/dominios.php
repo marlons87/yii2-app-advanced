@@ -41,7 +41,7 @@ foreach ($items as $i):?>
                     }else{
                         ?>
             
-            <p>El control <b><?php echo $cali["Nombre"];  ?></b> no aplica </p>
+            <p>El control <b><?php echo $cali["Nombre"];  ?></b> fue seleccionado como no aplicable.</p>
                         
                      <?php   
                     }

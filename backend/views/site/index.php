@@ -1,18 +1,21 @@
 <?php
 use yii\helpers\Html;
+use scotthuangzl\googlechart\GoogleChart;
+use yii\widgets\ActiveForm;
+use common\models\Instituciones;
+use common\models\InstitucionesSearch;
+use yii\filters\VerbFilter;
 /* @var $this yii\web\View */
 
 $this->title = 'ECM2';
+
+ $cantidad=$cantidad;
+ 
+ $Instituciones=$Instituciones;
 ?>
 <div class="site-index">
 
-    <div class="jumbotron">
-        <h1>xxx</h1>
-
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>
+    
 
     <div class="body-content">
 
@@ -44,26 +47,117 @@ $this->title = 'ECM2';
                
             </div>
             <div class="col-lg-4">
-                <h2>Heading</h2>
+                <h2>Niveles de madurez</h2>
+       
+          <?php
+          
+          $nivel_0=0;
+          $nivel_1=0;
+          $nivel_2=0;
+          $nivel_3=0;
+          $nivel_4=0;
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
+             foreach ($notaXInstitucion as $nota):
+                 
+                 if ($nota['Valor']!=NULL){
+                     
+                     
+                      if ($nota['Valor']==0){
+                     $nivel_0= $nivel_0+1; 
+                 }
+                 if ($nota['Valor']==1){
+                     $nivel_1= $nivel_1+1; 
+                 }
+                 if ($nota['Valor']==2){
+                     $nivel_2= $nivel_2+1; 
+                 }
+                  if ($nota['Valor']==3){
+                     $nivel_3= $nivel_3+1; 
+                 }
+                  if ($nota['Valor']==4){
+                     $nivel_4= $nivel_4+1; 
+                 }
+                     
+                 }
 
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
+             endforeach;
+   
+       echo GoogleChart::widget(array('visualization' => 'PieChart',
+                'data' => array(
+                     array('Task', 'Hours per Day'),
+                    array('Nivel 0', $nivel_0),
+                    array('Nivel 1', $nivel_1),
+                    array('Nivel 2', $nivel_2),
+                    array('Nivel 3', $nivel_3),
+                    array('Nivel 4', $nivel_4)
+                ),
+                'options' => array('title' => 'Niveles de madurez','height' => 300)));
+       
+       
+     
+        
+        ?>
             </div>
             <div class="col-lg-4">
-                <h2>Heading</h2>
+                <h2>Cantidad de Evaluaciones</h2>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <img src="https://pbs.twimg.com/media/Db51LThUQAAaRSF.png"/>
+                            </div>
+                            <div class="col-xs-6 text-right">
+                               
+                                <h1>
+                                   <?php
+                echo intval($cantidad['cantidad']);
+                ?>
+                             </h1>     
 
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#">
+                        <div class="panel-footer announcement-bottom">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                   Ver detalles
+                                </div>
+                                <div class="col-xs-6 text-right">
+                                    <i class="fa fa-arrow-circle-right"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+
+
+               
+
+
             </div>
         </div>
+        
+        
+        <div class="row">
+             <?php $form = ActiveForm::begin(); ?>
+            <h2>Comportamiento por instituci&oacute;n</h2>
+             <div class="col-md-4">
+                 
+              
+              .col-md-4
+             
+             </div>
+             <div class="col-md-8">
+                
+                .col-md-8
+            </div>
+            
+             <?php ActiveForm::end(); ?>
+ 
+</div>
 
     </div>
 </div>

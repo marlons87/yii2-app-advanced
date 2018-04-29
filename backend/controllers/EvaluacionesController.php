@@ -44,7 +44,19 @@ class EvaluacionesController extends Controller
                 ->bindValue(':IdInstitucion',$Id_Institucion)
                 ->queryAll();
                
-      return $this->render('index', ['items' => $count,'nombre'=>$nombre]);
+     
+      
+      $cantidad=Yii::$app->db->createCommand('select COUNT(*) as cantidad from evaluaciones where evaluaciones.Id_Institucion=:IdInstitucion' )
+               ->bindValue(':IdInstitucion',$Id_Institucion)
+               ->queryOne();
+      
+      
+      $historico =Yii::$app->db->createCommand('SELECT l.Id_Institucion, l.Id_Evaluacion, l.Consecutivo, l.Fecha, MIN(n.Valor) AS Valor FROM dominios d LEFT JOIN controles c ON d.Id_Dominio = c.Id_Dominio LEFT JOIN niveles n ON c.Id_Control = n.Id_Control LEFT JOIN respuestas r ON c.Id_Control = r.Id_Control AND n.Id_Nivel = r.Id_Nivel RIGHT JOIN (SELECT e.Id_Institucion, e.Id_Evaluacion, e.Consecutivo, e.Fecha FROM evaluaciones e) l ON r.Id_Evaluacion = l.Id_Evaluacion WHERE n.Valor >= 0 and l.Id_Institucion = :IdInstitucion GROUP BY l.Id_Institucion, l.Id_Evaluacion, l.Consecutivo ORDER BY l.Fecha asc ' )
+               ->bindValue(':IdInstitucion',$Id_Institucion)
+               ->queryAll();
+      
+      
+       return $this->render('index', ['items' => $count,'nombre'=>$nombre,'cantidad'=>$cantidad,'historico'=> $historico]);
                    
     }
     

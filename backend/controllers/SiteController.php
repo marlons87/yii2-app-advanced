@@ -7,6 +7,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
 
+
 /**
  * Site controller
  */
@@ -70,12 +71,19 @@ LEFT JOIN niveles n on r.Id_Nivel = n.Id_Nivel
 and n.Valor>-1
 GROUP by i.Id_Institucion, e.Id_Evaluacion')
                 ->queryAll();
+        
+     $cantidadEvaluacion =   Yii::$app->db->createCommand('select COUNT(*)as cantidad from evaluaciones')
+               ->queryOne();
+     
+    
+     $Instituciones =   Yii::$app->db->createCommand('SELECT * FROM instituciones') 
+         ->queryAll();
 
         
         
         
         
-        return $this->render('index',array('notaXInstitucion' => $notaXInstitucion));
+        return $this->render('index',array('notaXInstitucion' => $notaXInstitucion,'cantidad'=>$cantidadEvaluacion,'Instituciones'=>$Instituciones));
     }
     
     

@@ -50,7 +50,7 @@ $form = ActiveForm::begin([
                 if ($varNiveles['Valor'] == -1 && $val == '') {
                             $val = $varNiveles['Id_Nivel'];
                         }
-                echo Html::radioList($valc['Nombre'] . "radio", $val, [$varNiveles['Id_Nivel'] => $varNiveles['Descripcion']]);
+                echo Html::radioList($valc['Nombre'] . "radio", $val, [$varNiveles['Id_Nivel'] => $varNiveles['Descripcion']], ['disabled' => true]);
 
             endforeach;
             ?>

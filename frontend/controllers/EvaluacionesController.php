@@ -125,6 +125,8 @@ class EvaluacionesController extends Controller {
         $data = Yii::$app->request->post('niveles');
         $observaciones = Yii::$app->request->post('observaciones');
         $idEvaluacion = Yii::$app->request->post('idEvaluacion');
+        
+        //$Evaluacion = Evaluaciones::findOne($idEvaluacion);
         if (isset($data)) {
             foreach ($data as $respuesta) {
                 $nivel = Niveles::findOne($respuesta);
@@ -166,9 +168,16 @@ class EvaluacionesController extends Controller {
                     //$respuestaactual->Id_Nivel= intval($respuesta);
                     $respuestaactual->Observaciones = $comentario;
                     $respuestaactual->save();
+                    
                 }
             }
-            $test = "Acción ejecutada exitosamente";
+            $test = "Acción ejecutada exitosamente";            
+            Yii::$app->db->createCommand()
+            ->update('evaluaciones', ['Fecha_Ultima_Modificacion' =>  date('Y-m-d H:i:s')], 'Id_Evaluacion =:idEvaluacion')
+            ->bindValue(':idEvaluacion', $idEvaluacion)
+            ->execute();
+            
+            
         } else {
             $test = "Error al ejecutar la acción";
         }

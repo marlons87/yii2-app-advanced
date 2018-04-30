@@ -58,7 +58,7 @@ $form = ActiveForm::begin([
         </div>
         <div class="panel-footer">
             <label>Observaciones:</label>
-            <textarea class="txtObservaciones" id="<?= Html::encode($valc['Id_Control']) ?>"  name="txtObservaciones" style="width:100%"><?= (trim($comentario)); ?></textarea>
+            <textarea class="txtObservaciones" id="<?= Html::encode($valc['Id_Control']) ?>"maxlength="300"  name="txtObservaciones" style="width:100%"><?= (trim($comentario)); ?></textarea>
 
         </div>
 

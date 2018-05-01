@@ -99,6 +99,17 @@ class EvaluacionesController extends Controller
             return $this->render('evaluar', array('controles' => $controles, 'respuestas' => $respuestas, 'idevaluacion' => $idEvaluacion, 'iddominio' => $idDominio,'nombre'=>$nombre));
         }
     }
+    
+    
+    public function actionGenerales() {
+        
+        $evaluaciones = Yii::$app->db->createCommand('select evaluaciones.Id_Evaluacion,Fecha,Fecha_Ultima_Modificacion, instituciones.Nombre as institucion,user.Nombre,user.Apellido1,user.Apellido2,Consecutivo from evaluaciones, user, instituciones where evaluaciones.Id_Usuario= user.id and evaluaciones.Id_Institucion=instituciones.Id_Institucion ORDER by evaluaciones.Id_Evaluacion desc')
+               
+                ->queryAll();
+        
+         return $this->render('generales', array('evaluaciones' => $evaluaciones));
+        
+    }
 
 
 

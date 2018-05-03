@@ -11,8 +11,8 @@ use yii\helpers\ArrayHelper;
 $this->title = 'ECM2';
 
  $cantidad=$cantidad;
- $Instituciones=$Instituciones;
  
+
 
 ?>
 <div class="site-index">
@@ -55,7 +55,6 @@ $this->title = 'ECM2';
              foreach ($notaXInstitucion as $nota):
                  
                  if ($nota['Valor']!=NULL){
-                     
                      
                       if ($nota['Valor']==0){
                      $nivel_0= $nivel_0+1; 
@@ -139,12 +138,12 @@ $this->title = 'ECM2';
              <div class="col-md-4">
                  
                  
-                 
+                 <?php  
              
+                 echo Html::activeDropDownList($searchModel, 'Id_Institucion', ArrayHelper::map(Instituciones::find()->asArray()->all(), 'Id_Institucion', 'Nombre'), ['class'=>'form-control compor','prompt' => 'Seleccione la institución', 'onchange' => 'js:comportamiento()']); 
                  
                  
-                 
-            
+             ?>
              
              </div>
              <div class="col-md-8">
@@ -158,3 +157,28 @@ $this->title = 'ECM2';
 
     </div>
 </div>
+<script>
+    
+  
+    
+   function comportamiento()
+    {
+      
+       
+       alert($('.compor').val());
+       $.ajax({
+            type: "POST",
+            url: "<?php echo Yii::$app->getUrlManager()->createUrl('instituciones/ajax'); ?>",
+            data: {Id_Institucion:$('.compor').val()},
+            success: function () {
+                alert("CORECTO");
+            },
+            //callBack,
+            error: function (exception) {
+                alert(exception);
+            }
+        });
+       
+       
+    }
+    </script>

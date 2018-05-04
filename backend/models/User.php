@@ -37,7 +37,7 @@ class User extends \common\models\User
         return [
             ['username', 'trim'],
             ['username', 'required'],
-            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
+            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'El nombre de usuario o “Alias” ya está siendo utilizado en este momento..'],
             ['username', 'string', 'min' => 2, 'max' => 255],
             
             [['Nombre'], 'string', 'max' => 50],
@@ -53,14 +53,16 @@ class User extends \common\models\User
             ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'La dirección de correo ya está siendo utilizada.'],
             
             ['password', 'required'],
+            ['Puesto', 'string', 'max' => 100],
+            ['Identificacion', 'string', 'max' => 15],
             ['password', 'string', 'min' => 6],
-             ['passCompare', 'compare', 'compareAttribute'=>'password', 'skipOnEmpty' => false, 'message'=>"Las contraseñas digitadas deben de coincidir."],
+            ['passCompare', 'compare', 'compareAttribute'=>'password', 'skipOnEmpty' => false, 'message'=>"Las contraseñas digitadas deben de coincidir."],
             
 //            ['password', 'compare', 'compareAttribute' => 'passCompare'],
 
    
-            ['Id_Rol', 'required'],
-            [['Id_Rol'], 'exist', 'skipOnError' => true, 'targetClass' => \common\models\Roles::className(), 'targetAttribute' => ['Id_Rol' => 'Id_Rol']],
+          
+
             
             ['Id_Institucion', 'required'],
             [['Id_Institucion'], 'exist', 'skipOnError' => true, 'targetClass' => \common\models\Instituciones::className(), 'targetAttribute' => ['Id_Institucion' => 'Id_Institucion']],
@@ -69,28 +71,27 @@ class User extends \common\models\User
         //return array_merge(parent::rules(), $child);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getRoles()
+  public function attributeLabels()
     {
-        return $this->hasOne(\common\models\Roles::className(), ['Id_Rol' => 'Id_Rol']);
+        return [
+           
+            'username' => 'Alias',
+            'Puesto' => 'Puesto',
+            'Apellido1' => 'Primer Apellido',
+            'Apellido2' => 'Segundo Apellido',
+            'Identificacion' => 'Identificación',
+          
+            'status' => 'Estado',
+            'email' => 'Email',
+            'Id_Institucion' => 'Institución',
+             'instituciones.Nombre' => 'Institución',
+           
+        ];
     }
  
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getRolList()
-	{
-    	$Roles = \common\models\Roles::find()->all();
-    	$RolesList = ArrayHelper::map($Roles, 'Id_Rol', 'Descripcion');
-    	return $RolesList;
-	}
+   
 
-	public function getRolName()
-	{
-    	return $this->Roles ? $this->$Roles->Roles : '- no definido -';
-	}
+	
         
          /**
      * @return \yii\db\ActiveQuery

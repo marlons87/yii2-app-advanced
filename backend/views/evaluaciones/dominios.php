@@ -67,16 +67,11 @@ foreach ($items as $i):?>
                     'options' => array('title' => 'Resultado de la evaluación de los controles del dominio: ' . $i['Nombre'], 'height' => 450)));
             }
 
-            if ($nivelDominio == 6) {
+            if ($nivelDominio != 6) {
                 ?>
-                <?= Html::a('Evaluar', ['evaluar', 'idEvaluacion' => $idEvaluacion, 'idDominio' => $i['Id_Dominio'], 'nombre' => $i['Nombre']], ['class' => 'btn btn-primary']) ?>
-                <?php
-            } else {
-                ?>
-
-                <?=
-                Html::a('Ver detalles', ['evaluar', 'idEvaluacion' => $idEvaluacion, 'idDominio' => $i['Id_Dominio'], 'nombre' => $i['Nombre']], ['class' => 'btn btn-primary']);
-            }
+                <?= Html::a('Ver detalles', ['evaluar', 'idEvaluacion' => $idEvaluacion, 'idDominio' => $i['Id_Dominio'], 'nombre' => $i['Nombre']], ['class' => 'btn btn-primary']);
+               
+            } 
             ?>
 
             <br> <br>

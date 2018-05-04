@@ -8,8 +8,6 @@ use backend\models\UserSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\web\ForbiddenHttpException;
-
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -17,7 +15,7 @@ use yii\web\ForbiddenHttpException;
 class UserController extends Controller
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function behaviors()
     {
@@ -66,37 +64,19 @@ class UserController extends Controller
      */
     public function actionCreate()
     {
-        $model = new User(['scenario' => 'create']);
-        if(Yii::$app->user->can('CrearUsuario'))
-        {
         $model = new User();
- 
-        if ($model->load(Yii::$app->request->post())) {
+
+        if ($model->load(Yii::$app->request->post())){
             $model->setPassword($model->password);
             $model->generateAuthKey();
-            if ($model->save()) {
-                return $this->redirect(['index']);
-            }
+                if ($model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
         }
- 
+        }
         return $this->render('create', [
             'model' => $model,
         ]);
-        }else
-        {
-            return $this->redirect(['index']);
-            echo 'Su usuario posee permisos '.Yii::$app->user->identity->Nombre. ' '.Yii::$app->user->identity->Apellido1.' '.Yii::$app->user->identity->Apellido2;
-                    /*
-                     * throw new \Exception('No tienes los suficientes permisos para acceder a esta página');
-            throw new ForbiddenHttpException; */
-        }
     }
-    
-
-    
-    
-    
-    
 
     /**
      * Updates an existing User model.
@@ -144,6 +124,7 @@ class UserController extends Controller
         if (($model = User::findOne($id)) !== null) {
             return $model;
         }
+
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 }

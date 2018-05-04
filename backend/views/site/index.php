@@ -5,18 +5,17 @@ use yii\widgets\ActiveForm;
 use common\models\Instituciones;
 use common\models\InstitucionesSearch;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
 /* @var $this yii\web\View */
 
 $this->title = 'ECM2';
 
  $cantidad=$cantidad;
  
- $Instituciones=$Instituciones;
+
+
 ?>
 <div class="site-index">
-
-    
-
     <div class="body-content">
 
         <div class="row">
@@ -41,10 +40,6 @@ $this->title = 'ECM2';
                    
                 </ul>
 
-
-
-                
-               
             </div>
             <div class="col-lg-4">
                 <h2>Niveles de madurez</h2>
@@ -60,7 +55,6 @@ $this->title = 'ECM2';
              foreach ($notaXInstitucion as $nota):
                  
                  if ($nota['Valor']!=NULL){
-                     
                      
                       if ($nota['Valor']==0){
                      $nivel_0= $nivel_0+1; 
@@ -92,10 +86,7 @@ $this->title = 'ECM2';
                     array('Nivel 4', $nivel_4)
                 ),
                 'options' => array('title' => 'Niveles de madurez','height' => 300)));
-       
-       
-     
-        
+
         ?>
             </div>
             <div class="col-lg-4">
@@ -122,7 +113,7 @@ $this->title = 'ECM2';
                         <div class="panel-footer announcement-bottom">
                             <div class="row">
                                 <div class="col-xs-6">
-                                   Ver detalles
+                                   <?= Html::a('Ver detalles', ['evaluaciones/generales']) ?>
                                 </div>
                                 <div class="col-xs-6 text-right">
                                     <i class="fa fa-arrow-circle-right"></i>
@@ -131,23 +122,28 @@ $this->title = 'ECM2';
                         </div>
                     </a>
                 </div>
-
-
-
-               
-
-
             </div>
         </div>
         
         
         <div class="row">
-             <?php $form = ActiveForm::begin(); ?>
+             <?php 
+             
+             
+             $form = ActiveForm::begin();
+             
+             
+             ?>
             <h2>Comportamiento por instituci&oacute;n</h2>
              <div class="col-md-4">
                  
-              
-              .col-md-4
+                 
+                 <?php  
+             
+                 echo Html::activeDropDownList($searchModel, 'Id_Institucion', ArrayHelper::map(Instituciones::find()->asArray()->all(), 'Id_Institucion', 'Nombre'), ['class'=>'form-control compor','prompt' => 'Seleccione la institución', 'onchange' => 'js:comportamiento()']); 
+                 
+                 
+             ?>
              
              </div>
              <div class="col-md-8">
@@ -161,3 +157,28 @@ $this->title = 'ECM2';
 
     </div>
 </div>
+<script>
+    
+  
+    
+   function comportamiento()
+    {
+      
+       
+       alert($('.compor').val());
+       $.ajax({
+            type: "POST",
+            url: "<?php echo Yii::$app->getUrlManager()->createUrl('instituciones/ajax'); ?>",
+            data: {Id_Institucion:$('.compor').val()},
+            success: function () {
+                alert("CORECTO");
+            },
+            //callBack,
+            error: function (exception) {
+                alert(exception);
+            }
+        });
+       
+       
+    }
+    </script>

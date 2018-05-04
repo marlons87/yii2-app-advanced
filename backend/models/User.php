@@ -37,33 +37,26 @@ class User extends \common\models\User
         return [
             ['username', 'trim'],
             ['username', 'required'],
-            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'El nombre de usuario o “Alias” ya está siendo utilizado en este momento..'],
+            //['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'El nombre de usuario o “Alias” ya está siendo utilizado en este momento..'],
             ['username', 'string', 'min' => 2, 'max' => 255],
             
-            [['Nombre'], 'string', 'max' => 50],
-            
-                        [['Apellido1'], 'string', 'max' => 30],
-
-                        [['Apellido2'], 'string', 'max' => 30],
+            [['Nombre'], 'string', 'max' => 50], [['Apellido1'], 'string', 'max' => 30], [['Apellido2'], 'string', 'max' => 30],
             
             ['email', 'trim'],
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
-            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'La dirección de correo ya está siendo utilizada.'],
+            //['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'La dirección de correo ya está siendo utilizada.'],
             
+            [ ['username', 'email'], 'unique', 'targetClass' => '\common\models\User', 'when' => function ($model, $attribute) { return $model->{$attribute} !== $model->getOldAttribute($attribute); }, 'on' => 'update' ], [ ['username', 'email'], 'unique', 'on' => 'create', 'message' => 'El usuario y/o contraseña deben ser únicos.' ],
+
             ['password', 'required'],
             ['Puesto', 'string', 'max' => 100],
             ['Identificacion', 'string', 'max' => 15],
             ['password', 'string', 'min' => 6],
             ['passCompare', 'compare', 'compareAttribute'=>'password', 'skipOnEmpty' => false, 'message'=>"Las contraseñas digitadas deben de coincidir."],
             
-//            ['password', 'compare', 'compareAttribute' => 'passCompare'],
 
-   
-          
-
-            
             ['Id_Institucion', 'required'],
             [['Id_Institucion'], 'exist', 'skipOnError' => true, 'targetClass' => \common\models\Instituciones::className(), 'targetAttribute' => ['Id_Institucion' => 'Id_Institucion']],
         ];

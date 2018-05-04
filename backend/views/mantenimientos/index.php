@@ -20,6 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
   <a href="/controles/index" class="list-group-item">Controles</a>
   <a href="/niveles/index" class="list-group-item">Niveles</a>
   <a href="/instituciones/index" class="list-group-item">Instituciones</a>
+  <a href="/admin" class="list-group-item">Accesos y permisos</a>
 </div>
 
 

@@ -13,17 +13,17 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="site-login">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>Por favor complete los siguientes campos para iniciar sesión:</p>
+    <p>Por favor ingrese sus credenciales de acceso:</p>
 
     <div class="row">
         <div class="col-lg-5">
             <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
 
-                <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
+                <?= $form->field($model, 'username')->textInput(['autofocus' => true])->label('Usuario') ?>
 
-                <?= $form->field($model, 'password')->passwordInput() ?>
+                <?= $form->field($model, 'password')->passwordInput()->label('Contrase&ntilde;a') ?>
 
-                <?= $form->field($model, 'rememberMe')->checkbox() ?>
+                <?= $form->field($model, 'rememberMe')->checkbox()->label('Recordarme') ?>
 
                 <div style="color:#999;margin:1em 0">
                     Si usted olvido su contraseña la puede <?= Html::a('restablecer aquí', ['site/request-password-reset']) ?>.

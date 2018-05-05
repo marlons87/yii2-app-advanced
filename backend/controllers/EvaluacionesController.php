@@ -88,7 +88,7 @@ class EvaluacionesController extends Controller
     }
     
     
-    public function actionEvaluar($idEvaluacion, $idDominio,$nombre) {
+    public function actionEvaluar($idEvaluacion, $idDominio) {
         if (Yii::$app->request->post()) {
             $this->redirect(array('evaluaciones/dominios', 'id' => $idEvaluacion));
         } else {
@@ -96,7 +96,7 @@ class EvaluacionesController extends Controller
             $controles = $dominios->controles;
             $evaluaciones = Evaluaciones::findOne($idEvaluacion);
             $respuestas = $evaluaciones->respuestas;
-            return $this->render('evaluar', array('controles' => $controles, 'respuestas' => $respuestas, 'idevaluacion' => $idEvaluacion, 'iddominio' => $idDominio,'nombre'=>$nombre));
+            return $this->render('evaluar', array('controles' => $controles, 'respuestas' => $respuestas, 'idevaluacion' => $idEvaluacion,'dominios'=>$dominios));
         }
     }
     

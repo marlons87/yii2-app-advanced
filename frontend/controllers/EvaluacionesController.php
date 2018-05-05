@@ -11,7 +11,7 @@ use common\models\ControlesSearch;
 use common\models\Respuestas;
 use common\models\Evaluaciones;
 use frontend\models\EvaluacionForm;
-use yii\db\Schema;
+
 
 class EvaluacionesController extends Controller {
 
@@ -25,7 +25,7 @@ class EvaluacionesController extends Controller {
                     from evaluaciones
                     inner join instituciones on evaluaciones.Id_Institucion = instituciones.Id_Institucion
                     inner join user on evaluaciones.Id_Usuario = user.id
-                    where (instituciones.Id_Institucion =:IdInstitucion or user.id=:id)order by Consecutivo DESC ')
+                    where (instituciones.Id_Institucion =:IdInstitucion or user.id=:id)order by Id_Evaluacion DESC ')
                 ->bindValue(':id', yii::$app->user->identity->id)
                 ->bindValue(':IdInstitucion', yii::$app->user->identity->Id_Institucion)
                 ->queryAll();
@@ -98,7 +98,7 @@ class EvaluacionesController extends Controller {
         return $this->render('controles', array('items' => $sql));
     }
 
-    public function actionEvaluar($idEvaluacion, $idDominio,$nombre) {
+    public function actionEvaluar($idEvaluacion, $idDominio) {
         if (Yii::$app->request->post()) {
             $this->redirect(array('evaluaciones/dominios', 'id' => $idEvaluacion));
         } else {
@@ -106,7 +106,7 @@ class EvaluacionesController extends Controller {
             $controles = $dominios->controles;
             $evaluaciones = Evaluaciones::findOne($idEvaluacion);
             $respuestas = $evaluaciones->respuestas;
-            return $this->render('evaluar', array('controles' => $controles, 'respuestas' => $respuestas, 'idevaluacion' => $idEvaluacion, 'iddominio' => $idDominio,'nombre'=>$nombre));
+            return $this->render('evaluar', array('controles' => $controles, 'respuestas' => $respuestas, 'idevaluacion' => $idEvaluacion, 'dominios'=>$dominios));
         }
     }
 

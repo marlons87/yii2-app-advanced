@@ -7,7 +7,7 @@ use yii\helpers\ArrayHelper;
 
 $idEvaluacion = $idevaluacion;
 $comentario = "";
-$nombre = $nombre;
+
 
 $this->title = 'Controles a evaluar';
 $comentario='';
@@ -15,21 +15,26 @@ $comentario='';
 $this->params['breadcrumbs'][] = ['label' => 'Evaluaciones', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<h1><?= Html::encode($this->title) ?> para el dominio <?= Html::encode($nombre) ?></h1>
+<h1><?= Html::encode($this->title) ?> para el dominio <?= Html::encode($dominios['Nombre']) ?></h1>
 
 <input id="idEvaluacion" type="hidden" value="<?= Html::encode($idevaluacion) ?>">
-<input id="idDominio" type="hidden" value="<?= Html::encode($iddominio) ?>" >
+<input id="idDominio" type="hidden" value="<?= Html::encode($dominios['Id_Dominio']) ?>" >
 
 <?php
+
+
 $form = ActiveForm::begin([
             "method" => "post",
         ]);
 ?>
+
+
+
 <?php foreach ($controles as $valc): ?> 
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title"><?php echo $valc['Nombre']; ?>
+            <h3 class="panel-title"><?php echo $dominios['Codigo']."-".  $valc['Codigo']."-". $valc['Nombre']; ?>
             </h3>
         </div>
         <div class="panel-body">

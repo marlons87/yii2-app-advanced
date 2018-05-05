@@ -69,13 +69,13 @@ foreach ($items as $i):?>
 
             if ($nivelDominio == 6) {
                 ?>
-                <?= Html::a('Evaluar', ['evaluar', 'idEvaluacion' => $idEvaluacion, 'idDominio' => $i['Id_Dominio'], 'nombre' => $i['Nombre']], ['class' => 'btn btn-primary']) ?>
+                <?= Html::a('Evaluar', ['evaluar', 'idEvaluacion' => $idEvaluacion, 'idDominio' => $i['Id_Dominio']], ['class' => 'btn btn-primary']) ?>
                 <?php
             } else {
                 ?>
 
                 <?=
-                Html::a('Ver detalles', ['evaluar', 'idEvaluacion' => $idEvaluacion, 'idDominio' => $i['Id_Dominio'], 'nombre' => $i['Nombre']], ['class' => 'btn btn-primary']);
+                Html::a('Ver detalles', ['evaluar', 'idEvaluacion' => $idEvaluacion, 'idDominio' => $i['Id_Dominio']], ['class' => 'btn btn-primary']);
             }
             ?>
 
@@ -112,5 +112,17 @@ foreach ($items as $i):?>
 <?php endforeach; ?>
 
 <div class="alert alert-info">
-    <p>La calificaci&oacute;n general es: <?php echo $notaGlobal; ?></p>
+
+    <?php if ($notaGlobal == 6) {
+        ?> 
+
+        <p>La calificaci&oacute;n de la evaluaci&oacute;n se encuentra pendiente</p>
+        <?php
+    } else {
+        ?>
+        <p>La calificaci&oacute;n general es: <?php echo $notaGlobal; ?></p>
+        <?php
+    }
+    ?>
+
 </div>

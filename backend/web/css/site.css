@@ -118,3 +118,36 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+.panel-instituciones {
+
+	background:#00bde6;
+	color: #ffffff;
+}
+
+.panel-usuarios{
+
+	background:#f79c3a;
+	color: #ffffff;
+
+}
+
+.panel-controles{
+
+	background:#00a563;
+	color: #ffffff;
+
+}
+
+.panel-dominios{
+
+	background:#f76b5a;
+	color: #ffffff;
+
+}
+
+
+
+
+
+

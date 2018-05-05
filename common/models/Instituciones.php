@@ -28,8 +28,11 @@ class Instituciones extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            ['Nombre', 'trim'],
             [['Nombre'], 'required', 'message' => 'Complete el nombre de la Institución.'],
+            ['Nombre','unique','message' => 'La institución ya ha sido creada previamente.'],
             [['Nombre'], 'string', 'max' => 100]];
+        
     }
 
     /**

@@ -19,6 +19,104 @@ $this->title = 'ECM2';
     <div class="body-content">
 
         <div class="row">
+            <div class="col-lg-3">
+                 <div class="panel panel-instituciones">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <img src="https://pbs.twimg.com/media/Db51LThUQAAaRSF.png"/>
+                            </div>
+                            <div class="col-xs-8 text-right">
+                                <h2>
+                                    <?php
+                                    echo intval($cantidad['cantidad']);
+                                    ?>
+                                </h2> 
+                                <p> Total de Instituciones</p>
+
+                            </div>
+                        </div>
+                    </div>
+                  
+                </div>
+            </div>
+            <div class="col-lg-3">
+               <div class="panel panel-controles">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <img src="https://pbs.twimg.com/media/Db51LThUQAAaRSF.png"/>
+                            </div>
+                            <div class="col-xs-8 text-right">
+                                <h2>
+                                    <?php
+                                    echo intval($cantidad['cantidad']);
+                                    ?>
+                                </h2> 
+                                <p> Total de Controles</p>
+
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+            <div class="col-lg-3">
+               
+                <div class="panel panel-usuarios">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <img src="https://pbs.twimg.com/media/Db51LThUQAAaRSF.png"/>
+                            </div>
+                            <div class="col-xs-8 text-right">
+                                <h2>
+                                    <?php
+                                    echo intval($cantidad['cantidad']);
+                                    ?>
+                                </h2> 
+                                <p> Total de Evaluaciones</p>
+
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+
+
+
+
+            </div>
+            <div class="col-lg-3">
+               
+                <div class="panel panel-dominios">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <img src="https://pbs.twimg.com/media/Db51LThUQAAaRSF.png"/>
+                            </div>
+                            <div class="col-xs-8 text-right">
+                                <h2>
+                                    <?php
+                                    echo intval($cantidad['cantidad']);
+                                    ?>
+                                </h2> 
+                                <p> Total de dominios</p>
+
+                            </div>
+                        </div>
+                    </div>
+                  
+                </div>
+
+
+
+
+            </div>
+        </div>
+   
+        
+        <div class="row">
             <div class="col-lg-4">
                 <h2>Nivel por Instituci&oacute;n</h2>
                    <ul class="list-group">
@@ -42,7 +140,8 @@ $this->title = 'ECM2';
 
             </div>
             <div class="col-lg-4">
-                <h2>Niveles de madurez</h2>
+                
+                 <h2>Niveles de madurez</h2>
        
           <?php
           
@@ -88,43 +187,12 @@ $this->title = 'ECM2';
                 'options' => array('title' => 'Niveles de madurez','height' => 300)));
 
         ?>
+                
+                
             </div>
-            <div class="col-lg-4">
-                <h2>Cantidad de Evaluaciones</h2>
-
-                <div class="panel panel-info">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <img src="https://pbs.twimg.com/media/Db51LThUQAAaRSF.png"/>
-                            </div>
-                            <div class="col-xs-6 text-right">
-                               
-                                <h1>
-                                   <?php
-                echo intval($cantidad['cantidad']);
-                ?>
-                             </h1>     
-
-                            </div>
-                        </div>
-                    </div>
-                    <a href="#">
-                        <div class="panel-footer announcement-bottom">
-                            <div class="row">
-                                <div class="col-xs-6">
-                                   <?= Html::a('Ver detalles', ['evaluaciones/generales']) ?>
-                                </div>
-                                <div class="col-xs-6 text-right">
-                                    <i class="fa fa-arrow-circle-right"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
+              <div class="col-lg-4">4</div>
+            
         </div>
-        
         
         <div class="row">
              <?php 

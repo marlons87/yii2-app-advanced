@@ -59,6 +59,9 @@ class User extends \common\models\User
 
             ['Id_Institucion', 'required'],
             [['Id_Institucion'], 'exist', 'skipOnError' => true, 'targetClass' => \common\models\Instituciones::className(), 'targetAttribute' => ['Id_Institucion' => 'Id_Institucion']],
+                    
+            ['status', 'default', 'value' => self::STATUS_ACTIVE],
+            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],        
         ];
  
         //return array_merge(parent::rules(), $child);

@@ -23,21 +23,21 @@ use common\models\Instituciones;
 
     <?= $form->field($model, 'Apellido2')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'password')->passwordInput() ?>
+    <?= $form->field($model, 'password')->passwordInput() ->label('Contrase&ntilde;a')?>
    
-   <?= $form->field($model, 'passCompare')->passwordInput() ?>
+    <?= $form->field($model, 'passCompare')->passwordInput()->label('Confirmar contrase&ntilde;a')?>
 
-    
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
     
     <?= $form->field($model, 'Puesto')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'Id_Institucion')->dropDownList($model->InstitucionList , ['prompt' => 'Seleccione...']) ?>
     
-    
+    <?= $form->field($model, 'status')->dropDownList(['10' => 'Activo', '0' => 'Inactivo'],['prompt'=>'Seleccione...']); ?>
 
     <div class="form-group">
         <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
+        <?= Html::c
     </div>
 
     <?php ActiveForm::end(); ?>

@@ -71,7 +71,8 @@ class UserController extends Controller
             $model->setPassword($model->password);
             $model->generateAuthKey();
                 if ($model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            //return $this->redirect(['view', 'id' => $model->id]);
+                     return $this->redirect(['index']);
         }
         }
         return $this->render('create', [
@@ -91,7 +92,7 @@ class UserController extends Controller
         $model = $this->findModel($id);
         $model->scenario = "update";
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
 
         return $this->render('update', [

@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use common\models\Instituciones;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\User */
@@ -37,7 +38,9 @@ use common\models\Instituciones;
 
     <div class="form-group">
         <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
-        <?= Html::c
+       
+        <?= Html::a("Cancelar", Url::toRoute(['user/index']), ['class' => 'btn btn-success']) ?>
+        
     </div>
 
     <?php ActiveForm::end(); ?>

@@ -116,11 +116,11 @@ foreach ($items as $i):?>
     <?php if ($notaGlobal == 6) {
         ?> 
 
-        <p>La calificaci&oacute;n de la evaluaci&oacute;n se encuentra pendiente</p>
+    <p>La calificaci&oacute;n de la evaluaci&oacute;n se encuentra <b>Pendiente</b>.</p>
         <?php
     } else {
         ?>
-        <p>La calificaci&oacute;n general es: <?php echo $notaGlobal; ?></p>
+        <p>La calificaci&oacute;n general es: <b><?php echo $notaGlobal; ?></b></p>
         <?php
     }
     ?>

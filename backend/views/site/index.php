@@ -6,6 +6,7 @@ use common\models\Instituciones;
 use common\models\InstitucionesSearch;
 use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
+use yii\grid\GridView;
 /* @var $this yii\web\View */
 
 $this->title = 'ECM2';
@@ -24,14 +25,15 @@ $this->title = 'ECM2';
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-xs-4">
-                                <img src="https://pbs.twimg.com/media/Db51LThUQAAaRSF.png"/>
+                                <img src="https://pbs.twimg.com/media/Dct7-o4VAAEPxbe.png"/>
                             </div>
                             <div class="col-xs-8 text-right">
-                                <h2>
-                                    <?php
-                                    echo intval($cantidad['cantidad']);
-                                    ?>
-                                </h2> 
+                               
+                                    
+                                    
+                                    
+                                    <?= Html::tag('h2', Html::encode(Instituciones::find()->count())) ?>
+                          
                                 <p> Total de Instituciones</p>
 
                             </div>
@@ -45,15 +47,15 @@ $this->title = 'ECM2';
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-xs-4">
-                                <img src="https://pbs.twimg.com/media/Db51LThUQAAaRSF.png"/>
+                                <img src="https://pbs.twimg.com/media/DcuAWHCX0AAqb75.png"/>
                             </div>
                             <div class="col-xs-8 text-right">
                                 <h2>
                                     <?php
-                                    echo intval($cantidad['cantidad']);
+                                    echo intval($usuarios['usuarios']);
                                     ?>
                                 </h2> 
-                                <p> Total de Controles</p>
+                                <p>Usuarios</p>
 
                             </div>
                         </div>
@@ -67,7 +69,7 @@ $this->title = 'ECM2';
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-xs-4">
-                                <img src="https://pbs.twimg.com/media/Db51LThUQAAaRSF.png"/>
+                                <img src="https://pbs.twimg.com/media/DcpnpEZV4AAbfDU.png"/>
                             </div>
                             <div class="col-xs-8 text-right">
                                 <h2>
@@ -93,12 +95,12 @@ $this->title = 'ECM2';
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-xs-4">
-                                <img src="https://pbs.twimg.com/media/Db51LThUQAAaRSF.png"/>
+                                <img src="https://pbs.twimg.com/media/Dcux3wIW4AIdppn.png"/>
                             </div>
                             <div class="col-xs-8 text-right">
                                 <h2>
                                     <?php
-                                    echo intval($cantidad['cantidad']);
+                                    echo intval($dominios['dominios']);
                                     ?>
                                 </h2> 
                                 <p> Total de dominios</p>
@@ -119,6 +121,15 @@ $this->title = 'ECM2';
         <div class="row">
             <div class="col-lg-4">
                 <h2>Nivel por Instituci&oacute;n</h2>
+                
+                
+                 
+                
+                
+                
+                
+                
+                
                    <ul class="list-group">
                 <?php
                  foreach ($notaXInstitucion as $nota):
@@ -139,7 +150,7 @@ $this->title = 'ECM2';
                 </ul>
 
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-5">
                 
                  <h2>Niveles de madurez</h2>
        
@@ -190,7 +201,16 @@ $this->title = 'ECM2';
                 
                 
             </div>
-              <div class="col-lg-4">4</div>
+            <div class="col-lg-3">
+                
+                
+               
+             
+                
+               
+                
+                
+            </div>
             
         </div>
         

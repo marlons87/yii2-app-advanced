@@ -10,6 +10,11 @@
 ?>
 <h1><?= Html::encode($this->title) ?></h1>
 
+<div class="form-group">
+    <label>Consecutivo:</label>
+</div>
+ 
+
 <?php
     $idEvaluacion = $id;
     $notaGlobal = 6;
@@ -107,5 +112,17 @@ foreach ($items as $i):?>
 <?php endforeach; ?>
 
 <div class="alert alert-info">
-    <p>La calificaci&oacute;n general es: <?php echo $notaGlobal; ?></p>
+
+    <?php if ($notaGlobal == 6) {
+        ?> 
+
+    <p>La calificaci&oacute;n de la evaluaci&oacute;n se encuentra <b>Pendiente</b>.</p>
+        <?php
+    } else {
+        ?>
+        <p>La calificaci&oacute;n general es: <b><?php echo $notaGlobal; ?></b></p>
+        <?php
+    }
+    ?>
+
 </div>

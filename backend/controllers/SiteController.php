@@ -85,6 +85,13 @@ GROUP by i.Id_Institucion, e.Id_Evaluacion')
      $cantidadEvaluacion =   Yii::$app->db->createCommand('select COUNT(*)as cantidad from evaluaciones')
                ->queryOne();
      
+     $usuarios =   Yii::$app->db->createCommand("select count(*) as usuarios from user WHERE STATUS=10")
+       ->queryOne();
+     
+      $dominios =   Yii::$app->db->createCommand("select count(*) as dominios from dominios")
+       ->queryOne();
+     
+     
     
 //     $Instituciones =   Yii::$app->db->createCommand('SELECT * FROM instituciones') 
 //         ->queryAll();
@@ -96,7 +103,7 @@ GROUP by i.Id_Institucion, e.Id_Evaluacion')
         
         
         return $this->render('index',array('notaXInstitucion' => $notaXInstitucion,'cantidad'=>$cantidadEvaluacion,'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,));
+            'dataProvider' => $dataProvider,'usuarios'=>$usuarios,'dominios'=>$dominios));
         
         }
     }

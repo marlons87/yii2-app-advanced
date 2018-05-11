@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
           
           <div class="panel panel-default">
       <div class="panel-heading">
-          <h3 class="panel-title">Evaluaci&oacute;n <?php echo $i['Consecutivo']." - ".$i['institucion']; ?></h3>
+          <h3 class="panel-title">Evaluaci&oacute;n <?php echo $i['Consecutivo']." - ".$i['institucion']. "  |  ".$i['descripcion']; ?></h3>
       </div>
       <div class="panel-body">
           
@@ -42,12 +42,10 @@ $this->params['breadcrumbs'][] = $this->title;
           <p>Persona que la aplic&oacute;: <?php echo $i['usuario']." ".$i['Apellido1']." ".$i['Apellido2']; ?></p>
     
              
-              <p>&Uacute;ltima modificaci&oacute;n:<?php echo $i['Fecha_Ultima_Modificacion'];
+              <p>&Uacute;ltima modificaci&oacute;n:<?php echo $i['Fecha_Ultima_Modificacion'];?></p>
               
-            
              
-              ?></p>
-              
+               
              
               
         <?= Html::a('Ver detalles', ['dominios', 'id' => $i['Id_Evaluacion']], ['class' => 'btn btn-primary']) ?>

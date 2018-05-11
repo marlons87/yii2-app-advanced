@@ -36,10 +36,10 @@ class EvaluacionesController extends Controller
     }
 
     
-    public function actionIndex($Id_Institucion,$nombre)
+    public function actionIndex($Id_Institucion)
     {
         
-                $count = Yii::$app->db->createCommand('select Id_Evaluacion,Consecutivo,Fecha,evaluaciones.Status as estado,Fecha_Ultima_Modificacion,instituciones.Nombre as institucion,user.Nombre as usuario,user.Apellido1,user.Apellido2,user.Puesto from evaluaciones inner join instituciones on evaluaciones.Id_Institucion = instituciones.Id_Institucion inner join user on evaluaciones.Id_Usuario = user.id where evaluaciones.Id_Institucion=:IdInstitucion order by Consecutivo DESC ')
+                $count = Yii::$app->db->createCommand('select Id_Evaluacion,Consecutivo,Fecha,evaluaciones.Status as estado,Fecha_Ultima_Modificacion,instituciones.Nombre as institucion,user.Nombre as usuario,user.Apellido1,user.Apellido2,user.Puesto from evaluaciones inner join instituciones on evaluaciones.Id_Institucion = instituciones.Id_Institucion inner join user on evaluaciones.Id_Usuario = user.id where evaluaciones.Id_Institucion=:IdInstitucion order by Consecutivo DESC')
                
                 ->bindValue(':IdInstitucion',$Id_Institucion)
                 ->queryAll();
@@ -66,12 +66,12 @@ class EvaluacionesController extends Controller
                ->queryAll();
       
       
-       return $this->render('index', ['items' => $count,'nombre'=>$nombre,'cantidad'=>$cantidad,'historico'=> $historico,'usuarios'=>$usuarios,'unico'=>$unico]);
+       return $this->render('index', ['items' => $count,'cantidad'=>$cantidad,'historico'=> $historico,'usuarios'=>$usuarios,'unico'=>$unico,'Id_Institucion'=>$Id_Institucion]);
                    
     }
     
     
-    public function actionDominios($id) {
+    public function actionDominios($id,$Id_Institucion) {
         
         $sql = ( new \yii\db\Query())->select('*')->from('dominios')->All();
         $calificacion = Yii::$app->db->createCommand('select dominios.Id_Dominio, dominios.Codigo as DominioCodigo, dominios.Nombre as DominioNombre, controles.Id_Control, controles.Codigo, controles.Nombre, niveles.Valor
@@ -83,8 +83,15 @@ class EvaluacionesController extends Controller
         order by dominios.Id_Dominio, controles.Id_Control, niveles.Id_Nivel ASC')
                 ->bindValue(':id', $id)
                 ->queryAll();
+        
+        $evaluacion  = Yii::$app->db->createCommand('SELECT Id_Evaluacion,Consecutivo,descripcion,instituciones.Nombre,evaluaciones.Fecha,evaluaciones.Fecha_Ultima_Modificacion
+FROM evaluaciones INNER JOIN instituciones ON evaluaciones.Id_Institucion=instituciones.Id_Institucion and evaluaciones.Id_Evaluacion=:id')
+                 ->bindValue(':id', $id)
+                  ->queryOne();
+        
+        
 
-        return $this->render('dominios', array('items' => $sql, 'calificacion' => $calificacion, 'id' => $id));
+        return $this->render('dominios', array('items' => $sql, 'calificacion' => $calificacion, 'id' => $id,'Id_Institucion'=>$Id_Institucion,'evaluacion'=>$evaluacion));
     }
     
     

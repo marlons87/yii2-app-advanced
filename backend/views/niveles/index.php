@@ -20,7 +20,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
  
 
-    <?= GridView::widget([
+    
+    
+    <div class="row">
+        <div class="col-md-12">
+            
+            <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
@@ -46,4 +51,12 @@ $this->params['breadcrumbs'][] = $this->title;
        <p>
         <?= Html::a('Agregar Niveles', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
+            
+            
+        </div>
+        
+    </div>
+    
+    
+    
 </div>

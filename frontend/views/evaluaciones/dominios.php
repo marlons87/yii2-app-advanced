@@ -18,7 +18,7 @@ foreach ($items as $i):?>
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title"><?php echo $i['Nombre']; ?></h3>
+            <h3 class="panel-title"><?php echo$i['Codigo']."-". $i['Nombre']; ?></h3>
         </div>
         <div class="panel-body">
 
@@ -27,7 +27,7 @@ foreach ($items as $i):?>
 
 
     $graph_data = [];
-    $graph_data[] = array('Nombre', 'Valor');
+    $graph_data[] = array('Nombre', 'Nivel');
 
     foreach ($calificacion as $cali):
 

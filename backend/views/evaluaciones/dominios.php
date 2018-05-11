@@ -3,27 +3,48 @@
     use yii\helpers\Html;
     use scotthuangzl\googlechart\GoogleChart;
     use yii\helpers\ArrayHelper;
-
+    $idEvaluacion = $id;
+    $Id_Institucion=$Id_Institucion;
     $this->title = 'Dominios evaluados';
-    $this->params['breadcrumbs'][] = ['label' => 'Evaluaciones', 'url' => ['index']];
+    $this->params['breadcrumbs'][] = ['label' => 'Evaluaciones', 'url' => ['index', 'Id_Institucion' => $Id_Institucion]];
+    
     $this->params['breadcrumbs'][] = $this->title;
 ?>
-<h1><?= Html::encode($this->title) ?></h1>
+<h1><?= Html::encode($this->title);
 
-<div class="form-group">
-    <label>Consecutivo:</label>
+
+
+?></h1>
+
+
+<div class="alert alert-info evaluacion-header">
+    <div class="row">
+        <div class="col-md-12">
+            <p>Evaluaci&oacute;n: <?php echo " ". $evaluacion['Nombre']." - ".$evaluacion['Consecutivo'];?> </p>
+            <p>Fecha: <?php echo " ". $evaluacion['Fecha'];?></p>
+            <p>Descripción:  <?php echo " ". $evaluacion['descripcion'];?></p>
+            <p>Fecha de modificaci&oacute;n: <?php echo " ". $evaluacion['Fecha_Ultima_Modificacion'];?></p>
+         
+        </div>
+       
+    </div> 
+
 </div>
+
+
+
+
  
 
 <?php
-    $idEvaluacion = $id;
+  
     $notaGlobal = 6;
 foreach ($items as $i):?> 
 
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title"><?php echo $i['Nombre']; ?></h3>
+            <h3 class="panel-title"><?php echo$i['Codigo']."-". $i['Nombre']; ?></h3>
         </div>
         <div class="panel-body">
 

@@ -4,14 +4,15 @@ use yii\helpers\Html;
  use scotthuangzl\googlechart\GoogleChart;
    use yii\helpers\ArrayHelper;
    use yii\widgets\DetailView;
-  $nombre= $nombre;
+
   $cantidad=$cantidad;
+   $Id_Institucion=$Id_Institucion;
  
 $this->title = 'Evaluaciones'; 
 
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<h1>Evaluaci&oacute;n de  <?php echo $nombre;?></h1>
+<h1>Evaluaciones</h1>
     
 <br/><br/>
 
@@ -59,7 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
               
               ?></p>
                
-        <?= Html::a('Ver detalles', ['dominios', 'id' => $i['Id_Evaluacion']], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Ver detalles', ['dominios', 'id' => $i['Id_Evaluacion'],'Id_Institucion'=>$Id_Institucion], ['class' => 'btn btn-primary']) ?>
   
         <?php
    

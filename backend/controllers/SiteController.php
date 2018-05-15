@@ -63,14 +63,12 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        
          if (Yii::$app->request->post()) {
             $this->redirect(array('site/index', 'historico' => $historico));
         } else {
         
          $searchModel = new InstitucionesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        
         
         $notaXInstitucion = Yii::$app->db->createCommand('select i.Id_Institucion, i.Nombre, e.Id_Evaluacion, e.Fecha, MIN(n.Valor) as Valor
 FROM instituciones i 
@@ -91,16 +89,6 @@ GROUP by i.Id_Institucion, e.Id_Evaluacion')
       $dominios =   Yii::$app->db->createCommand("select count(*) as dominios from dominios")
        ->queryOne();
      
-     
-    
-//     $Instituciones =   Yii::$app->db->createCommand('SELECT * FROM instituciones') 
-//         ->queryAll();
-     
-     
-
-        
-        
-        
         
         return $this->render('index',array('notaXInstitucion' => $notaXInstitucion,'cantidad'=>$cantidadEvaluacion,'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,'usuarios'=>$usuarios,'dominios'=>$dominios));

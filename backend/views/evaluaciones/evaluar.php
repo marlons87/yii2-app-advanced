@@ -6,13 +6,14 @@ use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 
 $idEvaluacion = $idevaluacion;
-$comentario = "";
+
+
 
 
 $this->title = 'Controles a evaluar';
 $comentario='';
 
-$this->params['breadcrumbs'][] = ['label' => 'Evaluaciones', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Evaluaciones', 'url' => ['index','Id_Institucion' => $Id_Institucion]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h1><?= Html::encode($this->title) ?> para el dominio <?= Html::encode($dominios['Nombre']) ?></h1>
@@ -72,7 +73,7 @@ $form = ActiveForm::begin([
 
 <?=
 
-Html::a('Regresar', ['dominios', 'id' => $idEvaluacion], ['class' => 'btn btn-primary']);
+Html::a('Regresar', ['dominios', 'id' => $idEvaluacion,'Id_Institucion' => $Id_Institucion], ['class' => 'btn btn-primary']);
 
 
 ActiveForm::end();

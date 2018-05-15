@@ -25,7 +25,7 @@ $this->title = 'ECM2';
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-xs-4">
-                                <img src="https://pbs.twimg.com/media/Dct7-o4VAAEPxbe.png"/>
+                                <a target="_self" title="Ir a instituciones" href="../instituciones/index"> <img src="https://pbs.twimg.com/media/Dct7-o4VAAEPxbe.png"/></a>
                             </div>
                             <div class="col-xs-8 text-right">
                                
@@ -47,12 +47,14 @@ $this->title = 'ECM2';
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-xs-4">
-                                <img src="https://pbs.twimg.com/media/DcuAWHCX0AAqb75.png"/>
+                               
+                                <a target="_self" title="Ir a usuarios" href="../user/index"><img src="https://pbs.twimg.com/media/DcuAWHCX0AAqb75.png"/></a>
                             </div>
                             <div class="col-xs-8 text-right">
                                 <h2>
                                     <?php
                                     echo intval($usuarios['usuarios']);
+                                    
                                     ?>
                                 </h2> 
                                 <p>Usuarios</p>
@@ -69,7 +71,7 @@ $this->title = 'ECM2';
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-xs-4">
-                                <img src="https://pbs.twimg.com/media/DcpnpEZV4AAbfDU.png"/>
+                                <a target="_self" title="Ir a las evaluaciones" href="../evaluaciones/generales"> <img src="https://pbs.twimg.com/media/DcpnpEZV4AAbfDU.png"/></a>
                             </div>
                             <div class="col-xs-8 text-right">
                                 <h2>
@@ -95,7 +97,7 @@ $this->title = 'ECM2';
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-xs-4">
-                                <img src="https://pbs.twimg.com/media/Dcux3wIW4AIdppn.png"/>
+                                <a target="_self" title="Ir a dominios" href="../dominios/index"> <img src="https://pbs.twimg.com/media/Dcux3wIW4AIdppn.png"/></a>
                             </div>
                             <div class="col-xs-8 text-right">
                                 <h2>
@@ -124,7 +126,7 @@ $this->title = 'ECM2';
                 
                 
                  
-                
+
                 
                 
                 
@@ -150,7 +152,7 @@ $this->title = 'ECM2';
                 </ul>
 
             </div>
-            <div class="col-lg-5">
+            <div class="col-lg-8">
                 
                  <h2>Niveles de madurez</h2>
        
@@ -195,22 +197,13 @@ $this->title = 'ECM2';
                     array('Nivel 3', $nivel_3),
                     array('Nivel 4', $nivel_4)
                 ),
-                'options' => array('title' => 'Niveles de madurez','height' => 300)));
+                'options' => array('title' => 'Niveles de madurez','height' => 400)));
 
         ?>
                 
                 
             </div>
-            <div class="col-lg-3">
-                
-                
-               
-             
-                
-               
-                
-                
-            </div>
+            
             
         </div>
         

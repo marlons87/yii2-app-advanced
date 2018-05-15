@@ -1,47 +1,54 @@
 <?php
 use yii\helpers\Html;
-use yii\widgets\DetailView;
+use yii\grid\GridView;
+use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
+use common\models\Evaluaciones;
 
-$this->title = 'Dominios evaluar';
+$descripcion = "";
+$this->title = 'Crear evaluación';
 
 $this->params['breadcrumbs'][] = ['label' => 'Evaluaciones', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
-
-$idEvaluacion = $evaluacion["evaluacion"]; 
-
-
-
 ?>
-<h1><?= Html::encode($this->title) ?></h1>
 
-<ul class="list-group">
-<?php
+ <h1><?= Html::encode($this->title) ?></h1>
+ 
+ <?php $form = ActiveForm::begin([
+      "method" => "post",
+]) ?>
+  
+ <label for="descripcion" >Descripci&oacute;n  </label>
+  <textarea class="txtObservaciones" id="descripcion" maxlength="250"  name="txtObservaciones" style="width:100%"><?= (trim($descripcion)); ?></textarea>
 
-
-foreach ($items as $i):?> 
-
-    <li class="list-group-item">
-        
-         <?= Html::a($i['Nombre'], ['evaluar','idEvaluacion' => $idEvaluacion,'idDominio'=>$i['Id_Dominio'],'nombre'=>$i['Nombre']]) ?>
+    <div class="form-group">
       
-     
-  
-  
-  </li>
-  
+            <?= Html::submitButton('Crear evaluacion', ['class' => 'btn btn-success', 'value' => 'my_value','onClick' => 'js:sendData()']) ?>
+       
+    </div>
+<?php ActiveForm::end() ?>
+
+  <script>
+      
+          function sendData() {
+             
+             $.ajax({
+            type: "POST",
+            url: "<?php echo Yii::$app->getUrlManager()->createUrl('evaluaciones/insertar'); ?>",
+            data: {descripcion: $('#descripcion').val()},
+            success: function () {
+                alert("CORECTO");
+            },
+            //callBack,
+            error: function (exception) {
+                
+                alert(exception);
+            }
+        });
+          }
+      
+  </script>
 
 
 
-
-
-
-
-
-    
-    
-<?php
-
-
-endforeach;
-?>
-</ul>

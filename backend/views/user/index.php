@@ -10,6 +10,7 @@ use common\models\Instituciones;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Usuarios';
+$this->params['breadcrumbs'][] = ['label' => 'Mantenimientos', 'url' => ['/mantenimientos/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-index">

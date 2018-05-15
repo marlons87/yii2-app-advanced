@@ -16,7 +16,7 @@ foreach ($evaluaciones as $i):?>
  <div class="panel panel-default">
   <div class="panel-heading">
       <h3 class="panel-title">
-         Evaluaci&oacute;n <?php echo $i['Consecutivo']." - ".$i['institucion']; ?>
+         Evaluaci&oacute;n <?php echo $i['Consecutivo']." - ".$i['institucion']. "  |  ".$i['descripcion']; ?>
       </h3>
   </div>
   <div class="panel-body">
@@ -27,7 +27,7 @@ foreach ($evaluaciones as $i):?>
               
               ?></p>
                
-        <?= Html::a('Ver detalles', ['dominios', 'id' => $i['Id_Evaluacion']], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Ver detalles', ['dominios', 'id' => $i['Id_Evaluacion'],'Id_Institucion'=>$i['Id_Institucion']], ['class' => 'btn btn-primary']) ?>
   
         <?php
    

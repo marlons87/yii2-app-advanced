@@ -49,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
           
           <div class="panel panel-default">
       <div class="panel-heading">
-          <h3 class="panel-title">Evaluaci&oacute;n <?php echo $i['Consecutivo']." - ".$i['institucion']; ?></h3>
+          <h3 class="panel-title">Evaluaci&oacute;n <?php echo $i['Consecutivo']." - ".$i['institucion']. "  |  ".$i['descripcion']; ?></h3>
       </div>
       <div class="panel-body">
           
@@ -175,25 +175,65 @@ if (sizeof($historico)==1){
       ?>  
       
      
-             <div class="alert alert-info">
-                 
-                 <p>Cantidad de evaluaciones: <b> <?php echo intval($cantidad['cantidad']); ?></b></p>
-                 <p><b>Contactos</b></p>
-                  <?php
-                
-                   foreach ($usuarios as $u):
-                      ?> 
-         
-                 <p>Usuario: <?php echo $u['Nombre']." ".$u['Apellido1'] ." ".$u['Apellido2']; ?></p>
-                 <p>Correo: <?php echo $u['email'];  ?></p>
-                 <p>Puesto: <?php echo $u['Puesto'];  ?></p>
-                       
-                       <?php
-                   endforeach;
-                  
-                   ?> 
-                            
+           
+ 
+ 
+ <div class="row">
+     <div class="col-lg-4">
+
+         <div class="panel panel-usuarios">
+             <div class="panel-heading">
+                 <div class="row">
+                     <div class="col-xs-4">
+                         <img src="https://pbs.twimg.com/media/DcpnpEZV4AAbfDU.png"/>
+                     </div>
+                     <div class="col-xs-8 text-right">
+                         <h2>
+                             <?php
+                             echo intval($cantidad['cantidad']);
+                             ?>
+                         </h2> 
+                         <p> Total de Evaluaciones</p>
+
+                     </div>
+                 </div>
              </div>
+
+         </div>
+
+
+
+
+     </div>
+     <div class="col-lg-8">
+         <div class="panel panel-controles">
+             <div class="panel-heading">
+                 <div class="row">
+                     <div class="col-xs-2">
+                         <img src="https://pbs.twimg.com/media/DcuAWHCX0AAqb75.png"/>
+                     </div>
+                     <div class="col-xs-10 text-left">
+                        
+                         <?php
+                         foreach ($usuarios as $u):
+                             ?> 
+
+                             <p>Usuario: <?php echo $u['Nombre'] . " " . $u['Apellido1'] . " " . $u['Apellido2']; ?></p>
+                             <p>Correo: <?php echo $u['email']; ?></p>
+                             <p>Puesto: <?php echo $u['Puesto']; ?></p>
+
+                             <?php
+                         endforeach;
+                         ?> 
+
+                     </div>
+                 </div>
+             </div>
+
+         </div>
+     </div>
+
+ </div>
     
       
       

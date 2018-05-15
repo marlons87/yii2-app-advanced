@@ -2,17 +2,11 @@
 namespace backend\controllers;
 
 use Yii;
-use yii\base\InvalidParamException;
-use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use common\models\Dominios;
-use common\models\Controles;
-use common\models\Niveles;
-use common\models\ControlesSearch;
-use common\models\Respuestas;
 use common\models\Evaluaciones;
 //use frontend\models\EvaluacionForm;
-use yii\db\Schema;
+
 
 
 
@@ -39,7 +33,7 @@ class EvaluacionesController extends Controller
     public function actionIndex($Id_Institucion)
     {
         
-                $count = Yii::$app->db->createCommand('select Id_Evaluacion,Consecutivo,Fecha,evaluaciones.Status as estado,Fecha_Ultima_Modificacion,instituciones.Nombre as institucion,user.Nombre as usuario,user.Apellido1,user.Apellido2,user.Puesto from evaluaciones inner join instituciones on evaluaciones.Id_Institucion = instituciones.Id_Institucion inner join user on evaluaciones.Id_Usuario = user.id where evaluaciones.Id_Institucion=:IdInstitucion order by Consecutivo DESC')
+                $count = Yii::$app->db->createCommand('select Id_Evaluacion,Consecutivo,Fecha,evaluaciones.Status as estado,Fecha_Ultima_Modificacion,evaluaciones.descripcion ,instituciones.Nombre as institucion,user.Nombre as usuario,user.Apellido1,user.Apellido2,user.Puesto from evaluaciones inner join instituciones on evaluaciones.Id_Institucion = instituciones.Id_Institucion inner join user on evaluaciones.Id_Usuario = user.id where evaluaciones.Id_Institucion=:IdInstitucion order by Consecutivo DESC')
                
                 ->bindValue(':IdInstitucion',$Id_Institucion)
                 ->queryAll();
@@ -95,7 +89,7 @@ FROM evaluaciones INNER JOIN instituciones ON evaluaciones.Id_Institucion=instit
     }
     
     
-    public function actionEvaluar($idEvaluacion, $idDominio) {
+    public function actionEvaluar($idEvaluacion, $idDominio,$Id_Institucion) {
         if (Yii::$app->request->post()) {
             $this->redirect(array('evaluaciones/dominios', 'id' => $idEvaluacion));
         } else {
@@ -103,14 +97,14 @@ FROM evaluaciones INNER JOIN instituciones ON evaluaciones.Id_Institucion=instit
             $controles = $dominios->controles;
             $evaluaciones = Evaluaciones::findOne($idEvaluacion);
             $respuestas = $evaluaciones->respuestas;
-            return $this->render('evaluar', array('controles' => $controles, 'respuestas' => $respuestas, 'idevaluacion' => $idEvaluacion,'dominios'=>$dominios));
+            return $this->render('evaluar', array('controles' => $controles, 'respuestas' => $respuestas, 'idevaluacion' => $idEvaluacion,'dominios'=>$dominios,'Id_Institucion' => $Id_Institucion));
         }
     }
     
     
     public function actionGenerales() {
         
-        $evaluaciones = Yii::$app->db->createCommand('select evaluaciones.Id_Evaluacion,Fecha,Fecha_Ultima_Modificacion, instituciones.Nombre as institucion,user.Nombre,user.Apellido1,user.Apellido2,Consecutivo from evaluaciones, user, instituciones where evaluaciones.Id_Usuario= user.id and evaluaciones.Id_Institucion=instituciones.Id_Institucion ORDER by evaluaciones.Id_Evaluacion desc')
+        $evaluaciones = Yii::$app->db->createCommand('select evaluaciones.Id_Evaluacion,Fecha,Fecha_Ultima_Modificacion, instituciones.Nombre as institucion,instituciones.Id_Institucion,user.Nombre,user.Apellido1,user.Apellido2,Consecutivo,evaluaciones.descripcion from evaluaciones, user, instituciones where evaluaciones.Id_Usuario= user.id and evaluaciones.Id_Institucion=instituciones.Id_Institucion ORDER by evaluaciones.Id_Evaluacion desc ')
                
                 ->queryAll();
         

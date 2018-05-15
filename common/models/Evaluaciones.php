@@ -39,6 +39,7 @@ class Evaluaciones extends \yii\db\ActiveRecord
             [['Fecha', 'Fecha_Ultima_Modificacion'], 'safe'],
             [['Id_Usuario', 'Id_Institucion'], 'required'],
             [['Status'], 'string', 'max' => 1],
+            [['descripcion'], 'string', 'max' => 250],
             [['Id_Usuario'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['Id_Usuario' => 'id']],
             [['Id_Institucion'], 'exist', 'skipOnError' => true, 'targetClass' => Instituciones::className(), 'targetAttribute' => ['Id_Institucion' => 'Id_Institucion']],
         ];
@@ -57,6 +58,7 @@ class Evaluaciones extends \yii\db\ActiveRecord
             'Id_Usuario' => 'Id  Usuario',
             'Id_Institucion' => 'Id  Institucion',
             'Fecha_Ultima_Modificacion' => 'Fecha  Ultima  Modificacion',
+            'descripcion'=>'Descripción',
         ];
     }
 

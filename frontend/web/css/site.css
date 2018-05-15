@@ -118,3 +118,10 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+.evaluacion-header {
+    line-height: 1;
+    background:url(https://pbs.twimg.com/media/Dc5VZkKX0AEmbD_.png) #d9edf7 no-repeat 100% 5px; 
+    
+}
+

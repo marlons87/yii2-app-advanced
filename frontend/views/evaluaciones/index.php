@@ -1,6 +1,9 @@
 <?php
 
 use yii\helpers\Html;
+use yii\grid\GridView;
+use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
 
 
 $this->title = 'Evaluación';
@@ -43,13 +46,9 @@ $this->params['breadcrumbs'][] = $this->title;
     
              
               <p>&Uacute;ltima modificaci&oacute;n:<?php echo $i['Fecha_Ultima_Modificacion'];?></p>
-              
-             
-               
-             
-              
-        <?= Html::a('Ver detalles', ['dominios', 'id' => $i['Id_Evaluacion']], ['class' => 'btn btn-primary']) ?>
-  
+
+        
+  <?= Html::a('Ver detalles', ['dominios', 'id' => $i['Id_Evaluacion']], ['class' => 'btn btn-primary']) ?>
         
           
 
@@ -70,4 +69,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
  <p>
         <?= Html::a('Crear evaluación', ['insertar'], ['class' => 'btn btn-success']) ?>
+     
+     <?= Html::a('Crear evaluación', ['crear'], ['class' => 'btn btn-success']) ?>
+     
+
     </p>
+    
+    
+  

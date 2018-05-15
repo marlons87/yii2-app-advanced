@@ -62,14 +62,32 @@ class EvaluacionesController extends Controller {
         order by dominios.Id_Dominio, controles.Id_Control, niveles.Id_Nivel ASC')
                 ->bindValue(':id', $id)
                 ->queryAll();
+        
+             $evaluacion  = Yii::$app->db->createCommand('SELECT Id_Evaluacion,Consecutivo,descripcion,instituciones.Nombre,evaluaciones.Fecha,evaluaciones.Fecha_Ultima_Modificacion
+FROM evaluaciones INNER JOIN instituciones ON evaluaciones.Id_Institucion=instituciones.Id_Institucion and evaluaciones.Id_Evaluacion=:id')
+                 ->bindValue(':id', $id)
+                  ->queryOne();
 
-        return $this->render('dominios', array('items' => $sql, 'calificacion' => $calificacion, 'id' => $id));
+        return $this->render('dominios', array('items' => $sql, 'calificacion' => $calificacion, 'id' => $id,'evaluacion'=>$evaluacion));
     }
 
     public function actionInsertar() {
+        
+       
+        
+          $descripcion = Yii::$app->request->post('descripcion');
+       
         $consecutivo = Yii::$app->db->createCommand('select (MAX(Consecutivo)+1) as Consecutivo from {{evaluaciones}} where [[Id_Institucion]]=:idInstitucion')
                 ->bindValue(':idInstitucion', yii::$app->user->identity->Id_Institucion)
                 ->queryOne();
+        
+        
+        
+        if (is_null($consecutivo['Consecutivo'])){
+              $consecutivo['Consecutivo']=1;
+        }
+        
+   
 
         Yii::$app->db->createCommand()->insert('evaluaciones', [
             'Consecutivo' => $consecutivo['Consecutivo'],
@@ -77,13 +95,23 @@ class EvaluacionesController extends Controller {
             'Status' => 0,
             'Id_Usuario' => yii::$app->user->identity->Id,
             'Id_Institucion' => yii::$app->user->identity->Id_Institucion,
-            'Fecha_Ultima_Modificacion' => date('Y-m-d H:i:s'),])->execute();
+            'Fecha_Ultima_Modificacion' => date('Y-m-d H:i:s'),
+            'descripcion'=>$descripcion
+            ])
+                
+                
+                ->execute();
 
         $evaluacion = Yii::$app->db->createCommand('SELECT LAST_INSERT_ID() as evaluacion')
                 ->queryOne();
 
         $sql = ( new \yii\db\Query())->select('*')->from('dominios')->All();
-        return $this->render('crear', array('items' => $sql, 'evaluacion' => $evaluacion));
+     // return $this->render('dominios', array('id' => $evaluacion));
+    }
+    
+    
+      public function actionCrear() {
+         return $this->render('crear');
     }
 
     public function actionControles($idEvaluacion, $idDominio) {
@@ -122,6 +150,10 @@ class EvaluacionesController extends Controller {
 
     //Controller file code
     public function actionAjax() {
+        
+       
+        
+        
         $data = Yii::$app->request->post('niveles');
         $observaciones = Yii::$app->request->post('observaciones');
         $idEvaluacion = Yii::$app->request->post('idEvaluacion');
@@ -188,5 +220,9 @@ class EvaluacionesController extends Controller {
 
         echo "El id de la evaluacion es " . $id . " el id del dominio es " . $Id_Dominio . " el nivel es " . $idNivel;
     }
+    
+    
+    
+  
 
 }

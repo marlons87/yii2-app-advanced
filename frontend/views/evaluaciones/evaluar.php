@@ -4,13 +4,14 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
 
 $idEvaluacion = $idevaluacion;
 $comentario = "";
 
 
 $this->title = 'Controles a evaluar';
-$comentario='';
+
 
 $this->params['breadcrumbs'][] = ['label' => 'Evaluaciones', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
@@ -65,8 +66,10 @@ $form = ActiveForm::begin([
 <?php endforeach; ?>
 
 <?=
-Html::submitButton('Guardar', ['class' => 'btn btn-success', 'value' => 'my_value', 'onClick' => 'js:sendData()']);
+Html::submitButton('Guardar', ['class' => 'btn btn-success', 'value' => 'my_value', 'onClick' => 'js:sendData()']);?>
 
+
+<?= Html::a('Cancelar', ['evaluaciones/dominios', 'id' => $idEvaluacion], ['class' => 'btn btn-danger']);
 
 ActiveForm::end();
 ?>

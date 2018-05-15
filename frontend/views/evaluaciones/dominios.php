@@ -10,6 +10,21 @@
 ?>
 <h1><?= Html::encode($this->title) ?></h1>
 
+
+<div class="alert alert-info evaluacion-header">
+    <div class="row">
+        <div class="col-md-12">
+            <p>Evaluaci&oacute;n: <?php echo " ". $evaluacion['Nombre']." - ".$evaluacion['Consecutivo'];?> </p>
+            <p>Fecha: <?php echo " ". $evaluacion['Fecha'];?></p>
+            <p>Descripción:  <?php echo " ". $evaluacion['descripcion'];?></p>
+            <p>Fecha de modificaci&oacute;n: <?php echo " ". $evaluacion['Fecha_Ultima_Modificacion'];?></p>
+         
+        </div>
+       
+    </div> 
+
+</div>
+
 <?php
     $idEvaluacion = $id;
     $notaGlobal = 6;
@@ -64,7 +79,7 @@ foreach ($items as $i):?>
 
                 echo GoogleChart::widget(array('visualization' => 'ColumnChart',
                     'data' => $graph_data,
-                    'options' => array('title' => 'Resultado de la evaluación de los controles del dominio: ' . $i['Nombre'], 'height' => 450)));
+                    'options' => array( 'legend'=> 'none', 'title' => 'Resultado de la evaluación de los controles del dominio: ' . $i['Nombre'], 'height' => 450)));
             }
 
             if ($nivelDominio == 6) {

@@ -95,7 +95,7 @@ foreach ($items as $i):?>
 
             if ($nivelDominio != 6) {
                 ?>
-                <?= Html::a('Ver detalles', ['evaluar', 'idEvaluacion' => $idEvaluacion, 'idDominio' => $i['Id_Dominio']], ['class' => 'btn btn-primary']);
+                <?= Html::a('Ver detalles', ['evaluar', 'idEvaluacion' => $idEvaluacion, 'idDominio' => $i['Id_Dominio'],'Id_Institucion' => $Id_Institucion], ['class' => 'btn btn-primary']);
                
             } 
             ?>
@@ -145,5 +145,15 @@ foreach ($items as $i):?>
         <?php
     }
     ?>
+        
+       
 
 </div>
+
+ <?=
+
+Html::a('Regresar', ['index', 'Id_Institucion' => $Id_Institucion], ['class' => 'btn btn-primary']);
+
+
+
+?>

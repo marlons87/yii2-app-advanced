@@ -38,7 +38,7 @@ class User extends \common\models\User
             ['username', 'trim'],
             ['username', 'required'],
             //['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'El nombre de usuario o “Alias” ya está siendo utilizado en este momento..'],
-            ['username', 'string', 'min' => 2, 'max' => 255],
+            ['username', 'string', 'min' => 10, 'max' => 15],
             
             [['Nombre'], 'string', 'max' => 50], [['Apellido1'], 'string', 'max' => 30], [['Apellido2'], 'string', 'max' => 30],
             
@@ -52,7 +52,6 @@ class User extends \common\models\User
 
             ['password', 'required'],
             ['Puesto', 'string', 'max' => 100],
-            ['Identificacion', 'string', 'max' => 15],
             ['password', 'string', 'min' => 6],
             ['passCompare', 'compare', 'compareAttribute'=>'password', 'skipOnEmpty' => false, 'message'=>"Las contraseñas digitadas deben de coincidir."],
             
@@ -75,7 +74,6 @@ class User extends \common\models\User
             'Puesto' => 'Puesto',
             'Apellido1' => 'Primer Apellido',
             'Apellido2' => 'Segundo Apellido',
-            'Identificacion' => 'Identificación',
           
             'status' => 'Estado',
             'email' => 'Email',

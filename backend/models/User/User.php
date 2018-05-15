@@ -8,7 +8,6 @@ use Yii;
  * This is the model class for table "user".
  *
  * @property int $id
- * @property string $Identificacion
  * @property string $username
  * @property string $Nombre
  * @property string $Apellido1
@@ -42,9 +41,8 @@ class User extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Identificacion', 'username', 'Nombre', 'Apellido1', 'Apellido2', 'Puesto', 'auth_key', 'password_hash', 'email', 'created_at', 'updated_at', 'Id_Institucion'], 'required'],
+            [['username', 'Nombre', 'Apellido1', 'Apellido2', 'Puesto', 'auth_key', 'password_hash', 'email', 'created_at', 'updated_at', 'Id_Institucion'], 'required'],
             [['status', 'created_at', 'updated_at', 'Id_Institucion'], 'integer'],
-            [['Identificacion'], 'string', 'max' => 15],
             [['username', 'password_hash', 'password_reset_token', 'email'], 'string', 'max' => 255],
             [['Nombre'], 'string', 'max' => 50],
             [['Apellido1', 'Apellido2'], 'string', 'max' => 30],
@@ -64,7 +62,6 @@ class User extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'Identificacion' => 'Identificacion',
             'username' => 'Username',
             'Nombre' => 'Nombre',
             'Apellido1' => 'Apellido1',

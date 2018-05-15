@@ -26,7 +26,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'Id_Usuario',
-            'Identificacion',
             'Puesto',
             'Email:email',
             'Estado',

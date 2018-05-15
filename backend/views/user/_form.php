@@ -15,8 +15,6 @@ use yii\helpers\Url;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
-    
-    <?= $form->field($model, 'Identificacion')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'Nombre')->textInput(['maxlength' => true]) ?>
 

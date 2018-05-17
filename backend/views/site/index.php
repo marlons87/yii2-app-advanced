@@ -28,10 +28,6 @@ $this->title = 'ECM2';
                                 <a target="_self" title="Ir a instituciones" href="../instituciones/index"> <img src="https://pbs.twimg.com/media/Dct7-o4VAAEPxbe.png"/></a>
                             </div>
                             <div class="col-xs-8 text-right">
-                               
-                                    
-                                    
-                                    
                                     <?= Html::tag('h2', Html::encode(Instituciones::find()->count())) ?>
                           
                                 <p> Total de Instituciones</p>
@@ -125,13 +121,9 @@ $this->title = 'ECM2';
                 <h2>Nivel por Instituci&oacute;n</h2>
                 
                 
-                 
+                
+                    
 
-                
-                
-                
-                
-                
                    <ul class="list-group">
                 <?php
                  foreach ($notaXInstitucion as $nota):

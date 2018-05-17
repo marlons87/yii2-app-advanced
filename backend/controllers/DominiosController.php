@@ -8,6 +8,7 @@ use common\models\DominiosSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\data\Pagination;
 
 /**
  * DominiosController implements the CRUD actions for Dominios model.
@@ -37,6 +38,9 @@ class DominiosController extends Controller
     {
         $searchModel = new DominiosSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->pagination->pageSize=10;
+        
+     
 
         return $this->render('index', [
             'searchModel' => $searchModel,

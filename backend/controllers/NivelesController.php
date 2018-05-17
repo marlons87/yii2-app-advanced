@@ -37,6 +37,7 @@ class NivelesController extends Controller
     {
         $searchModel = new NivelesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->pagination->pageSize=10;
         
           
 

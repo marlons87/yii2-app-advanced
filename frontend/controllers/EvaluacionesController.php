@@ -21,11 +21,7 @@ class EvaluacionesController extends Controller {
         
           if (!Yii::$app->user->isGuest){
               
-               $count = Yii::$app->db->createCommand('select Id_Evaluacion,Consecutivo,Fecha,evaluaciones.Status as estado,Fecha_Ultima_Modificacion,instituciones.Nombre as institucion,user.Nombre as usuario,user.Apellido1,user.Apellido2,user.Puesto,evaluaciones.descripcion
-                    from evaluaciones
-                    inner join instituciones on evaluaciones.Id_Institucion = instituciones.Id_Institucion
-                    inner join user on evaluaciones.Id_Usuario = user.id
-                    where (instituciones.Id_Institucion =:IdInstitucion or user.id=:id)order by Id_Evaluacion DESC ')
+               $count = Yii::$app->db->createCommand('select Id_Evaluacion,Consecutivo,Fecha,e.Status as estado,Fecha_Ultima_Modificacion,i.Nombre as institucion, s.Nombre as sede,u.Nombre as usuario,u.Apellido1,u.Apellido2,u.Puesto,e.descripcion from evaluaciones e inner join sedes s on s.id_Sede = e.id_Sede inner join instituciones i on s.Id_Institucion = i.Id_Institucion inner join user u on e.Id_Usuario = u.id where (i.Id_Institucion = :IdInstitucion or u.id = :id)order by Id_Evaluacion DESC')
                 ->bindValue(':id', yii::$app->user->identity->id)
                 ->bindValue(':IdInstitucion', yii::$app->user->identity->Id_Institucion)
                 ->queryAll();
@@ -77,7 +73,7 @@ FROM evaluaciones INNER JOIN instituciones ON evaluaciones.Id_Institucion=instit
         
           $descripcion = Yii::$app->request->post('descripcion');
        
-        $consecutivo = Yii::$app->db->createCommand('select (MAX(Consecutivo)+1) as Consecutivo from {{evaluaciones}} where [[Id_Institucion]]=:idInstitucion')
+        $consecutivo = Yii::$app->db->createCommand('select (MAX(Consecutivo)+1) as Consecutivo from evaluaciones e inner join sedes  s on e.id_Sede = s.id_sede where Id_Institucion =:idInstitucion')
                 ->bindValue(':idInstitucion', yii::$app->user->identity->Id_Institucion)
                 ->queryOne();
         
@@ -106,7 +102,7 @@ FROM evaluaciones INNER JOIN instituciones ON evaluaciones.Id_Institucion=instit
                 ->queryOne();
 
         $sql = ( new \yii\db\Query())->select('*')->from('dominios')->All();
-     // return $this->render('dominios', array('id' => $evaluacion));
+     return $this->render('dominios', array('id' => $evaluacion));
     }
     
     

@@ -37,6 +37,7 @@ class InstitucionesController extends Controller
     {
         $searchModel = new InstitucionesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->pagination->pageSize=10;
 
         
 

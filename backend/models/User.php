@@ -70,7 +70,7 @@ class User extends \common\models\User
     {
         return [
            
-            'username' => 'Alias',
+            'username' => 'Identificación',
             'Puesto' => 'Puesto',
             'Apellido1' => 'Primer Apellido',
             'Apellido2' => 'Segundo Apellido',

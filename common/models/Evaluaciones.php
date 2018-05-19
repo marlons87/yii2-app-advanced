@@ -35,13 +35,13 @@ class Evaluaciones extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Consecutivo', 'Id_Usuario', 'Id_Institucion'], 'integer'],
+            [['Consecutivo', 'Id_Usuario', 'Id_Sede'], 'integer'],
             [['Fecha', 'Fecha_Ultima_Modificacion'], 'safe'],
-            [['Id_Usuario', 'Id_Institucion'], 'required'],
+            [['Id_Usuario', 'Id_Sede'], 'required'],
             [['Status'], 'string', 'max' => 1],
             [['descripcion'], 'string', 'max' => 250],
             [['Id_Usuario'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['Id_Usuario' => 'id']],
-            [['Id_Institucion'], 'exist', 'skipOnError' => true, 'targetClass' => Instituciones::className(), 'targetAttribute' => ['Id_Institucion' => 'Id_Institucion']],
+            [['Id_Sede'], 'exist', 'skipOnError' => true, 'targetClass' => Sedes::className(), 'targetAttribute' => ['Id_Sede' => 'Id_Sede']],
         ];
     }
 
@@ -56,7 +56,7 @@ class Evaluaciones extends \yii\db\ActiveRecord
             'Fecha' => 'Fecha',
             'Status' => 'Status',
             'Id_Usuario' => 'Id  Usuario',
-            'Id_Institucion' => 'Id  Institucion',
+            'Id_Sede' => 'Sede',
             'Fecha_Ultima_Modificacion' => 'Fecha  Ultima  Modificacion',
             'descripcion'=>'Descripción',
         ];
@@ -73,9 +73,9 @@ class Evaluaciones extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getInstitucion()
+    public function getSedes()
     {
-        return $this->hasOne(Instituciones::className(), ['Id_Institucion' => 'Id_Institucion']);
+        return $this->hasOne(Sedes::className(), ['Id_Sede' => 'Id_Sede']);
     }
 
     /**

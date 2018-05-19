@@ -11,7 +11,22 @@
 <h1><?= Html::encode($this->title) ?></h1>
 
 <?php
-foreach ($evaluaciones as $i):?> 
+
+if (sizeof($evaluaciones)==0){
+    
+    ?>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+      <p>No existen evaluaciones</p>
+  </div>
+</div>
+
+<?php
+    
+}else{
+    
+    foreach ($evaluaciones as $i):?> 
     
  <div class="panel panel-default">
   <div class="panel-heading">
@@ -37,4 +52,12 @@ foreach ($evaluaciones as $i):?>
     
  <?php   
 endforeach;
+
+    
+}
+
+
+
+
+
 ?> 

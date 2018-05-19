@@ -104,7 +104,7 @@ FROM evaluaciones INNER JOIN instituciones ON evaluaciones.Id_Institucion=instit
     
     public function actionGenerales() {
         
-        $evaluaciones = Yii::$app->db->createCommand('select evaluaciones.Id_Evaluacion,Fecha,Fecha_Ultima_Modificacion, instituciones.Nombre as institucion,instituciones.Id_Institucion,user.Nombre,user.Apellido1,user.Apellido2,Consecutivo,evaluaciones.descripcion from evaluaciones, user, instituciones where evaluaciones.Id_Usuario= user.id and evaluaciones.Id_Institucion=instituciones.Id_Institucion ORDER by evaluaciones.Id_Evaluacion desc ')
+        $evaluaciones = Yii::$app->db->createCommand('SELECT e.Id_Evaluacion, s.id_Sede, s.Nombre as Sede ,Fecha,Fecha_Ultima_Modificacion, i.Nombre as institucion,i.Id_Institucion,u.Nombre,u.Apellido1,u.Apellido2,Consecutivo,e.descripcion FROM evaluaciones e INNER JOIN sedes s on e.id_Sede = s.id_Sede INNER JOIN instituciones i on s.Id_Institucion = i.Id_Institucion INNER JOIN user u ON e.Id_Usuario = u.id ORDER BY e.Id_Evaluacion DESC ')
                
                 ->queryAll();
         

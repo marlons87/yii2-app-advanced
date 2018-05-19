@@ -5,6 +5,9 @@ use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use common\models\Evaluaciones;
+use common\models\Sedes;
+use common\models\SedesSearch;
+use common\models\User\User;
 
 $descripcion = "";
 $this->title = 'Crear evaluación';
@@ -17,8 +20,26 @@ $this->params['breadcrumbs'][] = $this->title;
  
  <?php $form = ActiveForm::begin([
       "method" => "post",
+     
+     
+     
 ]) ?>
   
+
+  <?php
+   
+  var_dump($dataProvider);
+ ?>
+  
+ 
+ 
+ <?php  
+             
+                 echo Html::activeDropDownList($dataProvider, 'Id_Sede', ArrayHelper::map(Sedes::find()->asArray()->all(), 'Id_Sede', 'Nombre'), ['class'=>'form-control compor','prompt' => 'Seleccione la institución',]); 
+                 
+                 
+             ?>
+ 
  <label for="descripcion" >Descripci&oacute;n  </label>
   <textarea class="txtObservaciones" id="descripcion" maxlength="250"  name="txtObservaciones" style="width:100%"><?= (trim($descripcion)); ?></textarea>
 

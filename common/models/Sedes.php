@@ -50,7 +50,7 @@ class Sedes extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'Id_Sede' => 'Id  Sede',
+            'Id_Sede' => 'Id_Sede',
             'Nombre' => 'Nombre',
             'Ubicacion' => 'Ubicacion',
             'Id_Institucion' => 'Id  Institucion',
@@ -91,4 +91,5 @@ class Sedes extends \yii\db\ActiveRecord
     {
         return new SedesQuery(get_called_class());
     }
+
 }

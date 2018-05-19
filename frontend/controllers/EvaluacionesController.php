@@ -14,6 +14,9 @@ use frontend\models\EvaluacionForm;
 use backend\models\User\User;
 use common\models\SedesSearch;
 use common\models\Sedes;
+use common\models\Instituciones;
+use common\models\InstitucionesSearch;
+use yii\helpers\ArrayHelper;
 
 
 class EvaluacionesController extends Controller {
@@ -110,16 +113,13 @@ FROM evaluaciones INNER JOIN instituciones ON evaluaciones.Id_Institucion=instit
     
     
       public function actionCrear() {
-          
-        $usuario = new User();
-        $usuario = User::findOne(yii::$app->user->identity->id);
-        $searchModel = new SedesSearch();
-        $searchModel->Id_Institucion =  $usuario->Id_Institucion;
-        $dataProvider = new Sedes();
-        $dataProvider = Sedes::findAll($searchModel);
-        return $this->render('crear', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+        
+        $searchModel = new InstitucionesSearch(); 
+        $searchModel->Id_Institucion = yii::$app->user->identity->Id_Institucion ;
+        $model = new Instituciones();
+        $model = Instituciones::findOne($searchModel);
+        
+        return $this->render('crear', ['model' => $model
         ]);
           
         

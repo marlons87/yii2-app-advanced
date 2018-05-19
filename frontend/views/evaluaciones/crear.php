@@ -25,20 +25,8 @@ $this->params['breadcrumbs'][] = $this->title;
      
 ]) ?>
   
-
-  <?php
-   
-  var_dump($dataProvider);
- ?>
   
- 
- 
- <?php  
-             
-                 echo Html::activeDropDownList($dataProvider, 'Id_Sede', ArrayHelper::map(Sedes::find()->asArray()->all(), 'Id_Sede', 'Nombre'), ['class'=>'form-control compor','prompt' => 'Seleccione la institución',]); 
-                 
-                 
-             ?>
+<?= $form->field($model, 'Id_Institucion')->dropDownList($model->SedesList , ['prompt' => 'Seleccione...']) ?>
  
  <label for="descripcion" >Descripci&oacute;n  </label>
   <textarea class="txtObservaciones" id="descripcion" maxlength="250"  name="txtObservaciones" style="width:100%"><?= (trim($descripcion)); ?></textarea>

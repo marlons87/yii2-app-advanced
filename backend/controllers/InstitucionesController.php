@@ -5,6 +5,7 @@ namespace backend\controllers;
 use Yii;
 use common\models\Instituciones;
 use common\models\InstitucionesSearch;
+use common\models\Sedes;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -70,6 +71,12 @@ class InstitucionesController extends Controller
         $model = new Instituciones();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $sedes = new Sedes();
+            $sedes->Id_Institucion = $model->Id_Institucion;
+            $sedes->Nombre = $model->Nombre.' Sede Central';
+            $sedes->Id_Usuario = yii::$app->user->identity->id;
+            $sedes->save();
+            
             return $this->redirect(['index']);
         }
 

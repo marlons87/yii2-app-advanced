@@ -37,10 +37,8 @@ class SedesController extends Controller
      */
     public function actionIndex()
     {
-        $usuario = new User();
-        $usuario = User::findOne(yii::$app->user->identity->id);
         $searchModel = new SedesSearch();
-        $searchModel->Id_Institucion =  $usuario->Id_Institucion;
+        $searchModel->Id_Institucion = yii::$app->user->identity->Id_Institucion ;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         return $this->render('index', [
             'searchModel' => $searchModel,

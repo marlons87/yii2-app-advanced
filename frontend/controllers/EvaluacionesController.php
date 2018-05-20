@@ -5,24 +5,15 @@ namespace frontend\controllers;
 use Yii;
 use yii\web\Controller;
 use common\models\Dominios;
-use common\models\Controles;
 use common\models\Niveles;
-use common\models\ControlesSearch;
 use common\models\Respuestas;
 use common\models\Evaluaciones;
-use frontend\models\EvaluacionForm;
-use backend\models\User\User;
-use common\models\SedesSearch;
-use common\models\Sedes;
 use common\models\Instituciones;
 use common\models\InstitucionesSearch;
-use yii\helpers\ArrayHelper;
 
 class EvaluacionesController extends Controller {
 
     public function actionIndex() {
-
-
 
         if (!Yii::$app->user->isGuest) {
 
@@ -33,9 +24,6 @@ class EvaluacionesController extends Controller {
 
             return $this->render('index', ['items' => $count]);
         } else {
-
-
-
             return $this->render('../site/index');
         }
     }
@@ -48,7 +36,6 @@ class EvaluacionesController extends Controller {
     }
 
     public function actionDominios($id) {
-
         $sql = ( new \yii\db\Query())->select('*')->from('dominios')->All();
         $calificacion = Yii::$app->db->createCommand('select dominios.Id_Dominio, dominios.Codigo as DominioCodigo, dominios.Nombre as DominioNombre, controles.Id_Control, controles.Codigo, controles.Nombre, niveles.Valor
         from dominios
@@ -68,25 +55,16 @@ class EvaluacionesController extends Controller {
     }
 
     public function actionInsertar() {
-
-
-
         $descripcion = Yii::$app->request->post('descripcion');
         $idSede = Yii::$app->request->post('idSede');
-
-
 
         $consecutivo = Yii::$app->db->createCommand('select (MAX(Consecutivo)+1) as Consecutivo from evaluaciones e inner join sedes s on e.id_Sede = s.id_sede where s.Id_Sede=:idSede')
                 ->bindValue(':idSede', $idSede)
                 ->queryOne();
 
-
-
         if (is_null($consecutivo['Consecutivo'])) {
             $consecutivo['Consecutivo'] = 1;
         }
-
-
 
         Yii::$app->db->createCommand()->insert('evaluaciones', [
                     'Consecutivo' => $consecutivo['Consecutivo'],
@@ -98,23 +76,25 @@ class EvaluacionesController extends Controller {
                     'descripcion' => $descripcion
                 ])
                 ->execute();
-
-        $id = Yii::$app->db->createCommand('SELECT LAST_INSERT_ID() as evaluacion')
-                ->queryOne();
-
-//      $sql = ( new \yii\db\Query())->select('*')->from('dominios')->All();
-        return $this->render('dominios', ['id' => $id] );
     }
 
     public function actionCrear() {
+        if (Yii::$app->request->post()) {
+            $idEvaluacion = Yii::$app->db->createCommand('SELECT MAX(Consecutivo) AS Consecutivo FROM evaluaciones e INNER JOIN sedes s on e.id_Sede = s.id_sede WHERE s.Id_Institucion=:idInstitucion')
+                    ->bindValue(':idInstitucion', yii::$app->user->identity->Id_Institucion)
+                    ->queryOne();
+            //return $this->render('dominios', array('id' => $evaluacion));
+            $this->redirect(array('evaluaciones/dominios', 'id' => $idEvaluacion['Consecutivo']));
+        } else {
 
-        $searchModel = new InstitucionesSearch();
-        $searchModel->Id_Institucion = yii::$app->user->identity->Id_Institucion;
-        $model = new Instituciones();
-        $model = Instituciones::findOne($searchModel);
+            $searchModel = new InstitucionesSearch();
+            $searchModel->Id_Institucion = yii::$app->user->identity->Id_Institucion;
+            $model = new Instituciones();
+            $model = Instituciones::findOne($searchModel);
 
-        return $this->render('crear', ['model' => $model
-        ]);
+            return $this->render('crear', ['model' => $model
+            ]);
+        }
     }
 
     public function actionControles($idEvaluacion, $idDominio) {
@@ -153,10 +133,6 @@ class EvaluacionesController extends Controller {
 
     //Controller file code
     public function actionAjax() {
-
-
-
-
         $data = Yii::$app->request->post('niveles');
         $observaciones = Yii::$app->request->post('observaciones');
         $idEvaluacion = Yii::$app->request->post('idEvaluacion');

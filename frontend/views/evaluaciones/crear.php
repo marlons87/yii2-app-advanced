@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ]) ?>
   
   
-<?= $form->field($model, 'Id_Institucion')->dropDownList($model->SedesList , ['prompt' => 'Seleccione...']) ?>
+<?= $form->field($model, 'Id_Institucion')->dropDownList($model->SedesList , ['prompt' => 'Seleccione...'])->label('Sedes')  ?>
  
  <label for="descripcion" >Descripci&oacute;n  </label>
   <textarea class="txtObservaciones" id="descripcion" maxlength="250"  name="txtObservaciones" style="width:100%"><?= (trim($descripcion)); ?></textarea>

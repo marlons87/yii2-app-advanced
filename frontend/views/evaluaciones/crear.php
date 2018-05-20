@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
              $.ajax({
             type: "POST",
             url: "<?php echo Yii::$app->getUrlManager()->createUrl('evaluaciones/insertar'); ?>",
-            data: {descripcion: $('#descripcion').val()},
+            data: {idSede: $('#instituciones-id_institucion').val(),descripcion:$('#descripcion').val()},
             success: function () {
                 alert("CORECTO");
             },

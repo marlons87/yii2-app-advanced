@@ -80,7 +80,7 @@ class EvaluacionesController extends Controller {
 
     public function actionCrear() {
         if (Yii::$app->request->post()) {
-            $idEvaluacion = Yii::$app->db->createCommand('SELECT MAX(Consecutivo) AS Consecutivo FROM evaluaciones e INNER JOIN sedes s on e.id_Sede = s.id_sede WHERE s.Id_Institucion=:idInstitucion')
+            $idEvaluacion = Yii::$app->db->createCommand('SELECT MAX(Id_Evaluacion) AS Consecutivo FROM evaluaciones e INNER JOIN sedes s on e.id_Sede = s.id_sede WHERE s.Id_Institucion=:idInstitucion')
                     ->bindValue(':idInstitucion', yii::$app->user->identity->Id_Institucion)
                     ->queryOne();
             //return $this->render('dominios', array('id' => $evaluacion));

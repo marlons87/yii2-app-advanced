@@ -9,6 +9,7 @@ use common\models\SedesSearch;
 use backend\models\User\User;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+
 use yii\filters\VerbFilter;
 
 /**
@@ -108,11 +109,19 @@ class SedesController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete($id)      
     {
-        $this->findModel($id)->delete();
+        
+         try {
+             
+                     $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+             
+         } catch (\Exception $ex) {
+ throw new NotFoundHttpException('No se puede eliminar el registro. La sede actualmente está siendo utilizado');
+         }
+
     }
 
     /**

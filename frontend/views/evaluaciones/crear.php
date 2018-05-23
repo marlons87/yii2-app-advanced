@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\Url;
 
 $descripcion = "";
 $this->title = 'Crear evaluación';
@@ -20,10 +21,11 @@ $this->params['breadcrumbs'][] = $this->title;
  
  <label for="descripcion" >Descripci&oacute;n  </label>
   <textarea class="txtObservaciones" id="descripcion" maxlength="250"  name="txtObservaciones" style="width:100%"><?= (trim($descripcion)); ?></textarea>
-
+ 
     <div class="form-group">
-      
+       <br>
             <?= Html::submitButton('Crear evaluacion', ['class' => 'btn btn-success', 'value' => 'my_value','onClick' => 'js:sendData()']) ?>
+   <?= Html::a("Cancelar", Url::toRoute(['evaluaciones/index']), ['class' => 'btn btn-danger']) ?>
        
     </div>
 <?php ActiveForm::end() ?>

@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model common\models\Sedes */
 
-$this->title = $model->Id_Sede;
+$this->title = $model->Nombre;
 $this->params['breadcrumbs'][] = ['label' => 'Sedes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -14,16 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->Id_Sede], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->Id_Sede], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
+    
 
     <?= DetailView::widget([
         'model' => $model,
@@ -36,5 +27,16 @@ $this->params['breadcrumbs'][] = $this->title;
             //'Id_Usuario',
         ],
     ]) ?>
+    
+    <p>
+        <?= Html::a('Actualizar', ['update', 'id' => $model->Id_Sede], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Eliminar', ['delete', 'id' => $model->Id_Sede], [
+            'class' => 'btn btn-danger',
+            'data' => [
+                'confirm' => '¿Está seguro que desea eliminar este registro?',
+                'method' => 'post',
+            ],
+        ]) ?>
+    </p>
 
 </div>

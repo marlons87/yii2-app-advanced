@@ -16,9 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php Pjax::begin(); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a('Create Sedes', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -33,8 +31,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'Fecha_Creacion',
             //'Id_Usuario',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn','header'=>'Acciones'],
         ],
     ]); ?>
+    
+    <p>
+        <?= Html::a('Agregar sede', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
     <?php Pjax::end(); ?>
 </div>

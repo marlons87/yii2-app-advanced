@@ -22,7 +22,28 @@ class EvaluacionesController extends Controller {
                     ->bindValue(':IdInstitucion', yii::$app->user->identity->Id_Institucion)
                     ->queryAll();
 
-            return $this->render('index', ['items' => $count]);
+           
+            $sedes = Yii::$app->db->createCommand('SELECT instituciones.Nombre as Institucion, sedes.Nombre as sede,sedes.Id_Sede FROM instituciones INNER JOIN sedes ON instituciones.Id_Institucion=sedes.Id_Institucion where instituciones.Id_Institucion=:IdInstitucion ORDER by sedes.Id_Sede asc')
+                  
+                    ->bindValue(':IdInstitucion', yii::$app->user->identity->Id_Institucion)
+                    ->queryAll();
+            
+            
+            $searchModel = new InstitucionesSearch();
+            $searchModel->Id_Institucion = yii::$app->user->identity->Id_Institucion;
+            $model = new Instituciones();
+            $model = Instituciones::findOne($searchModel);
+            
+            $general= Yii::$app->db->createCommand('SELECT i.Id_Institucion, i.Nombre, s.Id_Sede, s.Nombre, e.Id_Evaluacion, MAX(e.Consecutivo), r2.Valor FROM evaluaciones e INNER JOIN sedes s ON e.Id_Sede = s.Id_Sede INNER JOIN instituciones i ON s.Id_Institucion = i.Id_Institucion LEFT JOIN (SELECT Id_Evaluacion, MIN(n.Valor) AS Valor FROM respuestas r INNER JOIN niveles n ON r.Id_Nivel = n.Id_Nivel WHERE n.Valor >= 0 GROUP BY r.Id_Evaluacion) r2 ON e.Id_Evaluacion = r2.Id_Evaluacion WHERE i.Id_Institucion=:IdInstitucion GROUP BY i.Id_Institucion, s.Id_Sede')
+                  
+                    ->bindValue(':IdInstitucion', yii::$app->user->identity->Id_Institucion)
+                    ->queryAll();
+            
+
+            return $this->render('index', ['items' => $count, 'sedes'=>$sedes,'general'=>$general]);
+            
+            
+            
         } else {
             return $this->render('../site/index');
         }
@@ -91,7 +112,6 @@ class EvaluacionesController extends Controller {
             $searchModel->Id_Institucion = yii::$app->user->identity->Id_Institucion;
             $model = new Instituciones();
             $model = Instituciones::findOne($searchModel);
-
             return $this->render('crear', ['model' => $model
             ]);
         }

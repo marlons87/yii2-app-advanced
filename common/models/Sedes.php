@@ -52,9 +52,9 @@ class Sedes extends \yii\db\ActiveRecord
         return [
             'Id_Sede' => 'Id_Sede',
             'Nombre' => 'Nombre',
-            'Ubicacion' => 'Ubicacion',
+            'Ubicacion' => 'Ubicación',
             'Id_Institucion' => 'Id  Institucion',
-            'Fecha_Creacion' => 'Fecha  Creacion',
+            'Fecha_Creacion' => 'Fecha de creación',
             'Id_Usuario' => 'Id  Usuario',
         ];
     }

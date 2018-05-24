@@ -133,7 +133,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     array('Watch TV', 2, 'ff'),
                     array('Sleep', 7, 'Hola')
                 ),
-                'scriptAfterArrayToDataTable' => "data.setColumnProperty(2, 'role', 'tooltip');",
+                
+'scriptAfterArrayToDataTable' => "data.setColumnProperty(2, 'role', 'tooltip'); data.setColumnProperty(2, 'html', 'true');" ,
                 'options' => array('title' => 'My Daily Activity',  'legend'=> 'none', 'tooltip' => array('isHtml'=>'true'))));
     
                                  

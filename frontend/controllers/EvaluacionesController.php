@@ -58,7 +58,7 @@ class EvaluacionesController extends Controller {
 
     public function actionDominios($id) {
         $sql = ( new \yii\db\Query())->select('*')->from('dominios')->All();
-        $calificacion = Yii::$app->db->createCommand('select dominios.Id_Dominio, dominios.Codigo as DominioCodigo, dominios.Nombre as DominioNombre, controles.Id_Control, controles.Codigo, controles.Nombre, niveles.Valor
+        $calificacion = Yii::$app->db->createCommand('select dominios.Id_Dominio, dominios.Codigo as DominioCodigo, dominios.Nombre as DominioNombre, controles.Id_Control, controles.Codigo, controles.Nombre, niveles.Valor,respuestas.Observaciones
         from dominios
         LEFT join controles on dominios.Id_Dominio = controles.Id_Dominio
         left join niveles on controles.Id_Control = niveles.Id_Control

@@ -70,14 +70,16 @@ class SiteController extends Controller
          $searchModel = new InstitucionesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         
-        $notaXInstitucion = Yii::$app->db->createCommand('select i.Id_Institucion, i.Nombre, e.Id_Evaluacion, e.Fecha, MIN(n.Valor) as Valor
-FROM instituciones i 
-LEFT JOIN (SELECT e1.Id_Institucion, e1.Fecha, max(e1.Id_Evaluacion) as Id_Evaluacion FROM evaluaciones e1 GROUP BY e1.Id_Institucion) e on  
-i.Id_Institucion = e.Id_Institucion
-LEFT JOIN respuestas r on e.Id_Evaluacion = r.Id_Evaluacion
-LEFT JOIN niveles n on r.Id_Nivel = n.Id_Nivel
-and n.Valor>-1
-GROUP by i.Id_Institucion, e.Id_Evaluacion')
+        $notaXInstitucion = Yii::$app->db->createCommand('SELECT i.Id_Institucion, i.Nombre, s.Id_Sede, s.Nombre, e.Id_Evaluacion, MAX(e.Consecutivo), r2.Valor
+FROM evaluaciones e
+INNER JOIN sedes s ON e.Id_Sede = s.Id_Sede
+INNER JOIN instituciones i ON s.Id_Institucion = i.Id_Institucion
+LEFT JOIN (SELECT Id_Evaluacion, MIN(n.Valor) AS Valor
+FROM respuestas r INNER JOIN niveles n ON r.Id_Nivel = n.Id_Nivel
+WHERE n.Valor >= 0
+GROUP BY r.Id_Evaluacion) r2 ON e.Id_Evaluacion = r2.Id_Evaluacion
+WHERE i.Id_Institucion = 1 and s.Id_Sede = 1
+GROUP BY i.Id_Institucion, s.Id_Sede')
                 ->queryAll();
         
      $cantidadEvaluacion =   Yii::$app->db->createCommand('select COUNT(*)as cantidad from evaluaciones')

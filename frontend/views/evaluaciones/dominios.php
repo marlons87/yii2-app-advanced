@@ -41,7 +41,7 @@ foreach ($items as $i):?>
     $nivelDominio = 6;
 
 
-    $gph_data[raph_data = [];
+    $graph_data = [];
     $graph_data[] = array('Nombre', 'Nivel','Leyenda');
 
     foreach ($calificacion as $cali):

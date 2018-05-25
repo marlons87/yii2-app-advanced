@@ -68,7 +68,7 @@ class EvaluacionesController extends Controller
     public function actionDominios($id,$Id_Institucion) {
         
         $sql = ( new \yii\db\Query())->select('*')->from('dominios')->All();
-        $calificacion = Yii::$app->db->createCommand('select dominios.Id_Dominio, dominios.Codigo as DominioCodigo, dominios.Nombre as DominioNombre, controles.Id_Control, controles.Codigo, controles.Nombre, niveles.Valor
+        $calificacion = Yii::$app->db->createCommand('select dominios.Id_Dominio, dominios.Codigo as DominioCodigo, dominios.Nombre as DominioNombre, controles.Id_Control, controles.Codigo, controles.Nombre, niveles.Valor,respuestas.Observaciones
         from dominios
         LEFT join controles on dominios.Id_Dominio = controles.Id_Dominio
         left join niveles on controles.Id_Control = niveles.Id_Control
@@ -78,10 +78,9 @@ class EvaluacionesController extends Controller
                 ->bindValue(':id', $id)
                 ->queryAll();
         
-        $evaluacion  = Yii::$app->db->createCommand('SELECT Id_Evaluacion,Consecutivo,descripcion,instituciones.Nombre,evaluaciones.Fecha,evaluaciones.Fecha_Ultima_Modificacion
-FROM evaluaciones INNER JOIN instituciones ON evaluaciones.Id_Institucion=instituciones.Id_Institucion and evaluaciones.Id_Evaluacion=:id')
-                 ->bindValue(':id', $id)
-                  ->queryOne();
+      $evaluacion = Yii::$app->db->createCommand('SELECT e.Id_Evaluacion, Consecutivo, descripcion, i.Nombre, e.Fecha, e.Fecha_Ultima_Modificacion FROM evaluaciones e INNER JOIN sedes s on e.Id_Sede = s.Id_Sede INNER JOIN instituciones i ON s.Id_Institucion = i.Id_Institucion and e.Id_Evaluacion=:id')
+                ->bindValue(':id', $id)
+                ->queryOne();
         
         
 

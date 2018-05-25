@@ -53,7 +53,7 @@ foreach ($items as $i):?>
 
 
     $graph_data = [];
-    $graph_data[] = array('Nombre', 'Valor');
+    $graph_data[] = array('Nombre', 'Nivel','Leyenda');
 
     foreach ($calificacion as $cali):
 
@@ -62,8 +62,8 @@ foreach ($items as $i):?>
 
                     <?php
                     
-                    if (intval($cali["Valor"])>=0){
-                          $graph_data[] = array($cali["Nombre"], intval($cali["Valor"]));
+                 if (intval($cali["Valor"])>=0){
+                          $graph_data[] = array($cali["Nombre"], intval($cali["Valor"]),'<b>'.$cali["Nombre"].' </b><br><b>Nivel: </b>'.intval($cali["Valor"]).'<br>'.$cali["Observaciones"]);
                     }else{
                         ?>
             
@@ -90,7 +90,8 @@ foreach ($items as $i):?>
 
                 echo GoogleChart::widget(array('visualization' => 'ColumnChart',
                     'data' => $graph_data,
-                    'options' => array('title' => 'Resultado de la evaluación de los controles del dominio: ' . $i['Nombre'], 'height' => 450)));
+                    'scriptAfterArrayToDataTable' => "data.setColumnProperty(2, 'role', 'tooltip'); data.setColumnProperty(2, 'html', 'true');" ,
+                    'options' => array( 'legend'=> 'none','tooltip' => array('isHtml'=>'true'), 'title' => 'Resultado de la evaluación de los controles del dominio: ' . $i['Nombre'], 'height' => 450)));
             }
 
             if ($nivelDominio != 6) {

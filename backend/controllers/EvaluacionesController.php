@@ -118,15 +118,16 @@ class EvaluacionesController extends Controller
                 ->queryAll();
         
         
-          $notaXInstitucion = Yii::$app->db->createCommand('SELECT i.Id_Institucion, i.Nombre, s.Id_Sede, s.Nombre as sede, e.Id_Evaluacion, MAX(e.Consecutivo), r2.Valor
-FROM evaluaciones e
+          $notaXInstitucion = Yii::$app->db->createCommand('SELECT i.Id_Institucion, i.Nombre AS Nombre, e.Id_Sede, s.Nombre AS Sede, e.Id_Evaluacion, e.Consecutivo, e.Fecha, e.descripcion, MIN(n.Valor) AS Valor
+FROM evaluaciones e 
+INNER JOIN respuestas r ON e.Id_Evaluacion = r.Id_Evaluacion
+INNER JOIN niveles n ON r.Id_Nivel = n.Id_Nivel
 INNER JOIN sedes s ON e.Id_Sede = s.Id_Sede
 INNER JOIN instituciones i ON s.Id_Institucion = i.Id_Institucion
-LEFT JOIN (SELECT Id_Evaluacion, MIN(n.Valor) AS Valor
-FROM respuestas r INNER JOIN niveles n ON r.Id_Nivel = n.Id_Nivel
-WHERE n.Valor >= 0
-GROUP BY r.Id_Evaluacion) r2 ON e.Id_Evaluacion = r2.Id_Evaluacion
-GROUP BY i.Id_Institucion, s.Id_Sede')
+INNER JOIN (SELECT e1.Id_Sede, MAX(e1.Id_Evaluacion) Id_Evaluacion FROM evaluaciones e1 INNER JOIN respuestas r1 ON e1.Id_Evaluacion = r1.Id_Evaluacion GROUP BY e1.Id_Sede) e2
+on e.Id_Evaluacion = e2.Id_Evaluacion
+WHERE n.Valor > -1
+GROUP BY i.Id_Institucion, e.Id_Sede, e.Id_Evaluacion')
                 ->queryAll();
         
          return $this->render('instituciones', array('instituciones' => $Instituciones,'notas'=>$notaXInstitucion));

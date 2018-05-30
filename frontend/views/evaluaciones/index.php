@@ -127,14 +127,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 echo GoogleChart::widget(array('visualization' => 'ColumnChart',
                 'data' => array(
                     array('Task', 'Hours per Day', 'Hola'),
-                    array('Work', 11, '<b>h</b>'.' mundo '.'h' ),
-                    array('Eat', 2, 'Hola'),
-                    array('Commute', 2, 'Hola'),
-                    array('Watch TV', 2, 'ff'),
-                    array('Sleep', 7, 'Hola')
+                    array('Work', 11, 2 ),
+                    array('Eat', 2, 2),
+                    array('Commute', 2, 3),
+                    array('Watch TV', 2, 4),
+                    array('Sleep', 7, 5)
                 ),
                 
-'scriptAfterArrayToDataTable' => "data.setColumnProperty(2, 'role', 'tooltip'); data.setColumnProperty(2, 'html', 'true');" ,
+
                 'options' => array('title' => 'My Daily Activity',  'legend'=> 'none', 'tooltip' => array('isHtml'=>'true'))));
     
                                  

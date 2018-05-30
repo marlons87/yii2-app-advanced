@@ -81,7 +81,43 @@ $this->params['breadcrumbs'][] = $this->title;
 
                                   </div>
                                   <div id="<?php echo 'menu2_' . $sede['Id_Sede']; ?>" class="tab-pane fade">
-                                      2
+                                     
+                                      
+                                       <?php
+                                              $graph_data = [];
+                                              $graph_data[] = array('Dominio', 'Nivel');
+
+                                              foreach ($dominios as $dom):
+                                                  
+                                                    foreach ($nivelDominio as $nivel):
+                                                  
+                                                  if (($dom["Id_Dominio"]==$nivel["Id_Dominio"]) && ($sede['Id_Sede']==$nivel["Id_Sede"]) ){
+                                                      
+                                                      
+                                                      $graph_data[] = array($dom["Codigo"], intval($nivel["Valor"]));
+                                                  }
+                                                      
+                                                  
+                                                    endforeach;
+
+                                                  
+                                              
+                                              
+                                              
+
+                                              endforeach;
+                                              
+                                              
+                                               echo GoogleChart::widget(array('visualization' => 'LineChart',
+                    'data' => $graph_data,
+                    'options' => array('title' => 'Nivel de madurez','width' => 1100,'height' => 400)));
+                
+                                              
+                                              ?>                
+                                      
+                                      
+                                      
+                                      
                                   </div>
                               </div>
 
@@ -112,7 +148,7 @@ $this->params['breadcrumbs'][] = $this->title;
                
                foreach($general as $gene):
                    
-                      $graph_data[] = array($gene["Nombre"], intval($gene["Valor"]));
+                      $graph_data[] = array($gene["Sede"], intval($gene["Valor"]));
                    
                endforeach;
                

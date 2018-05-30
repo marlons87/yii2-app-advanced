@@ -132,7 +132,7 @@ $this->title = 'ECM2';
                     <span class="badge"><?php echo $nota['Valor']; ?></span>
                 
                     
-                             <?= Html::a($nota['Nombre'], ['evaluaciones/index','Id_Institucion' => $nota['Id_Institucion'],'nombre'=>$nota['Nombre']]) ?>
+                             <?= Html::a($nota['Nombre'].' - '.$nota['Sede'], ['evaluaciones/index','Id_Institucion' => $nota['Id_Institucion'],'nombre'=>$nota['Nombre']]) ?>
                     
                   </li>
                    <?php  

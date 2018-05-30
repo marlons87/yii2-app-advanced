@@ -78,7 +78,7 @@ LEFT JOIN (SELECT Id_Evaluacion, MIN(n.Valor) AS Valor
 FROM respuestas r INNER JOIN niveles n ON r.Id_Nivel = n.Id_Nivel
 WHERE n.Valor >= 0
 GROUP BY r.Id_Evaluacion) r2 ON e.Id_Evaluacion = r2.Id_Evaluacion
-WHERE i.Id_Institucion = 1 and s.Id_Sede = 1
+
 GROUP BY i.Id_Institucion, s.Id_Sede')
                 ->queryAll();
         

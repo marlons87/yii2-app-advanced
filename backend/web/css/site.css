@@ -153,6 +153,31 @@ a.desc:after {
 }
 
 
+.listaInstituciones {
+   
+}
+
+.listaInstituciones li {
+    margin: 1% 0 0 0;
+    width: 33%;
+    float:left;
+    list-style-type: disc;
+    
+   
+}
+
+.sedesList li {
+    float:none;
+  
+     width: 100%;
+     list-style-type: square;
+}
+
+.badge {
+    margin: 0 0 0 10px;
+}
+
+
 
 
 

@@ -33,8 +33,7 @@ class EvaluacionesController extends Controller
     public function actionIndex($Id_Institucion)
     {
         
-                $count = Yii::$app->db->createCommand('select Id_Evaluacion,Consecutivo,Fecha,evaluaciones.Status as estado,Fecha_Ultima_Modificacion,evaluaciones.descripcion ,instituciones.Nombre as institucion,user.Nombre as usuario,user.Apellido1,user.Apellido2,user.Puesto from evaluaciones inner join instituciones on evaluaciones.Id_Institucion = instituciones.Id_Institucion inner join user on evaluaciones.Id_Usuario = user.id where evaluaciones.Id_Institucion=:IdInstitucion order by Consecutivo DESC')
-               
+                  $count = Yii::$app->db->createCommand('select Id_Evaluacion,Consecutivo,Fecha,e.Status as estado,Fecha_Ultima_Modificacion,i.Nombre as institucion, s.Nombre as sede,u.Nombre as usuario,u.Apellido1,u.Apellido2,u.Puesto,e.descripcion from evaluaciones e inner join sedes s on s.id_Sede = e.id_Sede inner join instituciones i on s.Id_Institucion = i.Id_Institucion inner join user u on e.Id_Usuario = u.id where (i.Id_Institucion = :IdInstitucion or u.id = :id)order by Id_Evaluacion DESC')
                 ->bindValue(':IdInstitucion',$Id_Institucion)
                 ->queryAll();
                
@@ -108,6 +107,29 @@ class EvaluacionesController extends Controller
                 ->queryAll();
         
          return $this->render('generales', array('evaluaciones' => $evaluaciones));
+        
+    }
+    
+      
+    public function actionInstituciones() {
+        
+        $Instituciones = Yii::$app->db->createCommand('SELECT * FROM instituciones')
+               
+                ->queryAll();
+        
+        
+          $notaXInstitucion = Yii::$app->db->createCommand('SELECT i.Id_Institucion, i.Nombre, s.Id_Sede, s.Nombre as sede, e.Id_Evaluacion, MAX(e.Consecutivo), r2.Valor
+FROM evaluaciones e
+INNER JOIN sedes s ON e.Id_Sede = s.Id_Sede
+INNER JOIN instituciones i ON s.Id_Institucion = i.Id_Institucion
+LEFT JOIN (SELECT Id_Evaluacion, MIN(n.Valor) AS Valor
+FROM respuestas r INNER JOIN niveles n ON r.Id_Nivel = n.Id_Nivel
+WHERE n.Valor >= 0
+GROUP BY r.Id_Evaluacion) r2 ON e.Id_Evaluacion = r2.Id_Evaluacion
+GROUP BY i.Id_Institucion, s.Id_Sede')
+                ->queryAll();
+        
+         return $this->render('instituciones', array('instituciones' => $Instituciones,'notas'=>$notaXInstitucion));
         
     }
 

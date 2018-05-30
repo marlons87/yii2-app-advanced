@@ -44,7 +44,7 @@ foreach ($items as $i):?>
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title"><?php echo$i['Codigo']."-". $i['Nombre']; ?></h3>
+            <h3 class="panel-title"><b><?php echo$i['Codigo']."-". $i['Nombre']; ?></b></h3>
         </div>
         <div class="panel-body">
 

@@ -29,10 +29,10 @@ $this->params['breadcrumbs'][] = $this->title;
        ?>
      <ul class="nav nav-pills">
  
-  <li class="active"><a data-toggle="pill" href="#menu1">Sedes</a></li>
-  <li><a data-toggle="pill" href="#menu2">General</a></li>
+  <li class="active"><a data-toggle="pill" href="#menu1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sedes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+  <li><a data-toggle="pill" href="#menu2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;General&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
 </ul>
-      
+      <br>
       <div class="tab-content">
           
           <div id="menu1" class="tab-pane fade in active">
@@ -45,10 +45,11 @@ $this->params['breadcrumbs'][] = $this->title;
                           </div>
 
                           <div class="panel-body">
+                                     
 
                               <ul class="nav nav-pills">
-                                  <li class="active"><a data-toggle="pill" href="<?php echo '#menu1_' . $sede['Id_Sede']; ?>">Ver evaluaciones</a></li>
-                                  <li><a data-toggle="pill" href="<?php echo '#menu2_' . $sede['Id_Sede']; ?>">Mostrar comportamiento</a></li>
+                                  <li class="active"><a data-toggle="pill" href="<?php echo '#menu1_' . $sede['Id_Sede']; ?>">Ver evaluaciones <?php echo " - ". $sede['sede']; ?></a></li>
+                                  <li><a data-toggle="pill" href="<?php echo '#menu2_' . $sede['Id_Sede']; ?>">Comportamiento <?php echo " - ". $sede['sede']; ?></a></li>
                               </ul>
 
                               <div class="tab-content">
@@ -59,6 +60,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                       foreach ($items as $i):
 
                                           if ($sede['sede'] == $i["sede"]) {
+                                              
+                                              
+                                              
                                               ?> 
 
                                               <div class="panel panel-default">
@@ -85,7 +89,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                       
                                        <?php
                                               $graph_data = [];
-                                              $graph_data[] = array('Dominio', 'Nivel');
+                                              $graph_data[] = array('Dominio', 'Nivel','Leyenda');
 
                                               foreach ($dominios as $dom):
                                                   
@@ -93,27 +97,18 @@ $this->params['breadcrumbs'][] = $this->title;
                                                   
                                                   if (($dom["Id_Dominio"]==$nivel["Id_Dominio"]) && ($sede['Id_Sede']==$nivel["Id_Sede"]) ){
                                                       
-                                                      
-                                                      $graph_data[] = array($dom["Codigo"], intval($nivel["Valor"]));
+                                                      $graph_data[] = array($dom["Codigo"], intval($nivel["Valor"]),'<b>Dominio:</b> '.$dom["Nombre"].'<br><b>Nivel:</b>'.intval($nivel["Valor"]).'');
                                                   }
                                                       
-                                                  
                                                     endforeach;
-
-                                                  
-                                              
-                                              
-                                              
-
                                               endforeach;
                                               
                                               
-                                               echo GoogleChart::widget(array('visualization' => 'LineChart',
-                    'data' => $graph_data,
-                    'options' => array('title' => 'Nivel de madurez','width' => 1100,'height' => 400)));
-                
-                                              
-                                              ?>                
+                                              echo GoogleChart::widget(array('visualization' => 'LineChart',
+                                                'data' => $graph_data,
+                                                'scriptAfterArrayToDataTable' => "data.setColumnProperty(2, 'role', 'tooltip'); data.setColumnProperty(2, 'html', 'true');",
+                                                'options' => array('title' => 'Comportamiento  '.$sede['sede'],'tooltip' => array('isHtml'=>'true'), 'width' => 1100, 'height' => 400)));
+        ?>                
                                       
                                       
                                       
@@ -140,7 +135,7 @@ $this->params['breadcrumbs'][] = $this->title;
           </div> 
           
           <div id="menu2" class="tab-pane fade">
-              <h2>Niveles por Sede</h2>
+             
                 <?php
               
                $graph_data = [];
@@ -189,30 +184,19 @@ $this->params['breadcrumbs'][] = $this->title;
                     endforeach;
                    $y = $y+1;
                endforeach;
-               var_dump($graficoSede);
+               
                
                
                  echo GoogleChart::widget(array('visualization' => 'LineChart',
                     'data' => $graficoSede,
-                    'options' => array('title' => 'Nivel de madurez por Sede','width' => 1100,'height' => 400)));
+                    'options' => array('title' => 'Nivel de madurez por Sede','width' => 1200,'height' => 500)));
                
                
                
                
                
                
-echo GoogleChart::widget(array('visualization' => 'LineChart',
-                'data' => array(
-                    array('Task', 'Hours per Day', 'Hola'),
-                    array('Work', 11, 2 ),
-                    array('Eat', 2, 2),
-                    array('Commute', 2, 3),
-                    array('Watch TV', 2, 4),
-                    array('Sleep', 7, 5)
-                ),
-                
 
-                'options' => array('title' => 'My Daily Activity',   'tooltip' => array('isHtml'=>'true'))));
     
                                  
                

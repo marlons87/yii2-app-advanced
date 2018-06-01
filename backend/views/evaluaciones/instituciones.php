@@ -18,7 +18,9 @@
 foreach ($instituciones as $i):?> 
     
     <li>
-        <?php echo $i['Nombre'];?>
+       
+        
+               <?= Html::a($i['Nombre'], ['evaluaciones/index','Id_Institucion' => $i['Id_Institucion']]) ?>
         
         
         <?php 

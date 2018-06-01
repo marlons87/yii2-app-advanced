@@ -160,7 +160,48 @@ $this->params['breadcrumbs'][] = $this->title;
                 
                 
                 
-                echo GoogleChart::widget(array('visualization' => 'ColumnChart',
+                 $graficoSede = [];
+                
+                $array = array('Dominios');
+                
+                foreach ($ubicaciones as $q):
+                    
+                    
+                     array_push($array, $q['NombreS']);
+                    
+                endforeach;
+                
+               
+                
+                $graficoSede[] = $array;
+                $y=1;
+                foreach ($dominios as $d):               
+                    $x=1;
+                    foreach ($ubicaciones as $q):
+                        foreach ($nivelDominio as $nivel):
+                            if ($d['Id_Dominio']==$nivel['Id_Dominio']&&$q['Id_Sede']==$nivel['Id_Sede']){
+                                $graficoSede[$y][0] = $d['Codigo'];
+                                $graficoSede[$y][$x] = intval($nivel['Valor']);
+                        }
+
+                        endforeach; 
+                        $x = $x+1;
+                    endforeach;
+                   $y = $y+1;
+               endforeach;
+               var_dump($graficoSede);
+               
+               
+                 echo GoogleChart::widget(array('visualization' => 'LineChart',
+                    'data' => $graficoSede,
+                    'options' => array('title' => 'Nivel de madurez por Sede','width' => 1100,'height' => 400)));
+               
+               
+               
+               
+               
+               
+echo GoogleChart::widget(array('visualization' => 'LineChart',
                 'data' => array(
                     array('Task', 'Hours per Day', 'Hola'),
                     array('Work', 11, 2 ),
@@ -171,7 +212,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ),
                 
 
-                'options' => array('title' => 'My Daily Activity',  'legend'=> 'none', 'tooltip' => array('isHtml'=>'true'))));
+                'options' => array('title' => 'My Daily Activity',   'tooltip' => array('isHtml'=>'true'))));
     
                                  
                

@@ -70,10 +70,19 @@ GROUP BY i.Id_Institucion, e.Id_Sede, e.Id_Evaluacion, d.Id_Dominio')
                     ->bindValue(':IdInstitucion', yii::$app->user->identity->Id_Institucion)
                     ->queryAll();
             
+            
+            
+            
+              $ubicaciones = Yii::$app->db->createCommand('SELECT s.Id_Institucion, e.Id_Sede, s.Nombre AS NombreS FROM evaluaciones e INNER JOIN respuestas r ON e.Id_Evaluacion = r.Id_Evaluacion INNER JOIN sedes s ON e.Id_Sede = s.Id_Sede INNER JOIN (SELECT e1.Id_Sede, MAX(e1.Id_Evaluacion) Id_Evaluacion FROM evaluaciones e1 INNER JOIN respuestas r1 ON e1.Id_Evaluacion = r1.Id_Evaluacion GROUP BY e1.Id_Sede) e2 on e.Id_Evaluacion= e2.Id_Evaluacion WHERE s.Id_Institucion=:IdInstitucion GROUP BY s.Id_Institucion, e.Id_Sede')
+                  
+                    ->bindValue(':IdInstitucion', yii::$app->user->identity->Id_Institucion)
+                    ->queryAll();
+            
+            
 
             
 
-            return $this->render('index', ['items' => $count, 'sedes'=>$sedes,'general'=>$general,'dominios'=>$dominios,'nivelDominio'=>$nivelDominio]);
+            return $this->render('index', ['items' => $count, 'sedes'=>$sedes,'general'=>$general,'dominios'=>$dominios,'nivelDominio'=>$nivelDominio,'ubicaciones'=>$ubicaciones]);
             
             
             

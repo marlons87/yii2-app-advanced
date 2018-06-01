@@ -121,9 +121,7 @@ $this->title = 'ECM2';
                 <h2>Nivel por Instituci&oacute;n</h2>
                 
                 
-                
-                    
-
+              
                    <ul class="list-group">
                 <?php
                  foreach ($notaXInstitucion as $nota):

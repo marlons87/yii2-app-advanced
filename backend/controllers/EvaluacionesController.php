@@ -5,6 +5,8 @@ use Yii;
 use yii\web\Controller;
 use common\models\Dominios;
 use common\models\Evaluaciones;
+use common\models\Instituciones;
+use common\models\InstitucionesSearch;
 //use frontend\models\EvaluacionForm;
 
 
@@ -33,33 +35,69 @@ class EvaluacionesController extends Controller
     public function actionIndex($Id_Institucion)
     {
         
-                  $count = Yii::$app->db->createCommand('select Id_Evaluacion,Consecutivo,Fecha,e.Status as estado,Fecha_Ultima_Modificacion,i.Nombre as institucion, s.Nombre as sede,u.Nombre as usuario,u.Apellido1,u.Apellido2,u.Puesto,e.descripcion from evaluaciones e inner join sedes s on s.id_Sede = e.id_Sede inner join instituciones i on s.Id_Institucion = i.Id_Institucion inner join user u on e.Id_Usuario = u.id where (i.Id_Institucion = :IdInstitucion)order by Id_Evaluacion DESC')
-                ->bindValue(':IdInstitucion',$Id_Institucion)
-                ->queryAll();
+                  
+            $count = Yii::$app->db->createCommand('select Id_Evaluacion,Consecutivo,Fecha,e.Status as estado,Fecha_Ultima_Modificacion,i.Nombre as institucion, s.Nombre as sede,u.Nombre as usuario,u.Apellido1,u.Apellido2,u.Puesto,e.descripcion from evaluaciones e inner join sedes s on s.id_Sede = e.id_Sede inner join instituciones i on s.Id_Institucion = i.Id_Institucion inner join user u on e.Id_Usuario = u.id where (i.Id_Institucion = :IdInstitucion)order by Id_Evaluacion DESC')
                
-     
+                    ->bindValue(':IdInstitucion', $Id_Institucion)
+                    ->queryAll();
+
+           
+            $sedes = Yii::$app->db->createCommand('SELECT instituciones.Nombre as Institucion, sedes.Nombre as sede,sedes.Id_Sede FROM instituciones INNER JOIN sedes ON instituciones.Id_Institucion=sedes.Id_Institucion where instituciones.Id_Institucion=:IdInstitucion ORDER by sedes.Id_Sede asc')
+                  
+                    ->bindValue(':IdInstitucion',$Id_Institucion)
+                    ->queryAll();
+            
+            
+            $searchModel = new InstitucionesSearch();
+            $searchModel->Id_Institucion =$Id_Institucion ;
+            $model = new Instituciones();
+            $model = Instituciones::findOne($searchModel);
+            
+            $general= Yii::$app->db->createCommand('SELECT i.Id_Institucion, i.Nombre AS Nombre, e.Id_Sede, s.Nombre AS Sede, e.Id_Evaluacion, e.Consecutivo, e.Fecha, e.descripcion, MIN(n.Valor) AS Valor
+FROM evaluaciones e 
+INNER JOIN respuestas r ON e.Id_Evaluacion = r.Id_Evaluacion
+INNER JOIN niveles n ON r.Id_Nivel = n.Id_Nivel
+INNER JOIN sedes s ON e.Id_Sede = s.Id_Sede
+INNER JOIN instituciones i ON s.Id_Institucion = i.Id_Institucion
+INNER JOIN (SELECT e1.Id_Sede, MAX(e1.Id_Evaluacion) Id_Evaluacion FROM evaluaciones e1 INNER JOIN respuestas r1 ON e1.Id_Evaluacion = r1.Id_Evaluacion GROUP BY e1.Id_Sede) e2
+on e.Id_Evaluacion = e2.Id_Evaluacion
+WHERE n.Valor > -1
+and i.Id_Institucion=:IdInstitucion
+GROUP BY i.Id_Institucion, e.Id_Sede, e.Id_Evaluacion')
+                    ->bindValue(':IdInstitucion',$Id_Institucion)
+                    ->queryAll();
+            
+            
+$dominios = Yii::$app->db->createCommand('select * from dominios')
+                  
+                    ->queryAll();
+
+
+            $nivelDominio= Yii::$app->db->createCommand('SELECT i.Id_Institucion, i.Nombre AS NombreI, e.Id_Sede, s.Nombre AS NombreS, e.Id_Evaluacion, e.Consecutivo, e.Fecha, e.descripcion, d.Id_Dominio, d.Codigo, d.Nombre, MIN(n.Valor) AS Valor
+FROM evaluaciones e 
+INNER JOIN respuestas r ON e.Id_Evaluacion = r.Id_Evaluacion
+INNER JOIN controles c on r.Id_Control = c.Id_Control
+INNER JOIN niveles n on r.Id_Nivel = n.Id_Nivel and c.Id_Control = n.Id_Control
+INNER JOIN dominios d on c.Id_Dominio = d.Id_Dominio
+INNER JOIN sedes s ON e.Id_Sede = s.Id_Sede
+INNER JOIN instituciones i ON s.Id_Institucion = i.Id_Institucion
+INNER JOIN (SELECT e1.Id_Sede, MAX(e1.Id_Evaluacion) Id_Evaluacion FROM evaluaciones e1 INNER JOIN respuestas r1 ON e1.Id_Evaluacion = r1.Id_Evaluacion GROUP BY e1.Id_Sede) e2
+on e.Id_Evaluacion = e2.Id_Evaluacion
+WHERE n.Valor > -1
+and i.Id_Institucion=:IdInstitucion
+GROUP BY i.Id_Institucion, e.Id_Sede, e.Id_Evaluacion, d.Id_Dominio')
+                    ->bindValue(':IdInstitucion', $Id_Institucion)
+                    ->queryAll();
+            
+            
+            
+            
+              $ubicaciones = Yii::$app->db->createCommand('SELECT s.Id_Institucion, e.Id_Sede, s.Nombre AS NombreS FROM evaluaciones e INNER JOIN respuestas r ON e.Id_Evaluacion = r.Id_Evaluacion INNER JOIN sedes s ON e.Id_Sede = s.Id_Sede INNER JOIN (SELECT e1.Id_Sede, MAX(e1.Id_Evaluacion) Id_Evaluacion FROM evaluaciones e1 INNER JOIN respuestas r1 ON e1.Id_Evaluacion = r1.Id_Evaluacion GROUP BY e1.Id_Sede) e2 on e.Id_Evaluacion= e2.Id_Evaluacion WHERE s.Id_Institucion=:IdInstitucion GROUP BY s.Id_Institucion, e.Id_Sede')
+                  
+                    ->bindValue(':IdInstitucion',$Id_Institucion)
+                    ->queryAll();
       
-      $cantidad=Yii::$app->db->createCommand('select COUNT(*) as cantidad from evaluaciones where evaluaciones.Id_Institucion=:IdInstitucion' )
-               ->bindValue(':IdInstitucion',$Id_Institucion)
-               ->queryOne();
-      
-      
-      $historico =Yii::$app->db->createCommand('SELECT l.Id_Institucion, l.Id_Evaluacion, l.Consecutivo, l.Fecha, MIN(n.Valor) AS Valor FROM dominios d LEFT JOIN controles c ON d.Id_Dominio = c.Id_Dominio LEFT JOIN niveles n ON c.Id_Control = n.Id_Control LEFT JOIN respuestas r ON c.Id_Control = r.Id_Control AND n.Id_Nivel = r.Id_Nivel RIGHT JOIN (SELECT e.Id_Institucion, e.Id_Evaluacion, e.Consecutivo, e.Fecha FROM evaluaciones e) l ON r.Id_Evaluacion = l.Id_Evaluacion WHERE n.Valor >= 0 and l.Id_Institucion = :IdInstitucion GROUP BY l.Id_Institucion, l.Id_Evaluacion, l.Consecutivo ORDER BY l.Fecha asc ' )
-               ->bindValue(':IdInstitucion',$Id_Institucion)
-               ->queryAll();
-      
-      
-      $usuarios= Yii::$app->db->createCommand('select * from user where Id_Institucion=:IdInstitucion')
-               ->bindValue(':IdInstitucion',$Id_Institucion)
-               ->queryAll();
-      
-      
-      $unico= Yii::$app->db->createCommand('SELECT l.Id_Evaluacion, l.Consecutivo, l.Fecha, d.Id_Dominio, d.Codigo as DominioCodigo, d.Nombre as DominioNombre, MIN(n.Valor) AS Valor FROM dominios d LEFT JOIN controles c ON d.Id_Dominio = c.Id_Dominio LEFT JOIN niveles n ON c.Id_Control = n.Id_Control LEFT JOIN respuestas r ON c.Id_Control = r.Id_Control AND n.Id_Nivel = r.Id_Nivel RIGHT JOIN (SELECT e.Id_Evaluacion, e.Consecutivo, e.Fecha FROM evaluaciones e WHERE e.Id_Institucion = :IdInstitucion ORDER BY e.Id_Evaluacion DESC LIMIT 1) l ON r.Id_Evaluacion = l.Id_Evaluacion WHERE n.Valor >= 0 GROUP BY l.Id_Evaluacion, l.Consecutivo, d.Id_Dominio ORDER BY d.Id_Dominio, c.Id_Control, n.Id_Nivel ASC ')
-               ->bindValue(':IdInstitucion',$Id_Institucion)
-               ->queryAll();
-      
-      
-       return $this->render('index', ['items' => $count,'cantidad'=>$cantidad,'historico'=> $historico,'usuarios'=>$usuarios,'unico'=>$unico,'Id_Institucion'=>$Id_Institucion]);
+         return $this->render('index', ['items' => $count, 'sedes'=>$sedes,'general'=>$general,'dominios'=>$dominios,'nivelDominio'=>$nivelDominio,'ubicaciones'=>$ubicaciones,'Id_Institucion'=>$Id_Institucion]);
                    
     }
     

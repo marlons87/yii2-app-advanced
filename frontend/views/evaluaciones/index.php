@@ -43,9 +43,12 @@ $this->params['breadcrumbs'][] = $this->title;
                           <div class="panel-heading">
                               <h3 class="panel-title"><b><?php echo $sede['Institucion'] . "  |  " . $sede['sede']; ?></b></h3>
                           </div>
+                          
+                          
+                          
 
                           <div class="panel-body">
-                                     
+                                    
 
                               <ul class="nav nav-pills">
                                   <li class="active"><a data-toggle="pill" href="<?php echo '#menu1_' . $sede['Id_Sede']; ?>">Ver evaluaciones <?php echo " - ". $sede['sede']; ?></a></li>
@@ -58,6 +61,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
                                       <?php
                                       foreach ($items as $i):
+                                          
+                                          
 
                                           if ($sede['sede'] == $i["sede"]) {
                                               
@@ -85,35 +90,47 @@ $this->params['breadcrumbs'][] = $this->title;
 
                                   </div>
                                   <div id="<?php echo 'menu2_' . $sede['Id_Sede']; ?>" class="tab-pane fade">
-                                     
-                                      
-                                       <?php
+
+
+                                              <?php
                                               $graph_data = [];
-                                              $graph_data[] = array('Dominio', 'Nivel','Leyenda');
+                                              $graph_data[] = array('Dominio', 'Nivel', 'Leyenda');
 
                                               foreach ($dominios as $dom):
-                                                  
-                                                    foreach ($nivelDominio as $nivel):
-                                                  
-                                                  if (($dom["Id_Dominio"]==$nivel["Id_Dominio"]) && ($sede['Id_Sede']==$nivel["Id_Sede"]) ){
-                                                      
-                                                      $graph_data[] = array($dom["Codigo"], intval($nivel["Valor"]),'<b>Dominio:</b> '.$dom["Nombre"].'<br><b>Nivel:</b>'.intval($nivel["Valor"]).'');
-                                                  }
-                                                      
-                                                    endforeach;
+
+                                                  foreach ($nivelDominio as $nivel):
+
+                                                      if (($dom["Id_Dominio"] == $nivel["Id_Dominio"]) && ($sede['Id_Sede'] == $nivel["Id_Sede"])) {
+
+                                                          $graph_data[] = array($dom["Codigo"], intval($nivel["Valor"]), '<b>Dominio:</b> ' . $dom["Nombre"] . '<br><b>Nivel:</b>' . intval($nivel["Valor"]) . '');
+                                                      }
+
+                                                  endforeach;
                                               endforeach;
-                                              
-                                              
-                                              echo GoogleChart::widget(array('visualization' => 'LineChart',
-                                                'data' => $graph_data,
-                                                'scriptAfterArrayToDataTable' => "data.setColumnProperty(2, 'role', 'tooltip'); data.setColumnProperty(2, 'html', 'true');",
-                                                'options' => array('title' => 'Comportamiento  '.$sede['sede'],'tooltip' => array('isHtml'=>'true'), 'width' => 1100, 'height' => 400)));
-        ?>                
-                                      
-                                      
-                                      
-                                      
-                                  </div>
+
+
+
+
+
+                                              if (sizeof($graph_data) > 1) {
+
+
+                                                  echo GoogleChart::widget(array('visualization' => 'LineChart',
+                                                      'data' => $graph_data,
+                                                      'scriptAfterArrayToDataTable' => "data.setColumnProperty(2, 'role', 'tooltip'); data.setColumnProperty(2, 'html', 'true');",
+                                                      'options' => array('title' => 'Comportamiento  ' . $sede['sede'], 'tooltip' => array('isHtml' => 'true'), 'width' => 1100, 'height' => 400)));
+                                              } else {
+                                                  ?> 
+
+                                                  <p>La Sede no posee evaluaciones.</p>
+                                                  <?php
+                                              }
+                                              ?>                
+
+
+
+
+                                          </div>
                               </div>
 
 

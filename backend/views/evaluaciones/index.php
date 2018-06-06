@@ -1,253 +1,236 @@
+
+
 <?php
 
 use yii\helpers\Html;
- use scotthuangzl\googlechart\GoogleChart;
-   use yii\helpers\ArrayHelper;
-   use yii\widgets\DetailView;
+use yii\grid\GridView;
+use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
+use scotthuangzl\googlechart\GoogleChart;
 
-  $cantidad=$cantidad;
-   $Id_Institucion=$Id_Institucion;
- 
-$this->title = 'Evaluaciones'; 
+
+$this->title = 'Evaluación';
 
 $this->params['breadcrumbs'][] = $this->title;
+$Id_Institucion=$Id_Institucion;
 ?>
 <h1>Evaluaciones</h1>
-    
-<br/><br/>
 
- <ul class="nav nav-pills">
+  <div class="panel-body">
+  
+
+      
+  <?php
  
-  <li class="active"><a data-toggle="pill" href="#menu1">Ver evaluaciones</a></li>
-  <li><a data-toggle="pill" href="#menu2">Mostrar comportamiento</a></li>
-</ul>
-
-<div class="tab-content">
-  
-  <div id="menu1" class="tab-pane fade in active">
-      
-      <br/>
-       <br/>
-      
-      
-       <?php
-  
  if (sizeof($items)==0){
-     
-      ?>
-
-<div class="alert alert-info">
-    <p>La instituci&oacute;n no posee evaluaciones</p>
-</div>
-      
-
+     ?>
+      <p>La instituci&oacute;n no posee evaluaciones</p>
        <?php
  }else{
-   
- foreach ($items as $i):
-          ?>
+       ?>
+     <ul class="nav nav-pills">
+ 
+  <li class="active"><a data-toggle="pill" href="#menu1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sedes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+  <li><a data-toggle="pill" href="#menu2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;General&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+</ul>
+      <br>
+      <div class="tab-content">
           
-          <div class="panel panel-default">
-      <div class="panel-heading">
-          <h3 class="panel-title">Evaluaci&oacute;n <?php echo $i['Consecutivo']." - ".$i['institucion']. "  |  ".$i['descripcion']; ?></h3>
-      </div>
-      <div class="panel-body">
+          <div id="menu1" class="tab-pane fade in active">
+                  <?php
+                  foreach ($sedes as $sede):
+                      ?>
+                      <div class="panel panel-default">
+                          <div class="panel-heading">
+                              <h3 class="panel-title"><b><?php echo $sede['Institucion'] . "  |  " . $sede['sede']; ?></b></h3>
+                          </div>
+                          
+                          
+                          
+
+                          <div class="panel-body">
+                                    
+
+                              <ul class="nav nav-pills">
+                                  <li class="active"><a data-toggle="pill" href="<?php echo '#menu1_' . $sede['Id_Sede']; ?>">Ver evaluaciones <?php echo " - ". $sede['sede']; ?></a></li>
+                                  <li><a data-toggle="pill" href="<?php echo '#menu2_' . $sede['Id_Sede']; ?>">Comportamiento <?php echo " - ". $sede['sede']; ?></a></li>
+                              </ul>
+
+                              <div class="tab-content">
+                                  <br>
+                                  <div id="<?php echo 'menu1_' . $sede['Id_Sede']; ?>" class="tab-pane fade in active">
+
+                                      <?php
+                                      foreach ($items as $i):
+                                          
+                                          
+
+                                          if ($sede['sede'] == $i["sede"]) {
+                                              
+                                              
+                                              
+                                              ?> 
+
+                                              <div class="panel panel-default">
+                                                  <div class="panel-heading">
+                                                      <h3 class="panel-title">Evaluaci&oacute;n <?php echo $i['Consecutivo'] . "  |  " . $i['descripcion']; ?></h3>
+                                                  </div>
+                                                  <div class="panel-body">
+                                                      <p>Fecha creaci&oacute;n: <?php echo $i['Fecha']; ?></p>
+                                                      <p>Persona que la aplic&oacute;: <?php echo $i['usuario'] . " " . $i['Apellido1'] . " " . $i['Apellido2']; ?></p>
+                                                      <p>&Uacute;ltima modificaci&oacute;n:<?php echo $i['Fecha_Ultima_Modificacion']; ?></p>
+                                                      <?= Html::a('Ver detalles', ['dominios', 'id' => $i['Id_Evaluacion'],'Id_Institucion'=>$Id_Institucion], ['class' => 'btn btn-primary']) ?>
+                                                  </div>
+                                              </div>
+
+                                              <?php
+                                          }
+
+                                      endforeach;
+                                      ?> 
+
+                                  </div>
+                                  <div id="<?php echo 'menu2_' . $sede['Id_Sede']; ?>" class="tab-pane fade">
+
+
+                                              <?php
+                                              $graph_data = [];
+                                              $graph_data[] = array('Dominio', 'Nivel', 'Leyenda');
+
+                                              foreach ($dominios as $dom):
+
+                                                  foreach ($nivelDominio as $nivel):
+
+                                                      if (($dom["Id_Dominio"] == $nivel["Id_Dominio"]) && ($sede['Id_Sede'] == $nivel["Id_Sede"])) {
+
+                                                          $graph_data[] = array($dom["Codigo"], intval($nivel["Valor"]), '<b>Dominio:</b> ' . $dom["Nombre"] . '<br><b>Nivel:</b>' . intval($nivel["Valor"]) . '');
+                                                      }
+
+                                                  endforeach;
+                                              endforeach;
+
+
+
+
+
+                                              if (sizeof($graph_data) > 1) {
+
+
+                                                  echo GoogleChart::widget(array('visualization' => 'LineChart',
+                                                      'data' => $graph_data,
+                                                      'scriptAfterArrayToDataTable' => "data.setColumnProperty(2, 'role', 'tooltip'); data.setColumnProperty(2, 'html', 'true');",
+                                                      'options' => array('title' => 'Comportamiento  ' . $sede['sede'], 'tooltip' => array('isHtml' => 'true'), 'width' => 1100, 'height' => 400)));
+                                              } else {
+                                                  ?> 
+
+                                                  <p>La Sede no posee evaluaciones.</p>
+                                                  <?php
+                                              }
+                                              ?>                
+
+
+
+
+                                          </div>
+                              </div>
+
+
+
+
+
+                          </div>
+
+
+
+
+
+
+                      </div>
+                      <?php
+                  endforeach;
+              }
+              ?> 
+          </div> 
           
-          <p>Fecha creaci&oacute;n: <?php echo $i['Fecha']; ?></p>
-          <p>Persona que la aplic&oacute;: <?php echo $i['usuario']." ".$i['Apellido1']." ".$i['Apellido2']; ?></p>
-   
-              <p>&Uacute;ltima modificaci&oacute;n:<?php echo $i['Fecha_Ultima_Modificacion'];
+          <div id="menu2" class="tab-pane fade">
+             
+                <?php
               
-              ?></p>
+               $graph_data = [];
+               $graph_data[] = array('Sede', 'Nivel');
                
-        <?= Html::a('Ver detalles', ['dominios', 'id' => $i['Id_Evaluacion'],'Id_Institucion'=>$Id_Institucion], ['class' => 'btn btn-primary']) ?>
-  
-        <?php
-   
-    ?>
-          
-
-                </div>
-    </div>
-        
-          
-<?php endforeach; 
- }
- 
-?> 
-
-  </div>
-  <div id="menu2" class="tab-pane fade">
-      
- <h2>Comportamiento</h2>
-
-     <?php
-     
-if (sizeof($historico)==1){
-    
-      
-     
-      $graph_data = [];
-                $graph_data[] = array('Nombre', 'Nivel de madurez');                
-               foreach ($unico as $x):
+               foreach($general as $gene):
                    
-                $graph_data[] = array($x["DominioCodigo"], intval($x["Valor"])); 
-               endforeach;  
-                           
-      echo GoogleChart::widget(array('visualization' => 'ColumnChart',
-                 'data' => $graph_data,
-               
-                'options' => array('title' => 'Niveles de madurez según dominios ', 'width' => 1100,'height' => 500)));
-      
-      
- ?>
- 
-  <table class="table table-striped">
-      <tr>
-          <th>C&oacute;digo</th>
-          <th>Dominio</th>
-          <th>Valor</th>
-      </tr>
-     <?php foreach ($unico as $x):?>
- 
- 
-      <tr>
-          <td>
-               <?php echo $x['DominioNombre']; ?> 
-          </td>
-          <td>
-               <?php echo $x['DominioNombre']; ?> 
-          </td>
-          <td>
-             <?php echo $x['Valor']; ?> 
-          </td>
-      </tr>
-     
- 
-         
-         <?php   
-     endforeach;
-     
-     
-     ?>
-      </table>
-    
-   <?php     
-}else {
-    
-       if (sizeof($historico)>0){
-         
-         $graph_data = [];
-                $graph_data[] = array('Nombre', 'Nivel de madurez');                
-               foreach ($historico as $t):
+                      $graph_data[] = array($gene["Sede"], intval($gene["Valor"]));
                    
-                $graph_data[] = array($t["Fecha"], intval($t["Valor"])); 
-               endforeach;  
-                           
-      echo GoogleChart::widget(array('visualization' => 'LineChart',
-                 'data' => $graph_data,
+               endforeach;
                
-                'options' => array('title' => 'Desempeño de la organización: ', 'width' => 1200,'height' => 500)));
-         
-     }else{
-         
-           ?>  
-         <div class="alert alert-warning">
-             <p>La instituci&oacute;n no posee evaluaciones, por lo que no se puede mostrar un comportamiento.</p>
-</div>
-         <?php
-         
-         }
-    
- 
-    
-    
-}
-    
-     
-     
-     
-
-                 
+                echo GoogleChart::widget(array('visualization' => 'ColumnChart',
+                    'data' => $graph_data,
+                    'options' => array('title' => 'Nivel de madurez por Sede','width' => 1100,'height' => 400)));
                 
-      
-      
-      ?>  
-      
-     
-           
- 
- 
- <div class="row">
-     <div class="col-lg-4">
+                
+                
+                
+                
+                 $graficoSede = [];
+                
+                $array = array('Dominios');
+                
+                foreach ($ubicaciones as $q):
+                    
+                    
+                     array_push($array, $q['NombreS']);
+                    
+                endforeach;
+                
+               
+                
+                $graficoSede[] = $array;
+                $y=1;
+                foreach ($dominios as $d):               
+                    $x=1;
+                    foreach ($ubicaciones as $q):
+                        foreach ($nivelDominio as $nivel):
+                            if ($d['Id_Dominio']==$nivel['Id_Dominio']&&$q['Id_Sede']==$nivel['Id_Sede']){
+                                $graficoSede[$y][0] = $d['Codigo'];
+                                $graficoSede[$y][$x] = intval($nivel['Valor']);
+                        }
 
-         <div class="panel panel-usuarios">
-             <div class="panel-heading">
-                 <div class="row">
-                     <div class="col-xs-4">
-                         <img src="https://pbs.twimg.com/media/DcpnpEZV4AAbfDU.png"/>
-                     </div>
-                     <div class="col-xs-8 text-right">
-                         <h2>
-                             <?php
-                             echo intval($cantidad['cantidad']);
-                             ?>
-                         </h2> 
-                         <p> Total de Evaluaciones</p>
+                        endforeach; 
+                        $x = $x+1;
+                    endforeach;
+                   $y = $y+1;
+               endforeach;
+               
+               
+               
+                 echo GoogleChart::widget(array('visualization' => 'LineChart',
+                    'data' => $graficoSede,
+                    'options' => array('title' => 'Nivel de madurez por Sede','width' => 1200,'height' => 500)));
+               
+               
+               
+               
+               
+               
 
-                     </div>
-                 </div>
-             </div>
-
-         </div>
-
-
-
-
-     </div>
-     <div class="col-lg-8">
-         <div class="panel panel-controles">
-             <div class="panel-heading">
-                 <div class="row">
-                     <div class="col-xs-2">
-                         <img src="https://pbs.twimg.com/media/DcuAWHCX0AAqb75.png"/>
-                     </div>
-                     <div class="col-xs-10 text-left">
-                        
-                         <?php
-                         foreach ($usuarios as $u):
-                             ?> 
-
-                             <p>Usuario: <?php echo $u['Nombre'] . " " . $u['Apellido1'] . " " . $u['Apellido2']; ?></p>
-                             <p>Correo: <?php echo $u['email']; ?></p>
-                             <p>Puesto: <?php echo $u['Puesto']; ?></p>
-
-                             <?php
-                         endforeach;
-                         ?> 
-
-                     </div>
-                 </div>
-             </div>
-
-         </div>
-     </div>
-
- </div>
     
-      
+                                 
+               
+              
+               ?> 
+          </div>   
+    </div>   
       
   </div>
-</div>  
 
 
 
-      
-
-</div>
-
-
-
-
+<p>
+    <?= Html::a('Crear evaluación', ['crear'], ['class' => 'btn btn-success']) ?>
+</p>
+    
+   
 
 

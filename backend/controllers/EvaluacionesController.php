@@ -96,6 +96,12 @@ GROUP BY i.Id_Institucion, e.Id_Sede, e.Id_Evaluacion, d.Id_Dominio')
                   
                     ->bindValue(':IdInstitucion',$Id_Institucion)
                     ->queryAll();
+              
+              
+           
+              
+              
+              
       
          return $this->render('index', ['items' => $count, 'sedes'=>$sedes,'general'=>$general,'dominios'=>$dominios,'nivelDominio'=>$nivelDominio,'ubicaciones'=>$ubicaciones,'Id_Institucion'=>$Id_Institucion]);
                    

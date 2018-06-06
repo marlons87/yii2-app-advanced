@@ -118,19 +118,19 @@ $this->title = 'ECM2';
         
         <div class="row">
             <div class="col-lg-4">
-                <h2>Nivel por Instituci&oacute;n</h2>
+                <h3>Instituciones</h3>
                 
                 
               
                    <ul class="list-group">
                 <?php
-                 foreach ($notaXInstitucion as $nota):
+                 foreach ($instituciones as $nota):
                      ?>
-                   <li class="list-group-item">
-                    <span class="badge"><?php echo $nota['Valor']; ?></span>
+                       <li class="list-group-item" title="Ver evaluaciones">
+                   
                 
                     
-                             <?= Html::a($nota['Nombre'].' - '.$nota['Sede'], ['evaluaciones/index','Id_Institucion' => $nota['Id_Institucion'],'nombre'=>$nota['Nombre']]) ?>
+                             <?= Html::a($nota['Nombre'], ['evaluaciones/index','Id_Institucion' => $nota['Id_Institucion'],'nombre'=>$nota['Nombre']]) ?>
                     
                   </li>
                    <?php  
@@ -140,11 +140,12 @@ $this->title = 'ECM2';
                   
                    
                 </ul>
+                <a  class="btn btn-primary btn-lg btn-block" href="../evaluaciones/instituciones" target="_self">M&aacute;s instituciones</a>
 
             </div>
             <div class="col-lg-8">
                 
-                 <h2>Niveles de madurez</h2>
+                 <h3>Niveles de madurez</h3>
        
           <?php
           

@@ -73,6 +73,12 @@ class SiteController extends Controller
         $notaXInstitucion = Yii::$app->db->createCommand('SELECT i.Id_Institucion, i.Nombre AS Nombre, e.Id_Sede, s.Nombre AS Sede, e.Id_Evaluacion, e.Consecutivo, e.Fecha, e.descripcion, MIN(n.Valor) AS Valor FROM evaluaciones e INNER JOIN respuestas r ON e.Id_Evaluacion = r.Id_Evaluacion INNER JOIN niveles n ON r.Id_Nivel = n.Id_Nivel INNER JOIN sedes s ON e.Id_Sede = s.Id_Sede INNER JOIN instituciones i ON s.Id_Institucion = i.Id_Institucion INNER JOIN (SELECT e1.Id_Sede, MAX(e1.Id_Evaluacion) Id_Evaluacion FROM evaluaciones e1 INNER JOIN respuestas r1 ON e1.Id_Evaluacion = r1.Id_Evaluacion GROUP BY e1.Id_Sede) e2 on e.Id_Evaluacion = e2.Id_Evaluacion WHERE n.Valor > -1 GROUP BY i.Id_Institucion, e.Id_Sede, e.Id_Evaluacion ')
                 ->queryAll();
         
+        
+             $instituciones = Yii::$app->db->createCommand('select * from instituciones ORDER BY Id_Institucion DESC LIMIT 10')
+                  
+             
+                    ->queryAll();
+        
      $cantidadEvaluacion =   Yii::$app->db->createCommand('select COUNT(*)as cantidad from evaluaciones')
                ->queryOne();
      
@@ -84,7 +90,7 @@ class SiteController extends Controller
      
         
         return $this->render('index',array('notaXInstitucion' => $notaXInstitucion,'cantidad'=>$cantidadEvaluacion,'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,'usuarios'=>$usuarios,'dominios'=>$dominios));
+            'dataProvider' => $dataProvider,'usuarios'=>$usuarios,'dominios'=>$dominios,'instituciones'=>$instituciones));
         
         }
     }

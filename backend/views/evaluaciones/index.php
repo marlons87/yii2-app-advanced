@@ -167,6 +167,7 @@ $Id_Institucion=$Id_Institucion;
                
                 echo GoogleChart::widget(array('visualization' => 'ColumnChart',
                     'data' => $graph_data,
+                                            
                     'options' => array('title' => 'Nivel de madurez por Sede','width' => 1100,'height' => 400)));
                 
                 
@@ -184,7 +185,7 @@ $Id_Institucion=$Id_Institucion;
                     
                 endforeach;
                 
-               
+              
                 
                 $graficoSede[] = $array;
                 $y=1;
@@ -192,9 +193,11 @@ $Id_Institucion=$Id_Institucion;
                     $x=1;
                     foreach ($ubicaciones as $q):
                         foreach ($nivelDominio as $nivel):
+                        
                             if ($d['Id_Dominio']==$nivel['Id_Dominio']&&$q['Id_Sede']==$nivel['Id_Sede']){
                                 $graficoSede[$y][0] = $d['Codigo'];
                                 $graficoSede[$y][$x] = intval($nivel['Valor']);
+                               
                         }
 
                         endforeach; 
@@ -207,7 +210,8 @@ $Id_Institucion=$Id_Institucion;
                
                  echo GoogleChart::widget(array('visualization' => 'LineChart',
                     'data' => $graficoSede,
-                    'options' => array('title' => 'Nivel de madurez por Sede','width' => 1200,'height' => 500)));
+                            'scriptAfterArrayToDataTable' => "data.setColumnProperty(2, 'role', 'tooltip'); data.setColumnProperty(2, 'html', 'true');",
+                    'options' => array('title' => 'Nivel de madurez por Sede', 'tooltip' => array('isHtml' => 'true'),'width' => 1200,'height' => 500)));
                
                
                

@@ -74,12 +74,14 @@ class SedesController extends Controller
         $model->Id_Institucion = $usuario->Id_Institucion;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             
-            return $this->redirect(['view', 'id' => $model->Id_Sede]);
+              return $this->redirect(['index']);
         }
 
         return $this->render('create', [
             'model' => $model,
         ]);
+        
+          
     }
 
     /**
@@ -100,6 +102,7 @@ class SedesController extends Controller
         return $this->render('update', [
             'model' => $model,
         ]);
+         
     }
 
     /**
@@ -137,6 +140,6 @@ class SedesController extends Controller
             return $model;
         }
 
-        throw new NotFoundHttpException('The requested page does not exist.');
+        throw new NotFoundHttpException('No existe el registro solicitado.');
     }
 }

@@ -30,7 +30,7 @@ foreach ($instituciones as $i):?>
                  ?> 
                      
         <ul class="sedesList" >
-            <li>  <?php echo $w['Sede'];?>    <span class="badge"><?php echo $w['Valor'];?></span></li>
+            <li>  <?php echo $w['Sede'];?> <span class="badge">Nivel: <?php echo $w['Valor'];?></span></li>
         </ul>      
                      
                      

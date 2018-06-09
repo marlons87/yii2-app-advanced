@@ -198,7 +198,7 @@ $this->title = 'ECM2';
             
         </div>
         
-        <div class="row">
+<!--        <div class="row">
              <?php 
              
              
@@ -225,11 +225,11 @@ $this->title = 'ECM2';
             
              <?php ActiveForm::end(); ?>
  
-</div>
+</div>-->
 
     </div>
 </div>
-<script>
+<!--<script>
     
   
     
@@ -253,4 +253,4 @@ $this->title = 'ECM2';
        
        
     }
-    </script>
+    </script>-->

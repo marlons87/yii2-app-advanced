@@ -192,7 +192,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     foreach ($ubicaciones as $q):
                         foreach ($nivelDominio as $nivel):
                             if ($d['Id_Dominio']==$nivel['Id_Dominio']&&$q['Id_Sede']==$nivel['Id_Sede']){
-                                $graficoSede[$y][0] = $d['Codigo'];
+                                $graficoSede[$y][0] = $d['Nombre'];
                                 $graficoSede[$y][$x] = intval($nivel['Valor']);
                         }
 
@@ -206,7 +206,8 @@ $this->params['breadcrumbs'][] = $this->title;
                
                  echo GoogleChart::widget(array('visualization' => 'LineChart',
                     'data' => $graficoSede,
-                    'options' => array('title' => 'Nivel de madurez por Sede','width' => 1200,'height' => 500)));
+                   'options' => array('title' => 'Nivel de madurez por Sede', 'hAxis'=>array('slantedText'=>'true','slantedTextAngle'=>25, 'textStyle'=>array('fontSize'=>'9')), 'tooltip' => array('isHtml' => 'true'),'width' => 1200,'height' =>600)));
+               
                
                
                

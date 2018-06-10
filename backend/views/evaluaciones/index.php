@@ -187,7 +187,7 @@ $Id_Institucion=$Id_Institucion;
                 
               
                
-               var_dump($array);
+               
                 
                 $graficoSede[] = $array;
                 $y=1;

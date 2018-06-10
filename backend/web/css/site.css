@@ -177,6 +177,12 @@ a.desc:after {
     margin: 0 0 0 10px;
 }
 
+.borde{
+    border:1px solid #EEE;
+    padding: 0 10px 20px 10px;
+   
+}
+
 
 
 

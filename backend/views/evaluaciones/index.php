@@ -33,10 +33,10 @@ $Id_Institucion=$Id_Institucion;
   <li class="active"><a data-toggle="pill" href="#menu1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sedes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
   <li><a data-toggle="pill" href="#menu2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;General&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
 </ul>
-      <br>
+      
       <div class="tab-content">
           
-          <div id="menu1" class="tab-pane fade in active">
+          <div id="menu1" class="tab-pane fade in active borde">
                   <?php
                   foreach ($sedes as $sede):
                       ?>
@@ -152,7 +152,7 @@ $Id_Institucion=$Id_Institucion;
               ?> 
           </div> 
           
-          <div id="menu2" class="tab-pane fade">
+          <div id="menu2" class="tab-pane fade borde">
              
                 <?php
               
@@ -186,6 +186,8 @@ $Id_Institucion=$Id_Institucion;
                 endforeach;
                 
               
+               
+               var_dump($array);
                 
                 $graficoSede[] = $array;
                 $y=1;
@@ -195,8 +197,10 @@ $Id_Institucion=$Id_Institucion;
                         foreach ($nivelDominio as $nivel):
                         
                             if ($d['Id_Dominio']==$nivel['Id_Dominio']&&$q['Id_Sede']==$nivel['Id_Sede']){
-                                $graficoSede[$y][0] = $d['Codigo'];
+                                $graficoSede[$y][0] = $d['Nombre'];
                                 $graficoSede[$y][$x] = intval($nivel['Valor']);
+                                
+                                
                                
                         }
 
@@ -210,8 +214,8 @@ $Id_Institucion=$Id_Institucion;
                
                  echo GoogleChart::widget(array('visualization' => 'LineChart',
                     'data' => $graficoSede,
-                            'scriptAfterArrayToDataTable' => "data.setColumnProperty(2, 'role', 'tooltip'); data.setColumnProperty(2, 'html', 'true');",
-                    'options' => array('title' => 'Nivel de madurez por Sede', 'tooltip' => array('isHtml' => 'true'),'width' => 1200,'height' => 500)));
+//                    'scriptAfterArrayToDataTable' => "data.setColumnProperty(3, 'role', 'tooltip'); data.setColumnProperty(3, 'html', 'true');",
+                    'options' => array('title' => 'Nivel de madurez por Sede', 'hAxis'=>array('slantedText'=>'true','slantedTextAngle'=>25, 'textStyle'=>array('fontSize'=>'9')), 'tooltip' => array('isHtml' => 'true'),'width' => 1200,'height' =>600)));
                
                
                

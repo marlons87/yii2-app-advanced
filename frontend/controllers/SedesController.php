@@ -41,6 +41,7 @@ class SedesController extends Controller
         $searchModel = new SedesSearch();
         $searchModel->Id_Institucion = yii::$app->user->identity->Id_Institucion ;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->pagination->pageSize=5;
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

@@ -38,7 +38,7 @@ AppAsset::register($this);
     $menuItems = [
         ['label' => 'Inicio', 'url' => ['/site/index']],
       
-        ['label' => 'Contacto', 'url' => ['/site/contact']],
+        
     ];
     if (Yii::$app->user->isGuest) {
         
@@ -56,6 +56,9 @@ AppAsset::register($this);
             . '</li>';
         
     }
+    
+    $menuItems []= ['label' => 'Contacto', 'url' => ['/site/contact']];
+    
     
     
     echo Nav::widget([

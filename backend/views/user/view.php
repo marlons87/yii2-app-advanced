@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'status',
                 'value' => function($model) {
-                    return $model->status == 0 ? 'Inactivo' : 'Activo';
+                    return $model->status == \common\models\User::STATUS_DELETED ? 'Inactivo' : 'Activo';
                 },                
             ],
             //'created_at',

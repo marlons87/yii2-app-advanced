@@ -162,7 +162,10 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->password_hash = Yii::$app->security->generatePasswordHash($password);
     }
-
+    public function setClearPassword()
+    {
+        
+    }
     /**
      * Generates "remember me" authentication key
      */
@@ -185,5 +188,9 @@ class User extends ActiveRecord implements IdentityInterface
     public function removePasswordResetToken()
     {
         $this->password_reset_token = null;
+    }
+    
+    public function getClearpassword() {
+        return openssl_decrypt($this->password, $method, $this->password_hash);
     }
 }

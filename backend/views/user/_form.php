@@ -14,7 +14,7 @@ use yii\helpers\Url;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'username')->textInput(['readonly' => !$model->isNewRecord]) ?>
 
     <?= $form->field($model, 'Nombre')->textInput(['maxlength' => true]) ?>
 

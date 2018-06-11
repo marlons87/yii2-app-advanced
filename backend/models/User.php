@@ -38,7 +38,7 @@ class User extends \common\models\User
             ['username', 'trim'],
             ['username', 'required'],
             //['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'El nombre de usuario o “Alias” ya está siendo utilizado en este momento..'],
-            ['username', 'string', 'min' => 10, 'max' => 15],
+            ['username', 'string', 'min' => 9, 'max' => 15],
             
             [['Nombre'], 'string', 'max' => 50], [['Apellido1'], 'string', 'max' => 30], [['Apellido2'], 'string', 'max' => 30],
             

@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
 use common\models\Instituciones;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\UserSearch */
@@ -45,8 +46,39 @@ $this->params['breadcrumbs'][] = $this->title;
             'value' => 'instituciones.Nombre',
              'filter' => Html::activeDropDownList($searchModel, 'Id_Institucion', ArrayHelper::map(Instituciones::find()->asArray()->all(), 'Id_Institucion', 'Nombre'),['class'=>'form-control','prompt' => 'Seleccione la institución']), 
              ],
+            [
+                'attribute' => 'status',
+                'value' => function($model) {
+                    return $model->status == \common\models\User::STATUS_DELETED ? 'Inactivo' : 'Activo';
+                },                
+            ],
+/*
+            ['class' => 'yii\grid\ActionColumn',//'header'=>'Acciones'],
+            'template' => '{view} {update} {delete} {activate}',
+            'buttons' => [
+                'activate' => function ($url, $model) {
+                    $url = Url::to(['user/update', 'id' => $model->id]);
+                   return Html::a('<span class="fa fa-eye"></span>', $url, ['title' => 'view']);
+                },
+                
+             ]
+                                ],*/
+                        
+                        
+            [
+    'class' => 'yii\grid\ActionColumn','header'=>' Acciones ',
+    
+    'buttons' => [
+        'download' =>  function ($url, $model, $key) {
+                    return Html::a ( '<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> ', ['activate', 'id' => $model->id] );
+                
 
-            ['class' => 'yii\grid\ActionColumn','header'=>'Acciones'],
+        },
+    ],
+    'template' => ' {view}{update}{delete}{download}',            
+],            
+                        
+                        
         ],
     ]); ?>
     

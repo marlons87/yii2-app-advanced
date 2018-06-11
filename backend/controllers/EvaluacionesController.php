@@ -97,13 +97,18 @@ GROUP BY i.Id_Institucion, e.Id_Sede, e.Id_Evaluacion, d.Id_Dominio')
                     ->bindValue(':IdInstitucion',$Id_Institucion)
                     ->queryAll();
               
+                  $usuario = Yii::$app->db->createCommand('SELECT username,Nombre,Apellido1,Apellido2,Puesto,email FROM user WHERE user.Id_Institucion=:IdInstitucion and user.status=10')
+                  
+                    ->bindValue(':IdInstitucion',$Id_Institucion)
+                    ->queryAll();
+              
               
            
               
               
               
       
-         return $this->render('index', ['items' => $count, 'sedes'=>$sedes,'general'=>$general,'dominios'=>$dominios,'nivelDominio'=>$nivelDominio,'ubicaciones'=>$ubicaciones,'Id_Institucion'=>$Id_Institucion]);
+         return $this->render('index', ['items' => $count, 'sedes'=>$sedes,'general'=>$general,'dominios'=>$dominios,'nivelDominio'=>$nivelDominio,'ubicaciones'=>$ubicaciones,'Id_Institucion'=>$Id_Institucion,'usuario'=>$usuario]);
                    
     }
     
@@ -121,7 +126,7 @@ GROUP BY i.Id_Institucion, e.Id_Sede, e.Id_Evaluacion, d.Id_Dominio')
                 ->bindValue(':id', $id)
                 ->queryAll();
         
-      $evaluacion = Yii::$app->db->createCommand('SELECT e.Id_Evaluacion, Consecutivo, descripcion, i.Nombre, e.Fecha, e.Fecha_Ultima_Modificacion FROM evaluaciones e INNER JOIN sedes s on e.Id_Sede = s.Id_Sede INNER JOIN instituciones i ON s.Id_Institucion = i.Id_Institucion and e.Id_Evaluacion=:id')
+      $evaluacion = Yii::$app->db->createCommand('SELECT e.Id_Evaluacion, Consecutivo, descripcion, i.Nombre, e.Fecha, e.Fecha_Ultima_Modificacion, s.Id_Sede, s.Nombre as sede FROM evaluaciones e INNER JOIN sedes s on e.Id_Sede = s.Id_Sede INNER JOIN instituciones i ON s.Id_Institucion = i.Id_Institucion and e.Id_Evaluacion=:id')
                 ->bindValue(':id', $id)
                 ->queryOne();
         

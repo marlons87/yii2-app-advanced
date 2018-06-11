@@ -14,7 +14,7 @@
 <div class="alert alert-info evaluacion-header">
     <div class="row">
         <div class="col-md-12">
-            <p>Evaluaci&oacute;n: <?php echo " ". $evaluacion['Nombre']." - ".$evaluacion['Consecutivo'];?> </p>
+ <p>Evaluaci&oacute;n: <?php echo " ". $evaluacion['Nombre']." | ".$evaluacion['sede']." - ".$evaluacion['Consecutivo'];?> </p>
             <p>Fecha: <?php echo " ". $evaluacion['Fecha'];?></p>
             <p>Descripción:  <?php echo " ". $evaluacion['descripcion'];?></p>
             <p>Fecha de modificaci&oacute;n: <?php echo " ". $evaluacion['Fecha_Ultima_Modificacion'];?></p>
@@ -142,3 +142,11 @@ foreach ($items as $i):?>
     ?>
 
 </div>
+
+ <?=
+
+Html::a('Regresar', ['index', 'Id_Institucion' => yii::$app->user->identity->Id_Institucion], ['class' => 'btn btn-primary']);
+
+
+
+?>

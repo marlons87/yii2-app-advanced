@@ -20,7 +20,7 @@ foreach ($instituciones as $i):?>
     <li>
        
         
-               <?= Html::a($i['Nombre'], ['evaluaciones/index','Id_Institucion' => $i['Id_Institucion']]) ?>
+               <?= Html::a($i['Nombre'], ['evaluaciones/index','Id_Institucion' => $i['Id_Institucion'],'Nombre'=>$i['Nombre']]) ?>
         
         
         <?php 

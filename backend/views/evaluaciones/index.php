@@ -24,7 +24,20 @@ $Id_Institucion=$Id_Institucion;
  
  if (sizeof($items)==0){
      ?>
-      <p>La instituci&oacute;n no posee evaluaciones</p>
+      
+      <div class="alert alert-info">
+          <p>La instituci&oacute;n <b>no</b> posee evaluaciones</p>
+          
+          </div>
+      
+      <?=
+
+ Html::a('Regresar', ['site/index'], ['class' => 'btn btn-primary']);
+
+?>
+      
+      
+      
        <?php
  }else{
        ?>
@@ -50,8 +63,34 @@ $Id_Institucion=$Id_Institucion;
 
                           <div class="panel-body">
                                     
+                                      <?php
+                                      $g = 0;
+                                      foreach ($items as $i):
+                                          if (in_array($sede['sede'], $i)) {
 
-                              <ul class="nav nav-pills">
+                                              $g = $g + 1;
+                                          }
+
+                                      endforeach;
+
+                                      if($g==0){
+                                          
+                                         ?>
+  
+                              <p>No existen evaluaciones, la esta sede.</p>  
+                                          
+                                          
+                                     <?php     
+                                      } else {
+                                           ?>
+                                     
+                              
+                               <ul class="nav nav-pills">
+                                  
+                          
+
+                                  
+                                  
                                   <li class="active"><a data-toggle="pill" href="<?php echo '#menu1_' . $sede['Id_Sede']; ?>">Ver evaluaciones <?php echo " - ". $sede['sede']; ?></a></li>
                                   <li><a data-toggle="pill" href="<?php echo '#menu2_' . $sede['Id_Sede']; ?>">Comportamiento <?php echo " - ". $sede['sede']; ?></a></li>
                               </ul>
@@ -134,6 +173,15 @@ $Id_Institucion=$Id_Institucion;
                                           </div>
                               </div>
 
+                              
+                                                                   <?php
+                                                                   
+                                      }
+                                      ?>
+
+                              
+
+                             
 
 
 
@@ -172,8 +220,7 @@ $Id_Institucion=$Id_Institucion;
                 
                 
                 
-                
-                
+                           
                  $graficoSede = [];
                 
                 $array = array('Dominios');
@@ -184,11 +231,7 @@ $Id_Institucion=$Id_Institucion;
                      array_push($array, $q['NombreS']);
                     
                 endforeach;
-                
-              
-               
-               
-                
+                                         
                 $graficoSede[] = $array;
                 $y=1;
                 foreach ($dominios as $d):               
@@ -199,9 +242,7 @@ $Id_Institucion=$Id_Institucion;
                             if ($d['Id_Dominio']==$nivel['Id_Dominio']&&$q['Id_Sede']==$nivel['Id_Sede']){
                                 $graficoSede[$y][0] = $d['Nombre'];
                                 $graficoSede[$y][$x] = intval($nivel['Valor']);
-                                
-                                
-                               
+
                         }
 
                         endforeach; 
@@ -209,25 +250,50 @@ $Id_Institucion=$Id_Institucion;
                     endforeach;
                    $y = $y+1;
                endforeach;
-               
-               
-               
                  echo GoogleChart::widget(array('visualization' => 'LineChart',
                     'data' => $graficoSede,
-//                    'scriptAfterArrayToDataTable' => "data.setColumnProperty(3, 'role', 'tooltip'); data.setColumnProperty(3, 'html', 'true');",
                     'options' => array('title' => 'Nivel de madurez por Sede', 'hAxis'=>array('slantedText'=>'true','slantedTextAngle'=>25, 'textStyle'=>array('fontSize'=>'9')), 'tooltip' => array('isHtml' => 'true'),'width' => 1200,'height' =>600)));
                
-               
-               
-               
-               
-               
-
-    
-                                 
-               
               
-               ?> 
+                 
+                 ?> 
+              
+              <br> <br>
+              
+               <div class="panel panel-controles">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-2">
+                               
+                                <a target="_self" title="Ir a usuarios" href="../user/index"><img src="https://pbs.twimg.com/media/DcuAWHCX0AAqb75.png"/></a>
+                            </div>
+                            <div class="col-xs-10 text-left">
+                                
+                                    <?php
+                                    
+                                     foreach ($usuario as $user):
+                    ?>
+                                <p>Usuario: <?php echo $user['Nombre'].' '.$user['Apellido1'].' '.$user['Apellido2']; ?></p>
+                                <p>Puesto: <?php echo $user['Puesto']; ?></p>
+                                <p>Correo electr&oacute;nico: <?php echo $user['email']; ?></p>
+                    
+                    <?php
+                    
+                endforeach;
+                                    
+                                   
+                                    
+                                    ?>
+                                
+                               
+
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+              
+              
           </div>   
     </div>   
       
@@ -235,9 +301,7 @@ $Id_Institucion=$Id_Institucion;
 
 
 
-<p>
-    <?= Html::a('Crear evaluación', ['crear'], ['class' => 'btn btn-success']) ?>
-</p>
+
     
    
 

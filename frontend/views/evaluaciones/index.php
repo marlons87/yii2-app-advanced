@@ -48,6 +48,28 @@ $this->params['breadcrumbs'][] = $this->title;
                           
 
                           <div class="panel-body">
+                              
+                              
+                                       <?php
+                                      $g = 0;
+                                      foreach ($items as $i):
+                                          if (in_array($sede['sede'], $i)) {
+
+                                              $g = $g + 1;
+                                          }
+
+                                      endforeach;
+
+                                      if($g==0){
+                                          
+                                         ?>
+  
+                              <p>No existen evaluaciones, la esta sede.</p>  
+                                          
+                                          
+                                     <?php     
+                                      } else {
+                                           ?>
                                     
 
                               <ul class="nav nav-pills">
@@ -133,9 +155,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                           </div>
                               </div>
 
+  <?php 
 
-
-
+}?>
 
                           </div>
 

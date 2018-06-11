@@ -31,7 +31,7 @@ if (sizeof($evaluaciones)==0){
  <div class="panel panel-default">
   <div class="panel-heading">
       <h3 class="panel-title">
-         Evaluaci&oacute;n <?php echo $i['Consecutivo']." - ".$i['institucion']. "  |  ".$i['descripcion']; ?>
+        <?php echo $i['institucion']." - Evaluación ".$i['Consecutivo']. "  |  ".$i['descripcion']; ?>
       </h3>
   </div>
   <div class="panel-body">

@@ -39,6 +39,32 @@ $this->title = 'ECM2';
                 </div>
             </div>
             <div class="col-lg-3">
+               
+                <div class="panel panel-dominios">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <img src="https://pbs.twimg.com/media/Dcux3wIW4AIdppn.png"/>
+                            </div>
+                            <div class="col-xs-8 text-right">
+                                <h2>
+                                    <?php
+                                    echo intval($sede['sede']);
+                                    ?>
+                                </h2> 
+                                <p>Sedes</p>
+
+                            </div>
+                        </div>
+                    </div>
+                  
+                </div>
+
+
+
+
+            </div>
+            <div class="col-lg-3">
                <div class="panel panel-controles">
                     <div class="panel-heading">
                         <div class="row">
@@ -87,33 +113,10 @@ $this->title = 'ECM2';
 
 
             </div>
-            <div class="col-lg-3">
-               
-                <div class="panel panel-dominios">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-xs-4">
-                                <a target="_self" title="Ir a dominios" href="../dominios/index"> <img src="https://pbs.twimg.com/media/Dcux3wIW4AIdppn.png"/></a>
-                            </div>
-                            <div class="col-xs-8 text-right">
-                                <h2>
-                                    <?php
-                                    echo intval($dominios['dominios']);
-                                    ?>
-                                </h2> 
-                                <p> Total de dominios</p>
-
-                            </div>
-                        </div>
-                    </div>
-                  
-                </div>
-
-
-
-
-            </div>
+            
         </div>
+        
+      
    
         
         <div class="row">
@@ -196,6 +199,54 @@ $this->title = 'ECM2';
             </div>
             
             
+        </div>
+        
+        
+          <div class="row">
+            <div class="col-lg-4">
+                <div class="panel panel-default">
+  <div class="panel-heading">Dominios</div>
+  <div class="panel-body">
+      <h3><a target="_self" href="../dominios/index">
+                                    <?php
+                                    echo intval($dominios['dominios']);
+                                    ?>
+          </a></h3> 
+                                <p> Total de dominios</p>
+  </div>
+</div>
+            </div>
+            <div class="col-lg-4">
+                <div class="panel panel-default">
+  <div class="panel-heading">Controles</div>
+  <div class="panel-body">
+    <h3>
+        <a target="_self" href="../controles/index"><?php
+       
+                                    echo intval($control['control']);
+                                    ?>
+        </a></h3> 
+                                <p> Total de controles</p>
+  </div>
+</div>
+                
+            </div>
+            <div class="col-lg-4">
+                
+                <div class="panel panel-default">
+  <div class="panel-heading">Niveles</div>
+  <div class="panel-body">
+      <h3>
+          <a target="_self" href="../niveles/index"> <?php
+       
+                                    echo intval($nivel['nivel']);
+                                    ?>
+                                </a></h3> 
+                                <p> Total de niveles</p>
+  </div>
+</div>
+            </div>
+
         </div>
         
 <!--        <div class="row">

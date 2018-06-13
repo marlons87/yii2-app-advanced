@@ -87,10 +87,20 @@ class SiteController extends Controller
      
       $dominios =   Yii::$app->db->createCommand("select count(*) as dominios from dominios")
        ->queryOne();
+      
+      $sede =   Yii::$app->db->createCommand("select COUNT(*)as sede from sedes")
+       ->queryOne();
+      
+      
+      $nivel =   Yii::$app->db->createCommand("SELECT COUNT(Id_Nivel) AS nivel FROM niveles WHERE niveles.Valor!=-1")
+       ->queryOne();
+      
+      $control =   Yii::$app->db->createCommand("select COUNT(Id_Control) as control from controles")
+       ->queryOne();
      
         
         return $this->render('index',array('notaXInstitucion' => $notaXInstitucion,'cantidad'=>$cantidadEvaluacion,'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,'usuarios'=>$usuarios,'dominios'=>$dominios,'instituciones'=>$instituciones));
+            'dataProvider' => $dataProvider,'usuarios'=>$usuarios,'dominios'=>$dominios,'instituciones'=>$instituciones,'sede'=>$sede,'nivel'=>$nivel,'control'=>$control));
         
         }
     }

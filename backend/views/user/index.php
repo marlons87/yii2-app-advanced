@@ -19,14 +19,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    
-
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
            // 'id',
             'username',
             'Nombre',
@@ -42,17 +39,22 @@ $this->params['breadcrumbs'][] = $this->title;
             //'updated_at',
             //'Id_Institucion',
             [
-              'attribute' => 'Id_Institucion',
-            'value' => 'instituciones.Nombre',
-             'filter' => Html::activeDropDownList($searchModel, 'Id_Institucion', ArrayHelper::map(Instituciones::find()->asArray()->all(), 'Id_Institucion', 'Nombre'),['class'=>'form-control','prompt' => 'Seleccione la institución']), 
+                'attribute' => 'Id_Institucion',
+                'value' => 'instituciones.Nombre',
+                'filter' => Html::activeDropDownList($searchModel, 'Id_Institucion', ArrayHelper::map(Instituciones::find()->asArray()->all(), 'Id_Institucion', 'Nombre'),
+                                                                                    ['class'=>'form-control','prompt' => 'Seleccione la institución']), 
              ],
             [
                 'attribute' => 'status',
                 'value' => function($model) {
                     return $model->status == \common\models\User::STATUS_DELETED ? 'Inactivo' : 'Activo';
-                },                
+                },
+                'filter' => Html::activeDropDownList($searchModel, 'status', [\common\models\User::STATUS_DELETED => 'Inactivo',
+                                                                              \common\models\User::STATUS_ACTIVE  => 'Activo'], 
+                                                                                     ['class'=>'form-control','prompt' => 'Seleccione un estado']),
+                
             ],
-/*
+            /*
             ['class' => 'yii\grid\ActionColumn',//'header'=>'Acciones'],
             'template' => '{view} {update} {delete} {activate}',
             'buttons' => [
@@ -62,24 +64,20 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 
              ]
-                                ],*/
-                        
-                        
+             ],*/
             [
     'class' => 'yii\grid\ActionColumn','header'=>' Acciones ',
     
     'buttons' => [
         'download' =>  function ($url, $model, $key) {
-                    return Html::a ( '<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> ', ['activate', 'id' => $model->id] );
-                
-
-        },
+                    return Html::a ( '<span class="glyphicon glyphicon-power" aria-hidden="true"></span> ', ['activate', 'id' => $model->id],
+                            [
+                            'title' => Yii::t('app', 'Cambiar estado'),
+                            'class'=>'btn btn-primary btn-xs']);
+                    }, 
     ],
-    'template' => ' {view}{update}{delete}{download}',            
-],            
-                        
-                        
-        ],
+    'template' => ' {view}{update}{delete}{download}',],                           
+    ],
     ]); ?>
     
     <p>

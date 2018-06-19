@@ -70,10 +70,10 @@ $this->params['breadcrumbs'][] = $this->title;
     
     'buttons' => [
         'download' =>  function ($url, $model, $key) {
-                    return Html::a ( '<span class="glyphicon glyphicon-power" aria-hidden="true"></span> ', ['activate', 'id' => $model->id],
+                    return Html::a ( '<span class="glyphicon glyphicon-user" aria-hidden="true"></span> ', ['activate', 'id' => $model->id],
                             [
                             'title' => Yii::t('app', 'Cambiar estado'),
-                            'class'=>'btn btn-primary btn-xs']);
+                            'class'=>'btn btn-primary btn-xs usuario']);
                     }, 
     ],
     'template' => ' {view}{update}{delete}{download}',],                           

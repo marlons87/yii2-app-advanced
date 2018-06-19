@@ -8,6 +8,7 @@ use backend\models\UserSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use backend\models\PasswordResetRequestForm;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -111,11 +112,31 @@ class UserController extends Controller
     public function actionActivate($id)
     {
         $model = $this->findModel($id);
-        $model->scenario = "update";
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+        //$model->scenario = "update";
+        
+        $modelpass = new PasswordResetRequestForm();
+        
+        if ($model->load(Yii::$app->request->post())) {
+            
+            //$model->status = \common\models\User::STATUS_ACTIVE ? \common\models\User::STATUS_DELETED : \common\models\User::STATUS_ACTIVE;
+                    
+            if($model->status == \common\models\User::STATUS_ACTIVE ) {
+                $model->setAttribute('status', \common\models\User::STATUS_DELETED);
+                //$model->status => \common\models\User::STATUS_DELETED;
+            }
+            else{
+                $model->setAttribute('status', \common\models\User::STATUS_ACTIVE);
+                
+            }
+            if( $model->save(false)){
+                if($model->status == \common\models\User::STATUS_ACTIVE ) {
+                    $modelpass->email = $model->email;
+                    $modelpass->sendEmail();
+                }
+                return $this->redirect(['index']);
+                
+            }
         }
-
         return $this->render('activate', [
             'model' => $model,
         ]);

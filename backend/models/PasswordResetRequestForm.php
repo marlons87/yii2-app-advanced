@@ -3,7 +3,7 @@ namespace backend\models;
 
 use Yii;
 use yii\base\Model;
-use common\models\User;
+//use common\models\User;
 
 /**
  * Password reset request form
@@ -49,7 +49,7 @@ class PasswordResetRequestForm extends Model
         
         if (!User::isPasswordResetTokenValid($user->password_reset_token)) {
             $user->generatePasswordResetToken();
-            if (!$user->save()) {
+            if (!$user->save(false)) {
                 return false;
             }
         }

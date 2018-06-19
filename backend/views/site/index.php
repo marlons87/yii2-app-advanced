@@ -207,7 +207,7 @@ $this->title = 'ECM2';
                 <div class="panel panel-default">
   <div class="panel-heading">Dominios</div>
   <div class="panel-body">
-      <h3><a target="_self" href="../dominios/index">
+      <h3><a title="Ir a Dominios" target="_self" href="../dominios/index">
                                     <?php
                                     echo intval($dominios['dominios']);
                                     ?>
@@ -221,7 +221,7 @@ $this->title = 'ECM2';
   <div class="panel-heading">Controles</div>
   <div class="panel-body">
     <h3>
-        <a target="_self" href="../controles/index"><?php
+        <a title="Ir a Controles" target="_self" href="../controles/index"><?php
        
                                     echo intval($control['control']);
                                     ?>
@@ -237,7 +237,7 @@ $this->title = 'ECM2';
   <div class="panel-heading">Niveles</div>
   <div class="panel-body">
       <h3>
-          <a target="_self" href="../niveles/index"> <?php
+          <a title="Ir a los Niveles" target="_self" href="../niveles/index"> <?php
        
                                     echo intval($nivel['nivel']);
                                     ?>

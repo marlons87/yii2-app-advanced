@@ -23,7 +23,9 @@ class LoginForm extends Model
     {
         return [
             // username and password are both required
-            [['username', 'password'], 'required'],
+            
+            [['username'], 'required','message' => 'Por favor complete el nombre de usuario.'],
+            [['password'], 'required','message' => 'Por favor complete la contraseña.'],
             // rememberMe must be a boolean value
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()

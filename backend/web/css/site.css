@@ -189,6 +189,16 @@ a.desc:after {
     font-weight: normal;
 }
 
+.usuario.btn-primary{
+   
+    border:none;
+  
+     background:#fff;
+     color:#337ab7;
+}
+
+
+
 
 
 

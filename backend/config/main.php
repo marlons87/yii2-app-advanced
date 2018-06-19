@@ -16,6 +16,25 @@ return [
     'bootstrap' => ['log'],
     
     'components' => [
+        
+            
+        // backend
+    'urlManager' => [
+        'class' => 'yii\web\urlManager',
+        'enablePrettyUrl' => true,
+        'showScriptName' => true,
+
+    ],
+
+    // front-end
+    'urlManagerF' => [
+        'class' => 'yii\web\urlManager',
+        'baseUrl'=>'http://yii2-starter.dev/',
+        'enablePrettyUrl' => true,
+        'showScriptName' => false,
+
+    ],
+        
         'view' => [
          'theme' => [
              'pathMap' => [
@@ -71,9 +90,6 @@ return [
             // add a lot of actions here until you finally completed setting up rbac,
             // otherwise you may not even take a first step.
         ]
-    ],
-    
-    
-    
+    ],    
     
 ];

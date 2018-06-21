@@ -28,6 +28,7 @@
 <?php
     $idEvaluacion = $id;
     $notaGlobal = 6;
+    $cantidadNoAplica = 0;
 foreach ($items as $i):?> 
 
 
@@ -39,7 +40,7 @@ foreach ($items as $i):?>
 
     <?php
     $nivelDominio = 6;
-
+$cantidadNoAplica = 0;
 
     $graph_data = [];
     $graph_data[] = array('Nombre', 'Nivel','Leyenda');
@@ -54,9 +55,11 @@ foreach ($items as $i):?>
                     if (intval($cali["Valor"])>=0){
                           $graph_data[] = array($cali["Nombre"], intval($cali["Valor"]),'<b>'.$cali["Nombre"].' </b><br><b>Nivel: </b>'.intval($cali["Valor"]).'<br>'.$cali["Observaciones"]);
                     }else{
+                         $cantidadNoAplica = $cantidadNoAplica+1;
                         ?>
             
             <p>El control <b><?php echo $cali["Nombre"];  ?></b> fue seleccionado como no aplicable.</p>
+           
                         
                      <?php   
                     }
@@ -98,12 +101,21 @@ foreach ($items as $i):?>
             <br> <br>
             <div class="alert alert-info">
     <?php
+    
+    
     if ($nivelDominio == 6) {
+        
+       if ($cantidadNoAplica==1){ ?>
+           
+             <p>Calificaci&oacute;n: <b> No aplica </b></p>
+      <?php }else {
+        
+      
         ?>
                     <p>Calificaci&oacute;n: <b> Pendiente </b></p>
 
         <?php
-    } else {
+       }} else {
 
         if ($notaGlobal > $nivelDominio) {
 

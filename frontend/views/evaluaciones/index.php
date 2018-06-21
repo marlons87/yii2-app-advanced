@@ -23,7 +23,14 @@ $this->params['breadcrumbs'][] = $this->title;
  
  if (sizeof($items)==0){
      ?>
-      <p>El usuario no posee evaluaciones</p>
+      <div class="alert alert-info">
+             <p>El usuario no posee evaluaciones</p>
+      </div>
+      <p>
+    <?= Html::a('Crear evaluación', ['crear'], ['class' => 'btn btn-success']) ?>
+</p>
+    
+     
        <?php
  }else{
        ?>
@@ -171,6 +178,10 @@ $this->params['breadcrumbs'][] = $this->title;
                   endforeach;
               }
               ?> 
+              
+              <p>
+    <?= Html::a('Crear evaluación', ['crear'], ['class' => 'btn btn-success']) ?>
+</p>
           </div> 
           
           <div id="menu2" class="tab-pane fade">
@@ -249,9 +260,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 
-<p>
-    <?= Html::a('Crear evaluación', ['crear'], ['class' => 'btn btn-success']) ?>
-</p>
+
     
    
 

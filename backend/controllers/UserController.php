@@ -9,6 +9,8 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use backend\models\PasswordResetRequestForm;
+use yii\rbac\DbManager;
+
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -73,6 +75,10 @@ class UserController extends Controller
             $model->setPassword($model->password);
             $model->generateAuthKey();
                 if ($model->save()) {
+                    $auth = new DbManager;
+                    $auth->init();
+                    $role = $auth->getPermission('Externo');
+                    $auth->assign($role, $model->id);
             //return $this->redirect(['view', 'id' => $model->id]);
                      return $this->redirect(['index']);
         }

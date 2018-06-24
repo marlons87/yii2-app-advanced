@@ -181,6 +181,14 @@ $this->params['breadcrumbs'][] = $this->title;
               
               <p>
     <?= Html::a('Crear evaluación', ['crear'], ['class' => 'btn btn-success']) ?>
+                  
+                   <?=
+
+ Html::a('Cancelar', ['site/index'], ['class' => 'btn btn-danger']);
+
+?>
+                  
+                  
 </p>
           </div> 
           
@@ -203,7 +211,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 
                 
                 
-                
+          
                 
                  $graficoSede = [];
                 
@@ -211,26 +219,58 @@ $this->params['breadcrumbs'][] = $this->title;
                 
                 foreach ($ubicaciones as $q):
                     
+                    $canti=0;
                     
-                     array_push($array, $q['NombreS']);
+                    foreach ($nivelDominio as $nivel):
                     
+                    
+            
+                
+            
+                    
+                    
+                     if ($q['Id_Sede']==$nivel['Id_Sede']){
+                         
+                          $canti=$canti+1;
+                         
+                         if (in_array($q['NombreS'], $array)) {
+   
+}
+if (sizeof($dominios)==$canti){
+    
+  
+     array_push($array, $q['NombreS']);
+}  
+                     }
+                    
+                    endforeach;
+                              
                 endforeach;
-                
-               
-                
+                              
                 $graficoSede[] = $array;
                 $y=1;
                 foreach ($dominios as $d):               
                     $x=1;
                     foreach ($ubicaciones as $q):
+                        
+                        if (in_array($q['NombreS'], $array)) {
+                            
+                             
                         foreach ($nivelDominio as $nivel):
                             if ($d['Id_Dominio']==$nivel['Id_Dominio']&&$q['Id_Sede']==$nivel['Id_Sede']){
                                 $graficoSede[$y][0] = $d['Nombre'];
                                 $graficoSede[$y][$x] = intval($nivel['Valor']);
                         }
+                        
 
                         endforeach; 
                         $x = $x+1;
+                            
+                        }
+                       
+                        
+                        
+                        
                     endforeach;
                    $y = $y+1;
                endforeach;
@@ -242,15 +282,28 @@ $this->params['breadcrumbs'][] = $this->title;
                    'options' => array('title' => 'Nivel de madurez por Sede', 'hAxis'=>array('slantedText'=>'true','slantedTextAngle'=>25, 'textStyle'=>array('fontSize'=>'9')), 'tooltip' => array('isHtml' => 'true'),'width' => 1200,'height' =>600)));
                
                
+                 
+                 
+                 
+             
+                 
                
-               
-               
-               
-               
+               foreach($ubicaciones as $b):
+                   
+                   if (in_array($b['NombreS'], $array)) {
+                       
+                   } else {
+                       
+                         ?> 
+              <br>
+              <div class="alert alert-info">
+                  <p>La evaluación para  <b><?php echo $b['NombreS'];  ?></b>,  no existe o se encuentra incompleta.</p>
+              </div>
+                       
+                           <?php
+                   }
+               endforeach;
 
-    
-                                 
-               
               
                ?> 
           </div>   

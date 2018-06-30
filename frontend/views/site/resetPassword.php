@@ -20,6 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php $form = ActiveForm::begin(['id' => 'reset-password-form']); ?>
 
                 <?= $form->field($model, 'password')->passwordInput(['autofocus' => true]) ?>
+                <?= $form->field($model, 'passCompare')->passwordInput()->label('Confirmar contrase&ntilde;a')?>
 
                 <div class="form-group">
                     <?= Html::submitButton('Guardar', ['class' => 'btn btn-primary']) ?>

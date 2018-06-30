@@ -4,6 +4,8 @@ namespace frontend\models;
 use yii\base\Model;
 use yii\base\InvalidParamException;
 use common\models\User;
+use yii\helpers\Html;
+use yii\helpers\Url;
 
 /**
  * Password reset form
@@ -11,6 +13,7 @@ use common\models\User;
 class ResetPasswordForm extends Model
 {
     public $password;
+    public $passCompare;
 
     /**
      * @var \common\models\User
@@ -45,6 +48,7 @@ class ResetPasswordForm extends Model
         return [
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
+            ['passCompare', 'compare', 'compareAttribute'=>'password', 'skipOnEmpty' => false, 'message'=>"Las contraseñas digitadas deben de coincidir."],
         ];
     }
 

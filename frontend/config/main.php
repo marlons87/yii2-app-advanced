@@ -18,6 +18,14 @@ return [
             'csrfParam' => '_csrf-frontend',
         ],
         
+        'urlManagerF' => [
+        'class' => 'yii\web\urlManager',
+        'baseUrl'=>'http://yii2-starter.dev/',
+        'enablePrettyUrl' => true,
+        'showScriptName' => false,
+
+        ],
+        
         'session' => [
             // this is the name of the session cookie used for login on the frontend
             'name' => 'advanced-frontend',

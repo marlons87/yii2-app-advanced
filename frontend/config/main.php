@@ -14,6 +14,15 @@ return [
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
+        
+        'user' => [
+            'identityClass' => 'common\models\User',
+            //'identityClass' => 'mdm\admin\models\User',
+            'loginUrl' => ['site/login'],
+            'enableAutoLogin' => true,
+            'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
+        ],
+        
         'request' => [
             'csrfParam' => '_csrf-frontend',
         ],
@@ -45,4 +54,14 @@ return [
         
     ],
     'params' => $params,
+    
+    
+    'as access' => [
+        'class' => 'mdm\admin\components\AccessControl',
+        'allowActions' => [
+            'site/*',
+            'admin/*',
+        ]
+    ]
+    
 ];

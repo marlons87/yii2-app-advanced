@@ -11,13 +11,7 @@ return [
         ],
         'authManager' => [
             'class' => 'yii\rbac\DbManager',],
-        'user' => [
-            'identityClass' => 'common\models\User',
-            //'identityClass' => 'mdm\admin\models\User',
-            'loginUrl' => ['site/login'],
-            'enableAutoLogin' => true,
-            'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
-        ],
+        
         
          'urlManager' => [
             'enablePrettyUrl' => true,
@@ -48,12 +42,6 @@ return [
         ],
     ],
     
-    'as access' => [
-        'class' => 'mdm\admin\components\AccessControl',
-        'allowActions' => [
-            'site/*',
-            'admin/*',
-        ]
-    ]
+    
       
 ];

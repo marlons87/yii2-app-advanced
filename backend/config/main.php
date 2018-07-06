@@ -17,7 +17,14 @@ return [
     
     'components' => [
         
-            
+    'user' => [
+            'identityClass' => 'common\models\User',
+            //'identityClass' => 'mdm\admin\models\User',
+            'loginUrl' => ['site/login'],
+            'enableAutoLogin' => true,
+            'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
+        ],
+        
         // backend
     'urlManager' => [
         'class' => 'yii\web\urlManager',

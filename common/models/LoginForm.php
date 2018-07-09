@@ -58,7 +58,7 @@ class LoginForm extends Model
             'passwordAttribute' => 'password',
             
             // the validation message to return to `usernameAttribute`
-            'message' => Yii::t('app', 'Su cuenta ha sido bloqueda temporalmente por motivos de seguridadf'),
+            'message' => Yii::t('app', 'Su cuenta ha sido bloqueda temporalmente por motivos de seguridad'),
         ];
         
         return $behaviors;

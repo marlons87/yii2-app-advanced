@@ -22,9 +22,7 @@ use yii\helpers\Url;
 
     <?= $form->field($model, 'Apellido2')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'password')->passwordInput() ->label('Contrase&ntilde;a')?>
-   
-    <?= $form->field($model, 'passCompare')->passwordInput()->label('Confirmar contrase&ntilde;a')?>
+
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
     

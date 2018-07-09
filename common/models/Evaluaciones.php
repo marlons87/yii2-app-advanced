@@ -39,7 +39,9 @@ class Evaluaciones extends \yii\db\ActiveRecord
             [['Fecha', 'Fecha_Ultima_Modificacion'], 'safe'],
             [['Id_Usuario', 'Id_Sede'], 'required'],
             [['Status'], 'string', 'max' => 1],
+            [['descripcion'], 'required'],
             [['descripcion'], 'string', 'max' => 250],
+            
             [['Id_Usuario'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['Id_Usuario' => 'id']],
             [['Id_Sede'], 'exist', 'skipOnError' => true, 'targetClass' => Sedes::className(), 'targetAttribute' => ['Id_Sede' => 'Id_Sede']],
         ];

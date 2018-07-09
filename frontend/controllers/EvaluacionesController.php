@@ -99,6 +99,9 @@ GROUP BY i.Id_Institucion, e.Id_Sede, e.Id_Evaluacion, d.Id_Dominio')
     }
 
     public function actionDominios($id) {
+        
+        
+        
         $sql = ( new \yii\db\Query())->select('*')->from('dominios')->All();
         $calificacion = Yii::$app->db->createCommand('select dominios.Id_Dominio, dominios.Codigo as DominioCodigo, dominios.Nombre as DominioNombre, controles.Id_Control, controles.Codigo, controles.Nombre, niveles.Valor,respuestas.Observaciones
         from dominios
@@ -120,6 +123,7 @@ GROUP BY i.Id_Institucion, e.Id_Sede, e.Id_Evaluacion, d.Id_Dominio')
     public function actionInsertar() {
         $descripcion = Yii::$app->request->post('descripcion');
         $idSede = Yii::$app->request->post('idSede');
+        
 
         $consecutivo = Yii::$app->db->createCommand('select (MAX(Consecutivo)+1) as Consecutivo from evaluaciones e inner join sedes s on e.id_Sede = s.id_sede where s.Id_Sede=:idSede')
                 ->bindValue(':idSede', $idSede)
@@ -147,7 +151,14 @@ GROUP BY i.Id_Institucion, e.Id_Sede, e.Id_Evaluacion, d.Id_Dominio')
                     ->bindValue(':idInstitucion', yii::$app->user->identity->Id_Institucion)
                     ->queryOne();
             //return $this->render('dominios', array('id' => $evaluacion));
+            
+            if (is_null($idEvaluacion['Consecutivo'])){
+            
+                    return $this->render('../site/index');
+        }
+                      
             $this->redirect(array('evaluaciones/dominios', 'id' => $idEvaluacion['Consecutivo']));
+                        
         } else {
 
             $searchModel = new InstitucionesSearch();

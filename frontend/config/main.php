@@ -19,9 +19,15 @@ return [
             'identityClass' => 'common\models\User',
             //'identityClass' => 'mdm\admin\models\User',
             'loginUrl' => ['site/login'],
-            'enableAutoLogin' => true,
+            'enableAutoLogin' => false,
+            'authTimeout' => 3600, // auth expire 
             'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
-        ],
+        ],'session' => [
+        'class' => 'yii\web\Session',
+        'cookieParams' => ['httponly' => true, 'lifetime' => 3600 * 4],
+        'timeout' => 3600*4, //session expire
+        'useCookies' => true,
+    ],
         
         'request' => [
             'csrfParam' => '_csrf-frontend',

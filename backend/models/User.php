@@ -50,10 +50,10 @@ class User extends \common\models\User
             
             [ ['username', 'email'], 'unique', 'targetClass' => '\common\models\User', 'when' => function ($model, $attribute) { return $model->{$attribute} !== $model->getOldAttribute($attribute); }, 'on' => 'update' ], [ ['username', 'email'], 'unique', 'on' => 'create', 'message' => 'El usuario y/o contraseña deben ser únicos.' ],
 
-            ['password', 'required'],
+//            ['password', 'required'],
             ['Puesto', 'string', 'max' => 100],
-            ['password', 'string', 'min' => 6],
-            ['passCompare', 'compare', 'compareAttribute'=>'password', 'skipOnEmpty' => false, 'message'=>"Las contraseñas digitadas deben de coincidir."],
+//            ['password', 'string', 'min' => 6],
+//            ['passCompare', 'compare', 'compareAttribute'=>'password', 'skipOnEmpty' => false, 'message'=>"Las contraseñas digitadas deben de coincidir."],
             
 
             ['Id_Institucion', 'required'],

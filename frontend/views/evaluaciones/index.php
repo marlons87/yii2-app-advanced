@@ -26,9 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
       <div class="alert alert-info">
              <p>El usuario no posee evaluaciones</p>
       </div>
-      <p>
-    <?= Html::a('Crear evaluación', ['crear'], ['class' => 'btn btn-success']) ?>
-</p>
+     
     
      
        <?php

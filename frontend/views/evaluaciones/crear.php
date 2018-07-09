@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
  
     <div class="form-group">
        <br>
-            <?= Html::submitButton('Crear evaluacion', ['class' => 'btn btn-success', 'value' => 'my_value','onClick' => 'js:sendData()']) ?>
+   <?= Html::submitButton('Crear evaluacion', ['class' => 'btn btn-success', 'value' => 'my_value','onClick' => 'js:sendData()']) ?>
    <?= Html::a("Cancelar", Url::toRoute(['evaluaciones/index']), ['class' => 'btn btn-danger']) ?>
        
     </div>
@@ -33,8 +33,18 @@ $this->params['breadcrumbs'][] = $this->title;
   <script>
       
           function sendData() {
-             
-             $.ajax({
+              
+              
+              if (($('#instituciones-id_institucion').val()!== null) || ($('#descripcion').val()!== null)) {
+               alert("Por favor complete los datos de la Sede y la Descripción para crear una evaluación");
+              }else {
+                                  
+                               $.ajax({
+                 
+                
+                 
+                 
+                 
             type: "POST",
             url: "<?php echo Yii::$app->getUrlManager()->createUrl('evaluaciones/insertar'); ?>",
             data: {idSede: $('#instituciones-id_institucion').val(),descripcion:$('#descripcion').val()},
@@ -44,9 +54,17 @@ $this->params['breadcrumbs'][] = $this->title;
             //callBack,
             error: function (exception) {
                 
+              
+                
                 alert(exception);
             }
         });
+                  
+              }
+              
+               
+             
+
           }
       
   </script>

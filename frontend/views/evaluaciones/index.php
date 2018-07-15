@@ -149,7 +149,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                               } else {
                                                   ?> 
 
-                                                  <p>La Sede no posee evaluaciones.</p>
+                                                  <p>La sede no posee evaluaciones.</p>
                                                   <?php
                                               }
                                               ?>                
@@ -200,16 +200,32 @@ $this->params['breadcrumbs'][] = $this->title;
                foreach($general as $gene):
                    
                       $graph_data[] = array($gene["Sede"], intval($gene["Valor"]));
+               
+               
                    
                endforeach;
                
-                echo GoogleChart::widget(array('visualization' => 'ColumnChart',
+               if (sizeof($general)>0){
+                   
+                    echo GoogleChart::widget(array('visualization' => 'ColumnChart',
                     'data' => $graph_data,
                     'options' => array('title' => 'Nivel de madurez por Sede','width' => 1100,'height' => 400)));
                 
+                   
+               }else{
+                  ?> 
+                   
+              <div class="alert alert-info">
+                  <p>La instituci&oacute;n no posee, evaluaciones registradas</p>
+              </div>
+                   
+               <?php    
+               }
+               
+               
                 
                 
-          
+        
                 
                  $graficoSede = [];
                 
@@ -273,12 +289,22 @@ if (sizeof($dominios)==$canti){
                    $y = $y+1;
                endforeach;
                
+
+                 if ((sizeof($ubicaciones)<=1) && (sizeof($nivelDominio)<12) ){
+                        
+                     
+
+                    
+                    }else{
                
-               
-                 echo GoogleChart::widget(array('visualization' => 'LineChart',
+                   
+                    echo GoogleChart::widget(array('visualization' => 'LineChart',
                     'data' => $graficoSede,
                    'options' => array('title' => 'Nivel de madurez por Sede', 'hAxis'=>array('slantedText'=>'true','slantedTextAngle'=>25, 'textStyle'=>array('fontSize'=>'9')), 'tooltip' => array('isHtml' => 'true'),'width' => 1200,'height' =>600)));
                
+               }
+               
+                
                
                  
                  
@@ -295,7 +321,8 @@ if (sizeof($dominios)==$canti){
                          ?> 
               <br>
               <div class="alert alert-info">
-                  <p>La evaluación para  <b><?php echo $b['NombreS'];  ?></b>,  no existe o se encuentra incompleta.</p>
+              
+                  <p>No se puede mostrar el comportamiento para <b><?php echo $b['NombreS']; ?></b>, por que la evaluaci&oacute;n se encuentra incompleta  .</p>
               </div>
                        
                            <?php

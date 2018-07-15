@@ -35,9 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
           function sendData() {
               
               
-              if (($('#instituciones-id_institucion').val()!== null) || ($('#descripcion').val()!== null)) {
-               alert("Por favor complete los datos de la Sede y la Descripción para crear una evaluación");
-              }else {
+             
                                   
                                $.ajax({
                  
@@ -56,11 +54,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 
               
                 
-                alert(exception);
+               // alert(exception);
             }
         });
                   
-              }
+              
               
                
              

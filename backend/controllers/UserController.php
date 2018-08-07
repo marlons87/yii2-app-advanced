@@ -157,7 +157,14 @@ class UserController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+       
+        
+          try {
+               $this->findModel($id)->delete();
+          } catch (\Exception $ex) {
+            throw new NotFoundHttpException('No se puede eliminar el usuario debido a que tiene datos asociados.');
+
+          }
 
         return $this->redirect(['index']);
     }

@@ -38,6 +38,7 @@ class Controles extends \yii\db\ActiveRecord {
             ['Id_Dominio', 'integer'],
             [['Id_Dominio'], 'exist', 'skipOnError' => true, 'targetClass' => Dominios::className(), 'targetAttribute' => ['Id_Dominio' => 'Id_Dominio']],
            // [['Id_Nivel'], 'exist', 'skipOnError' => true, 'targetClass' => \common\models\Niveles::className(), 'targetAttribute' => ['Id_Nivel' => 'Id_Nivel']],
+             [['Codigo'], 'unique', 'message' => 'El código digitado, ya fue ingresado.' ],
         ];
     }
 

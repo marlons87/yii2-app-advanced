@@ -131,3 +131,10 @@ a.desc:after {
     font-weight: normal;
 }
 
+.txtObservaciones{
+    min-height: 100px;
+}
+
+.firma{
+    color:red;
+}

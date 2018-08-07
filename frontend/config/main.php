@@ -8,7 +8,7 @@ $params = array_merge(
 
 return [
     'id' => 'app-frontend',
-     'name' => 'EMC2',
+     'name' => 'ECM2',
       'language' => 'es',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],

@@ -36,14 +36,16 @@ class User extends \common\models\User
     {
         return [
             ['username', 'trim'],
-            ['username', 'required'],
+            ['username', 'required','message' => 'Complete la identificación del usuario.'],
             //['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'El nombre de usuario o “Alias” ya está siendo utilizado en este momento..'],
             ['username', 'string', 'min' => 9, 'max' => 15],
             
             [['Nombre'], 'string', 'max' => 50], [['Apellido1'], 'string', 'max' => 30], [['Apellido2'], 'string', 'max' => 30],
             
             ['email', 'trim'],
-            ['email', 'required'],
+            ['Nombre', 'required','message' => 'Complete el nombre del usuario.'],
+            ['Apellido1', 'required','message' => 'Complete el primer apellido del usuario.'],
+            ['email', 'required','message' => 'Complete el correo electrónico del usuario.'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
             //['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'La dirección de correo ya está siendo utilizada.'],
@@ -56,7 +58,7 @@ class User extends \common\models\User
 //            ['passCompare', 'compare', 'compareAttribute'=>'password', 'skipOnEmpty' => false, 'message'=>"Las contraseñas digitadas deben de coincidir."],
             
 
-            ['Id_Institucion', 'required'],
+            ['Id_Institucion', 'required','message' => 'Seleccione la institución a la que pertenece el usuario.'],
             [['Id_Institucion'], 'exist', 'skipOnError' => true, 'targetClass' => \common\models\Instituciones::className(), 'targetAttribute' => ['Id_Institucion' => 'Id_Institucion']],
                     
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
@@ -76,7 +78,7 @@ class User extends \common\models\User
             'Apellido2' => 'Segundo Apellido',
           
             'status' => 'Estado',
-            'email' => 'Email',
+            'email' => 'Correo electrónico',
             'Id_Institucion' => 'Institución',
              'instituciones.Nombre' => 'Institución',
            

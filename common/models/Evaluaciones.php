@@ -40,6 +40,7 @@ class Evaluaciones extends \yii\db\ActiveRecord
             [['Id_Usuario', 'Id_Sede'], 'required'],
             [['Status'], 'string', 'max' => 1],
             [['descripcion'], 'required'],
+            [['Id_Sede'], 'required'],
             [['descripcion'], 'string', 'max' => 250],
             
             [['Id_Usuario'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['Id_Usuario' => 'id']],

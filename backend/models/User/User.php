@@ -70,7 +70,7 @@ class User extends \yii\db\ActiveRecord
             'auth_key' => 'Auth Key',
             'password_hash' => 'Password Hash',
             'password_reset_token' => 'Password Reset Token',
-            'email' => 'Email',
+            'email' => 'Correo electrónico',
             'status' => 'Status',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',

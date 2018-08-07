@@ -7,7 +7,7 @@
 
 use yii\helpers\Html;
 
-$this->title = 'ECM2- Error';
+$this->title = 'ECM2';
 ?>
 <div class="site-error">
 

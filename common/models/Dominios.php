@@ -31,6 +31,8 @@ class Dominios extends \yii\db\ActiveRecord {
             [['Codigo'], 'required','message' => 'Complete el Código del Dominio.'],
             [['Nombre'], 'string', 'max' => 100],
             [['Codigo'], 'string', 'max' => 5],
+            [['Codigo'], 'unique', 'message' => 'El código digitado, ya fue ingresado.' ],
+
         ];
     }
 

@@ -37,6 +37,11 @@ $this->params['breadcrumbs'][] = $this->title;
     
     <p>
         <?= Html::a('Agregar sede', ['create'], ['class' => 'btn btn-success']) ?>
+        <?=
+
+ Html::a('Ir a evaluaciones', ['evaluaciones/index'], ['class' => 'btn btn-primary']);
+
+?>
     </p>
     <?php Pjax::end(); ?>
 </div>

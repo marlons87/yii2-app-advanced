@@ -197,6 +197,10 @@ a.desc:after {
      color:#337ab7;
 }
 
+.txtObservaciones{
+    min-height: 100px;
+}
+
 
 
 

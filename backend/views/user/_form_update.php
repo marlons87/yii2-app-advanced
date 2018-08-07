@@ -28,7 +28,7 @@ use yii\helpers\Url;
     <div class="form-group">
         <?= Html::submitButton($model->status == \common\models\User::STATUS_ACTIVE ? 'Desactivar':'Activar', ['class' => 'btn btn-success']) ?>
     
-        <?= Html::a("Cancelar", Url::toRoute(['user/index']), ['class' => 'btn btn-success']) ?>
+        <?= Html::a("Cancelar", Url::toRoute(['user/index']), ['class' => 'btn btn-danger']) ?>
     
     </div>
 

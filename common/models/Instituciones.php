@@ -30,8 +30,10 @@ class Instituciones extends \yii\db\ActiveRecord {
         return [
             ['Nombre', 'trim'],
             [['Nombre'], 'required', 'message' => 'Complete el nombre de la Institución.'],
+            [['Nombre'], 'unique', 'message' => 'La institución digitada ya ha sido ingresada previamente.' ],
             ['Nombre', 'unique', 'message' => 'La institución ya ha sido creada previamente.'],
             [['Nombre'], 'string', 'max' => 100]];
+         
     }
 
     /**

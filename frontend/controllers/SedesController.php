@@ -125,7 +125,7 @@ class SedesController extends Controller
         return $this->redirect(['index']);
              
          } catch (\Exception $ex) {
- throw new NotFoundHttpException('No se puede eliminar el registro. La sede actualmente está siendo utilizado');
+ throw new NotFoundHttpException('No se puede eliminar el registro. La sede está actualmente siendo utilizada.');
          }
 
     }

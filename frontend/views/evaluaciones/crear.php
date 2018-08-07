@@ -34,10 +34,16 @@ $this->params['breadcrumbs'][] = $this->title;
       
           function sendData() {
               
-              
-             
-                                  
-                               $.ajax({
+                if((($('#instituciones-id_institucion').val())==="") || ($.trim($('#descripcion').val()))===""){
+                    
+                    
+                    alert("Para crear una evaluación es necesario seleccionar la sede donde se desea aplicar la evaluación y agregar un pequeño comentario, o descripción de la evaluación.");
+                    
+                    
+                     event.preventDefault();
+                }else{
+                    
+                                                 $.ajax({
                  
                 
                  
@@ -57,6 +63,10 @@ $this->params['breadcrumbs'][] = $this->title;
                // alert(exception);
             }
         });
+                }
+            
+                                  
+  
                   
               
               

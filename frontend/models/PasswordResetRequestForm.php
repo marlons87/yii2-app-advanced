@@ -35,6 +35,19 @@ class PasswordResetRequestForm extends Model
      *
      * @return bool whether the email was send
      */
+    public function attributeLabels()
+    {
+        return [
+          
+            'email'=>'Correo electrónico',
+            
+        ];
+    }
+    
+    
+    
+    
+    
     public function sendEmail()
     {
         /* @var $user User */

@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'EMC2 | Inicio';
+$this->title = 'ECM2 | Inicio';
 ?>
 <div class="site-index">
 
@@ -10,7 +10,7 @@ $this->title = 'EMC2 | Inicio';
     
     <div class="row">
         <div class="col-md-12">
-            <image alt="EMC2 Modelo de madurez en Ciberseguridad" src="https://pbs.twimg.com/media/DcU5pdzVAAAINdh.jpg" />
+            <image alt="ECM2 Modelo de madurez en Ciberseguridad" src="https://pbs.twimg.com/media/DjymHr9V4AAoWwT.jpg" />
         </div>
     </div>
 

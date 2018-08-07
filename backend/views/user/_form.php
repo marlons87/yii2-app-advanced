@@ -35,7 +35,7 @@ use yii\helpers\Url;
     <div class="form-group">
         <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
        
-        <?= Html::a("Cancelar", Url::toRoute(['user/index']), ['class' => 'btn btn-success']) ?>
+        <?= Html::a("Cancelar", Url::toRoute(['user/index']), ['class' => 'btn btn-danger']) ?>
         
     </div>
 

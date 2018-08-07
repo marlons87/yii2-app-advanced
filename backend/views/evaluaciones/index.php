@@ -26,9 +26,9 @@ $Id_Institucion = $Id_Institucion;
 
         </div>
 
-    <?=
-    Html::a('Regresar', ['site/index'], ['class' => 'btn btn-primary']);
-    ?>
+        <?=
+        Html::a('Regresar', ['site/index'], ['class' => 'btn btn-primary']);
+        ?>
 
 
 
@@ -44,9 +44,9 @@ $Id_Institucion = $Id_Institucion;
         <div class="tab-content">
 
             <div id="menu1" class="tab-pane fade in active borde">
-    <?php
-    foreach ($sedes as $sede):
-        ?>
+                <?php
+                foreach ($sedes as $sede):
+                    ?>
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h3 class="panel-title"><b><?php echo $sede['Institucion'] . "  |  " . $sede['sede']; ?></b></h3>
@@ -57,18 +57,18 @@ $Id_Institucion = $Id_Institucion;
 
                         <div class="panel-body">
 
-        <?php
-        $g = 0;
-        foreach ($items as $i):
-            if (in_array($sede['sede'], $i)) {
+                            <?php
+                            $g = 0;
+                            foreach ($items as $i):
+                                if (in_array($sede['sede'], $i)) {
 
-                $g = $g + 1;
-            }
+                                    $g = $g + 1;
+                                }
 
-        endforeach;
+                            endforeach;
 
-        if ($g == 0) {
-            ?>
+                            if ($g == 0) {
+                                ?>
 
                                 <p>No existen evaluaciones, la esta sede.</p>  
 
@@ -92,13 +92,13 @@ $Id_Institucion = $Id_Institucion;
                                     <br>
                                     <div id="<?php echo 'menu1_' . $sede['Id_Sede']; ?>" class="tab-pane fade in active">
 
-            <?php
-            foreach ($items as $i):
+                                        <?php
+                                        foreach ($items as $i):
 
 
 
-                if ($sede['sede'] == $i["sede"]) {
-                    ?> 
+                                            if ($sede['sede'] == $i["sede"]) {
+                                                ?> 
 
                                                 <div class="panel panel-default">
                                                     <div class="panel-heading">
@@ -108,15 +108,15 @@ $Id_Institucion = $Id_Institucion;
                                                         <p>Fecha creaci&oacute;n: <?php echo $i['Fecha']; ?></p>
                                                         <p>Persona que la aplic&oacute;: <?php echo $i['usuario'] . " " . $i['Apellido1'] . " " . $i['Apellido2']; ?></p>
                                                         <p>&Uacute;ltima modificaci&oacute;n:<?php echo $i['Fecha_Ultima_Modificacion']; ?></p>
-                    <?= Html::a('Ver detalles', ['dominios', 'id' => $i['Id_Evaluacion'], 'Id_Institucion' => $Id_Institucion], ['class' => 'btn btn-primary']) ?>
+                                                        <?= Html::a('Ver detalles', ['dominios', 'id' => $i['Id_Evaluacion'], 'Id_Institucion' => $Id_Institucion], ['class' => 'btn btn-primary']) ?>
                                                     </div>
                                                 </div>
 
-                    <?php
-                }
+                                                <?php
+                                            }
 
-            endforeach;
-            ?> 
+                                        endforeach;
+                                        ?> 
 
                                     </div>
                                     <div id="<?php echo 'menu2_' . $sede['Id_Sede']; ?>" class="tab-pane fade">
@@ -164,9 +164,9 @@ $Id_Institucion = $Id_Institucion;
                                 </div>
 
 
-            <?php
-        }
-        ?>
+                                <?php
+                            }
+                            ?>
 
 
 
@@ -180,10 +180,10 @@ $Id_Institucion = $Id_Institucion;
 
 
                     </div>
-        <?php
-    endforeach;
-}
-?> 
+                    <?php
+                endforeach;
+            }
+            ?> 
         </div> 
 
         <div id="menu2" class="tab-pane fade">
@@ -197,23 +197,22 @@ $Id_Institucion = $Id_Institucion;
                 $graph_data[] = array($gene["Sede"], intval($gene["Valor"]));
 
             endforeach;
-            
-             if (sizeof($general)>0){
 
-            echo GoogleChart::widget(array('visualization' => 'ColumnChart',
-                'data' => $graph_data,
-                'options' => array('title' => 'Nivel de madurez por Sede', 'width' => 1100, 'height' => 400)));
+            if (sizeof($general) > 0) {
 
-}else{
-                  ?> 
-                   
-              <div class="alert alert-info">
-                  <p>La instituci&oacute;n no posee, evaluaciones registradas</p>
-              </div>
-                   
-               <?php    
-               }
-               
+                echo GoogleChart::widget(array('visualization' => 'ColumnChart',
+                    'data' => $graph_data,
+                    'options' => array('title' => 'Nivel de madurez por Sede', 'width' => 1100, 'height' => 400)));
+            } else {
+                ?> 
+
+                <div class="alert alert-info">
+                    <p>La instituci&oacute;n no posee, evaluaciones registradas</p>
+                </div>
+
+                <?php
+            }
+
 
 
 
@@ -278,22 +277,20 @@ $Id_Institucion = $Id_Institucion;
                 $y = $y + 1;
             endforeach;
 
-            
-            
-                    
-                    
-                    if ((sizeof($ubicaciones)<=1) && (sizeof($nivelDominio)<12) ){
-                        
-                    
-                    }else{
-                         echo GoogleChart::widget(array('visualization' => 'LineChart',
-                'data' => $graficoSede,
-                'options' => array('title' => 'Nivel de madurez por Sede', 'hAxis' => array('slantedText' => 'true', 'slantedTextAngle' => 25, 'textStyle' => array('fontSize' => '9')), 'tooltip' => array('isHtml' => 'true'), 'width' => 1200, 'height' => 600)));
-
-                    }
 
 
-           
+
+
+            if ((sizeof($ubicaciones) <= 1) && (sizeof($nivelDominio) < 12)) {
+                
+            } else {
+                echo GoogleChart::widget(array('visualization' => 'LineChart',
+                    'data' => $graficoSede,
+                    'options' => array('title' => 'Nivel de madurez por Sede', 'hAxis' => array('slantedText' => 'true', 'slantedTextAngle' => 25, 'textStyle' => array('fontSize' => '9')), 'tooltip' => array('isHtml' => 'true'), 'width' => 1200, 'height' => 600)));
+            }
+
+
+
 
 
 
@@ -308,14 +305,16 @@ $Id_Institucion = $Id_Institucion;
                         <p>No se puede mostrar el comportamiento para <b><?php echo $b['NombreS']; ?></b>, por que la evaluaci&oacute;n se encuentra incompleta  .</p>
                     </div>
 
-                    <?php
-                }
-            endforeach;
-            ?> 
+        <?php
+    }
+endforeach;
 
 
 
-            <div class="panel panel-controles">
+if (sizeof($usuario)>0){
+  ?>
+                    
+                       <div class="panel panel-controles">
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-2">
@@ -324,9 +323,9 @@ $Id_Institucion = $Id_Institucion;
                         </div>
                         <div class="col-xs-10 text-left">
 
-            <?php
-            foreach ($usuario as $user):
-                ?>
+<?php
+foreach ($usuario as $user):
+    ?>
                                 <p>Usuario: <?php echo $user['Nombre'] . ' ' . $user['Apellido1'] . ' ' . $user['Apellido2']; ?></p>
                                 <p>Puesto: <?php echo $user['Puesto']; ?></p>
                                 <p>Correo electr&oacute;nico: <?php echo $user['email']; ?></p>
@@ -340,6 +339,17 @@ endforeach;
                 </div>
 
             </div>
+                    
+<?php                 
+                    
+}
+?> 
+
+                    
+                    
+
+
+         
         </div>  
 
 
@@ -347,9 +357,9 @@ endforeach;
         <br>
 
 
-                            <?=
-                            Html::a('Regresar', ['site/index'], ['class' => 'btn btn-danger']);
-                            ?>
+<?=
+Html::a('Regresar', ['site/index'], ['class' => 'btn btn-primary']);
+?>
     </div>   
 
 </div>

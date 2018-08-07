@@ -34,7 +34,9 @@ class Sedes extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Nombre', 'Id_Institucion', 'Id_Usuario'], 'required'],
+            [['Id_Institucion', 'Id_Usuario'], 'required'],
+            [['Nombre'], 'required','message' => 'Complete el nombre de la sede.'],
+            
             [['Id_Institucion', 'Id_Usuario'], 'integer'],
             [['Fecha_Creacion'], 'safe'],
             [['Nombre'], 'string', 'max' => 100],

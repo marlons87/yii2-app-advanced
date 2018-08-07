@@ -10,6 +10,7 @@ use common\models\Respuestas;
 use common\models\Evaluaciones;
 use common\models\Instituciones;
 use common\models\InstitucionesSearch;
+use yii\web\NotFoundHttpException;
 
 class EvaluacionesController extends Controller {
 
@@ -124,7 +125,10 @@ GROUP BY i.Id_Institucion, e.Id_Sede, e.Id_Evaluacion, d.Id_Dominio')
         $descripcion = Yii::$app->request->post('descripcion');
         $idSede = Yii::$app->request->post('idSede');
         
-
+     
+             
+//              return $this->render('../site/index');        
+            
         $consecutivo = Yii::$app->db->createCommand('select (MAX(Consecutivo)+1) as Consecutivo from evaluaciones e inner join sedes s on e.id_Sede = s.id_sede where s.Id_Sede=:idSede')
                 ->bindValue(':idSede', $idSede)
                 ->queryOne();
@@ -143,6 +147,12 @@ GROUP BY i.Id_Institucion, e.Id_Sede, e.Id_Evaluacion, d.Id_Dominio')
                     'descripcion' => $descripcion
                 ])
                 ->execute();
+            
+        
+            
+       
+       
+
     }
 
     public function actionCrear() {

@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Html;
+use yii\helpers\Url;
 use scotthuangzl\googlechart\GoogleChart;
 use yii\widgets\ActiveForm;
 use common\models\Instituciones;
@@ -71,6 +72,7 @@ $this->title = 'ECM2';
                             <div class="col-xs-4">
                                
                                 <a target="_self" title="Ir a usuarios" href="../user/index"><img src="https://pbs.twimg.com/media/DcuAWHCX0AAqb75.png"/></a>
+                                
                             </div>
                             <div class="col-xs-8 text-right">
                                 <h2>

@@ -35,7 +35,7 @@ class User extends \common\models\User
     public function rules()
     {
         return [
-            ['username', 'trim'],
+            ['username', 'match','pattern'=>'^[0][1-9]?\d{4}?\d{4}$/'],
             ['username', 'required','message' => 'Complete la identificación del usuario.'],
             //['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'El nombre de usuario o “Alias” ya está siendo utilizado en este momento..'],
             ['username', 'string', 'min' => 9, 'max' => 15],

@@ -27,10 +27,13 @@ return [
         
         // backend
     'urlManager' => [
-        'class' => 'yii\web\urlManager',
+        'class' => 'yii\web\urlManager',        
         'enablePrettyUrl' => true,
-        'showScriptName' => true,
-
+        'showScriptName' => false,
+        'rules' => [
+            '' => 'site/index',                                
+            '<controller:\w+>/<action:\w+>/' => '<controller>/<action>',
+        ],
     ],
 
     // front-end
@@ -59,6 +62,7 @@ return [
     ],
         'request' => [
             'csrfParam' => '_csrf-backend',
+            //'baseUrl' => '/admin',
         ],
        
         'session' => [

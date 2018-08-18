@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?= $form->field($model, 'username')->textInput(['autofocus' => true])->label('Usuario') ?>
 
-                <?= $form->field($model, 'password')->passwordInput()->label('Contrase&ntilde;a')  ?>
+                <?= $form->field($model, 'password')->passwordInput(['autocomplete' => 'off'])->label('Contrase&ntilde;a')  ?>
 
                 <?= $form->field($model, 'rememberMe')->checkbox()->label('Recordarme') ?>
 

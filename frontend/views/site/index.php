@@ -45,7 +45,7 @@ $this->title = 'ECM2 | Inicio';
       <div class="row featurette">
         <div class="col-md-7 col-md-push-5">
           <h2 class="featurette-heading">F&aacute;cil de <span class="text-muted">implementar.</span></h2>
-          <p class="lead">El modelo debe de ser sencillo para que una persona con experiencia en TI de la empresa sea capaz de implementar el modelo y hacer la evaluaci&oacute;n de la empresa.</p>
+          <p class="lead">El modelo debe ser sencillo para que una persona con experiencia en TI de la empresa sea capaz de implementar y hacer la evaluaci&oacute;n de la empresa.</p>
         </div>
         <div class="col-md-5 col-md-pull-7">
             
@@ -59,7 +59,7 @@ $this->title = 'ECM2 | Inicio';
         <div class="col-md-7">
           <h2 class="featurette-heading">F&aacute;cil <span class="text-muted">de comprender</span></h2>
           <p class="lead">Un modelo de madurez, no se hace para cumplir, se hace para conocer a fondo a la empresa y por eso es vital que las personas encargadas de implementarlo, lo comprendan a cabalidad.</p>
-           <p class="lead">Adem&aacute;s, debe de ser una herramienta de comunicaci&oacute;n para usar con la alta gerencia y que permita ver de forma clara la situaci&oacute;n real de la empresa, en cuanto a Ciberseguridad en un lenguaje claro, y sin tener que entrar en tecnicismos que pueden complicar la comunicaci&oacute;n.</p>
+           <p class="lead">Adem&aacute;s, debe ser una herramienta de comunicaci&oacute;n para usar con la alta gerencia y que permita ver de forma clara la situaci&oacute;n real de la empresa en cuanto a Ciberseguridad. El lenguaje debe estar libre de tecnicismos esto facilitará la comprensión con todo tipo de personas.</p>
         </div>
         <div class="col-md-5">
           <img class="featurette-image img-responsive center-block" src="https://pbs.twimg.com/media/DbCp7HYV4AA8_ER.jpg" alt="Facil de comprender">
